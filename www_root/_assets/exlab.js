@@ -27485,6 +27485,8 @@
 	         if (this.props.children) {
 	            ev.preventDefault();
 	            console.log(Date.now());
+	         } else {
+	            return;
 	         }
 	      }
 	   }, {

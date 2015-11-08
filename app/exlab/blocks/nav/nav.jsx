@@ -22,6 +22,9 @@ export class NavLink extends Component {
          ev.preventDefault();
          console.log( Date.now() );
       }
+      else{
+         return;
+      }
    }
    render() {
       const className = classNames( "nav__link", this.props.className );
