@@ -24957,21 +24957,9 @@
 	            _react2["default"].createElement(
 	               _blocksNavNav.Nav,
 	               null,
-	               _react2["default"].createElement(
-	                  _blocksNavNav.NavLink,
-	                  { to: "/exlab" },
-	                  "Exlab Home"
-	               ),
-	               _react2["default"].createElement(
-	                  _blocksNavNav.NavLink,
-	                  { to: "/exlab/1" },
-	                  "Link 1"
-	               ),
-	               _react2["default"].createElement(
-	                  _blocksNavNav.NavLink,
-	                  { to: "/exlab/2" },
-	                  "Link 2"
-	               )
+	               _react2["default"].createElement(_blocksNavNav.NavLink, { to: "/exlab", name: "Exlab Home" }),
+	               _react2["default"].createElement(_blocksNavNav.NavLink, { to: "/exlab/1", name: "Link 1" }),
+	               _react2["default"].createElement(_blocksNavNav.NavLink, { to: "/exlab/2", name: "Link 2" })
 	            ),
 	            _react2["default"].createElement(
 	               "div",
@@ -27487,6 +27475,12 @@
 	   }
 
 	   _createClass(NavLink, [{
+	      key: "_onClick",
+	      value: function _onClick() {
+	         // if( this.pprops. )
+	         console.log(Date.now());
+	      }
+	   }, {
 	      key: "render",
 	      value: function render() {
 	         var className = (0, _classnames2["default"])("nav__link", this.props.className);
@@ -27495,8 +27489,13 @@
 	            { className: "nav__item" },
 	            _react2["default"].createElement(
 	               _reactRouter.Link,
-	               _extends({ activeClassName: "nav__link--active" }, this.props, { className: className }),
-	               this.props.children
+	               _extends({
+	                  activeClassName: "nav__link--active",
+	                  onClick: this._onClick.bind(this)
+	               }, this.props, {
+	                  className: className
+	               }),
+	               this.props.name
 	            )
 	         );
 	      }

@@ -16,12 +16,21 @@ export class Nav extends Component {
 }
 
 export class NavLink extends Component {
+   _onClick(){
+      // if( this.pprops. )
+      console.log( Date.now() );
+   }
    render() {
       const className = classNames( "nav__link", this.props.className );
       return (
          <li className="nav__item">
-            <Link activeClassName="nav__link--active" { ...this.props } className={ className } >
-               { this.props.children }
+            <Link
+               activeClassName="nav__link--active"
+               onClick={ this._onClick.bind( this ) }
+               { ...this.props }
+               className={ className }
+            >
+               { this.props.name }
             </Link>
          </li>
       );
