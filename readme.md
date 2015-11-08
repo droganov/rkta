@@ -9,9 +9,6 @@ gulp
 npm start
 ```
 
-## Roadmap
-- Spree API tests
-- Session management
 
 ## Coventions
 - BEM naming pattern for components

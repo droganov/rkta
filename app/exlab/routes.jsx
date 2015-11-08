@@ -16,6 +16,8 @@ export default (
          name="home"
          component={ FrontPage }
       />
+      <Route path="1" component={ FrontPage } />
+      <Route path="2" component={ FrontPage } />
       <Route path="*" name="404" component={ NotFound } />
    </Route>
 );
