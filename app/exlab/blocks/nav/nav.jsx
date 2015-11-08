@@ -16,9 +16,12 @@ export class Nav extends Component {
 }
 
 export class NavLink extends Component {
-   _onClick(){
+   _onClick( ev ){
       // if( this.pprops. )
-      console.log( Date.now() );
+      if( this.props.children ){
+         ev.preventDefault();
+         console.log( Date.now() );
+      }
    }
    render() {
       const className = classNames( "nav__link", this.props.className );

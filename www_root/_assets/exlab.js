@@ -24958,7 +24958,11 @@
 	               _blocksNavNav.Nav,
 	               null,
 	               _react2["default"].createElement(_blocksNavNav.NavLink, { to: "/exlab", name: "Exlab Home" }),
-	               _react2["default"].createElement(_blocksNavNav.NavLink, { to: "/exlab/1", name: "Link 1" }),
+	               _react2["default"].createElement(
+	                  _blocksNavNav.NavLink,
+	                  { to: "/exlab/1", name: "Link 1" },
+	                  "child"
+	               ),
 	               _react2["default"].createElement(_blocksNavNav.NavLink, { to: "/exlab/2", name: "Link 2" })
 	            ),
 	            _react2["default"].createElement(
@@ -27476,9 +27480,12 @@
 
 	   _createClass(NavLink, [{
 	      key: "_onClick",
-	      value: function _onClick() {
+	      value: function _onClick(ev) {
 	         // if( this.pprops. )
-	         console.log(Date.now());
+	         if (this.props.children) {
+	            ev.preventDefault();
+	            console.log(Date.now());
+	         }
 	      }
 	   }, {
 	      key: "render",

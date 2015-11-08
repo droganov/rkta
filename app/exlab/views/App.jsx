@@ -22,7 +22,7 @@ export default class App extends Component {
             />
             <Nav>
                <NavLink to="/exlab" name="Exlab Home"></NavLink>
-               <NavLink to="/exlab/1" name="Link 1"></NavLink>
+               <NavLink to="/exlab/1" name="Link 1">child</NavLink>
                <NavLink to="/exlab/2" name="Link 2"></NavLink>
             </Nav>
             <div className="App__content">
