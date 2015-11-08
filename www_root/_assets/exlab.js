@@ -27481,13 +27481,20 @@
 	   _createClass(NavLink, [{
 	      key: "_onClick",
 	      value: function _onClick(ev) {
-	         // if( this.pprops. )
 	         if (this.props.children) {
-	            // ev.preventDefault();
-	            console.log(Date.now());
-	         } else {
+	            this.showDropdown();
+	            return ev.preventDefault();
+	         }
+	      }
+	   }, {
+	      key: "showDropdown",
+	      value: function showDropdown() {
+	         if (!this.props.children) {
 	            return;
 	         }
+	         this.setState({
+	            showDropdown: true
+	         });
 	      }
 	   }, {
 	      key: "render",
@@ -27502,7 +27509,7 @@
 	                  activeClassName: "nav__link--active",
 	                  onClick: this._onClick.bind(this),
 	                  onTouchStart: this._onClick.bind(this),
-	                  onMouseOver: this._onClick.bind(this)
+	                  onMouseOver: this.showDropdown.bind(this)
 	               }, this.props, {
 	                  className: className
 	               }),

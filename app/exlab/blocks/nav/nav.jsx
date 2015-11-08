@@ -17,14 +17,18 @@ export class Nav extends Component {
 
 export class NavLink extends Component {
    _onClick( ev ){
-      // if( this.pprops. )
       if( this.props.children ){
-         // ev.preventDefault();
-         console.log( Date.now() );
+         this.showDropdown();
+         return ev.preventDefault();
       }
-      else{
+   }
+   showDropdown(){
+      if( !this.props.children ){
          return;
       }
+      this.setState({
+         showDropdown: true,
+      })
    }
    render() {
       const className = classNames( "nav__link", this.props.className );
@@ -34,7 +38,7 @@ export class NavLink extends Component {
                activeClassName="nav__link--active"
                onClick={ this._onClick.bind( this ) }
                onTouchStart={ this._onClick.bind( this ) }
-               onMouseOver={ this._onClick.bind( this ) }
+               onMouseOver={ this.showDropdown.bind( this ) }
                { ...this.props }
                className={ className }
             >
