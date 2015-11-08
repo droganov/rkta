@@ -1,0 +1,58 @@
+@import "nib"
+
+// colors
+color-white         = #FFFFFF
+color-text          = #414141
+color-menu          = #868686
+color-menu--hover   = color-text
+color-rule          = rgba(#000, .06)
+
+// fonts
+font-sans = "San Francisco", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif
+font-playfair = "Playfair Display", serif
+
+// depth
+z-overlays = 10
+z-dropdowns = 20
+
+// easing
+easeOutQuint = cubic-bezier(0.230, 1.000, 0.320, 1.000)
+easeOutExpo = cubic-bezier(0.190, 1.000, 0.220, 1.000)
+
+body
+   color color-text
+   margin 0
+   padding 0
+   background-color color-white
+   font-family font-sans
+   font-size 14px
+   font-variant-ligatures: common-ligatures
+   line-height 24px
+
+   text-rendering: optimizeLegibility !important;
+   -webkit-font-smoothing: antialiased !important;
+
+   @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)
+      font-weight 200
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+
+.App
+   background-color color-white
+
+.content-box
+   max-width 1200px
+   margin auto
+
+// Imports
+@import "views/**/*"
+// @import "blocks/**/*"
+
+
+// Linking fonts
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic&subset=latin,latin-ext")
+
+// Bundling fonts
+// @font-face
+//    font-family "Font family"
+// 	src url( fonts/webfont.woff ) format("woff")
+//    src url( fonts/webfont.woff2 ) format("woff2")
