@@ -27483,7 +27483,7 @@
 	      value: function _onClick(ev) {
 	         // if( this.pprops. )
 	         if (this.props.children) {
-	            ev.preventDefault();
+	            // ev.preventDefault();
 	            console.log(Date.now());
 	         } else {
 	            return;
@@ -27500,7 +27500,9 @@
 	               _reactRouter.Link,
 	               _extends({
 	                  activeClassName: "nav__link--active",
-	                  onClick: this._onClick.bind(this)
+	                  onClick: this._onClick.bind(this),
+	                  onTouchStart: this._onClick.bind(this),
+	                  onMouseOver: this._onClick.bind(this)
 	               }, this.props, {
 	                  className: className
 	               }),

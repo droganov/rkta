@@ -19,7 +19,7 @@ export class NavLink extends Component {
    _onClick( ev ){
       // if( this.pprops. )
       if( this.props.children ){
-         ev.preventDefault();
+         // ev.preventDefault();
          console.log( Date.now() );
       }
       else{
@@ -33,6 +33,8 @@ export class NavLink extends Component {
             <Link
                activeClassName="nav__link--active"
                onClick={ this._onClick.bind( this ) }
+               onTouchStart={ this._onClick.bind( this ) }
+               onMouseOver={ this._onClick.bind( this ) }
                { ...this.props }
                className={ className }
             >
