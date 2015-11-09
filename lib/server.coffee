@@ -42,7 +42,6 @@ require("./graphqlWorker")( app )
 # mounting applications
 # dev
 # if app.env is "development"
-console?.log require("../app/exlab/layout")
 app.use mount("/exlab", adapter( stats, require("../app/exlab/layout"), require("../app/exlab/routes") ))
 
 # production

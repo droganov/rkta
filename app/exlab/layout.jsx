@@ -28,7 +28,7 @@ export default class Layout extends Component {
    // componentDidUpdate(prevProps, prevState){}
    // componentWillUnmount(){}
    render() {
-      let { base, link, meta, title } = this.props.helmet;
+      let { base, link, meta, script, title } = this.props.helmet;
       return (
          <html lang="en">
             <head>
@@ -38,6 +38,7 @@ export default class Layout extends Component {
                { base.toComponent() }
                { link.toComponent() }
                { meta.toComponent() }
+               { script.toComponent() }
                { title.toComponent() }
             </head>
             <body>
