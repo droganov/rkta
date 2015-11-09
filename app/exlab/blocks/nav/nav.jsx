@@ -41,6 +41,7 @@ export class NavLink extends Component {
                onMouseOver={ this.showDropdown.bind( this ) }
                { ...this.props }
                className={ className }
+               ref="link"
             >
                { this.props.name }
             </Link>

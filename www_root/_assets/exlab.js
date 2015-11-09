@@ -27511,7 +27511,8 @@
 	                  onTouchStart: this._onClick.bind(this),
 	                  onMouseOver: this.showDropdown.bind(this)
 	               }, this.props, {
-	                  className: className
+	                  className: className,
+	                  ref: "link"
 	               }),
 	               this.props.name
 	            )
