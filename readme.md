@@ -1,30 +1,22 @@
 # Readme
-## Start Dev Server
+Start Dev Server:
 ```
-gulp
+> gulp
+
 ```
 
-## Start Production Server
+Start Production Server:
 ```
-npm start
+> npm start
 ```
 
 
-## Coventions
+## Principles
+- Isomorphism
+- Multiple front-end applications can run on top of single back-end
+- Everything is compiled in development mode, I want production server to be up as fast as possible, so the only bottleneck is the babel so far.
+- .es6 extension is used for es2015 files
+- .jsx extension is used for react templates
+- Everything the client need is bundled into a single file
 - BEM naming pattern for components
 - .jsx extension for react templates, .es6 for ES6 scripts, .js for ES5
-
-## TODO
-- Server network layer for graphQL
-- Isomorphic rendering
-
-Server side rendering issue is being investigated
-by the core team:
-https://github.com/facebook/relay/issues/136
-
-No point to attach it right now, there is a hacked example
-which works:
-https://github.com/mikhail-riabokon/relay-server-rendering
-
-But I think we can wait, the re no need to apply own hacks
-right now.
