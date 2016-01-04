@@ -2,31 +2,6 @@
 import React, { Component } from "react";
 
 export default class Layout extends Component {
-   propTypes: {
-      hash: React.PropTypes.string.isRequired,
-      helmet: React.PropTypes.object.isRequired,
-      isProduction: React.PropTypes.bool.isRequired,
-      markup: React.PropTypes.string.isRequired,
-   }
-   // constructor(props) {
-   //    super(props);
-   //    this.state = {};
-   //    this.defaultProps = {};
-   //    this.statics = {};
-   // }
-   componentWillMount(){
-      let scriptName = this.props.isProduction ? "/assets/exlab.js" : "/_assets/exlab.js"
-      this.setState({
-         scriptName: scriptName + "?" + this.props.hash,
-      });
-   }
-   // componentDidMount(){}
-   // componentWillReceiveProps(nextProps){}
-   // shouldComponentUpdate(nextProps, nextState){}
-   // shouldComponentUpdate(nextProps, nextState){}
-   // componentWillUpdate(nextProps, nextState){}
-   // componentDidUpdate(prevProps, prevState){}
-   // componentWillUnmount(){}
    render() {
       let { base, link, meta, script, title } = this.props.helmet;
       return (

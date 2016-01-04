@@ -7,7 +7,7 @@ import App from "./views/App";
 import FrontPage from "./views/front-page/front-page";
 import NotFound from "./views/not-found/not-found";
 
-export default (
+module.exports = () => (
    <Route
       path="/"
       component={ App }

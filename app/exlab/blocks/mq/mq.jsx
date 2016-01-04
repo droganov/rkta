@@ -1,6 +1,6 @@
 "use strict"
 import React, { Component } from "react";
-import {isServer} from "../../../../com/util"
+import { isServer } from "../../../../com/util"
 
 import MediaQuery from "react-responsive"
 

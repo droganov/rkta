@@ -12,7 +12,7 @@ npm start
 
 ## Coventions
 - BEM naming pattern for components
-- .JSX extension for ES6 scripts, .JS or .coffee for ES5
+- .jsx extension for react templates, .es6 for ES6 scripts, .js for ES5
 
 ## TODO
 - Server network layer for graphQL
