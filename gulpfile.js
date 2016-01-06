@@ -47,7 +47,7 @@ gulp.task( "serve", ()=> {
    // http://stackoverflow.com/questions/29217978/gulp-to-watch-when-node-app-listen-is-invoked-or-to-port-livereload-nodejs-a
    nodemon({
       script: "lib/server.js",
-      ext: "jsx es6 styl",
+      ext: "es6",
       args: [ "--harmony", "--debug-break", "--trace_opt", "--trace_deopt", "--allow-natives-syntax" ],
       env: {
          "NODE_ENV": "development",
@@ -62,4 +62,4 @@ gulp.task( "serve", ()=> {
 });
 
 
-gulp.task( "default", [ "serve", "uglify", "watch" ] );
+gulp.task( "default", [ "serve", "watch" ] );
