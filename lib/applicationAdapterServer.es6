@@ -15,7 +15,7 @@ function getInstance ({ stats, Layout, routes, Store, dataProvider }){
    const app = koa();
    middleware( app );
    app.use( function *( next ){
-      let context = this;
+      const context = this;
       match({
             routes: routes(),
             location: this.originalUrl,

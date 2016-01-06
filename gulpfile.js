@@ -3,7 +3,6 @@
 const gulp = require( "gulp" );
 const babel = require( "gulp-babel" );
 const gutil = require( "gulp-util" );
-const gzip = require( "gulp-gzip" );
 const nodemon = require( "gulp-nodemon" );
 const uglify  = require( "gulp-uglify" );
 const webpack = require( "webpack" );
@@ -12,9 +11,9 @@ const webpackConfig = require( "./config/config.webpack" );
 const paths = {
    webpack: [
       "*.jsx",
-      "app/**.styl",
-      "com/**",
       "*.es6",
+      "**.styl",
+      "com/**",
    ],
 }
 
@@ -47,8 +46,8 @@ gulp.task( "serve", ()=> {
    // todo: live reload
    // http://stackoverflow.com/questions/29217978/gulp-to-watch-when-node-app-listen-is-invoked-or-to-port-livereload-nodejs-a
    nodemon({
-      script: "lib/server.es6",
-      ext: "jsx es6",
+      script: "lib/server.js",
+      ext: "jsx es6 styl",
       args: [ "--harmony", "--debug-break", "--trace_opt", "--trace_deopt", "--allow-natives-syntax" ],
       env: {
          "NODE_ENV": "development",

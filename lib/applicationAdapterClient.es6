@@ -17,7 +17,7 @@ export function onReady( cb ){
       return cb();
    }
    document.addEventListener( "DOMContentLoaded", cb, false );
-}
+};
 
 
 // module.exports =

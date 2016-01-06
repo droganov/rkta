@@ -14994,7 +14994,7 @@
 	      return cb();
 	   }
 	   document.addEventListener("DOMContentLoaded", cb, false);
-	}
+	};
 
 	// module.exports =
 	//    attachStyle: ( data )->
