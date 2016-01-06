@@ -14926,7 +14926,6 @@
 	   (0, _createClass3.default)(NotFound, [{
 	      key: "render",
 
-	      // propTypes: {}
 	      // constructor(props) {
 	      //    super(props);
 	      //    this.state = {};
@@ -14962,6 +14961,7 @@
 	   return NotFound;
 	})(_react.Component);
 
+	NotFound.propTypes = {};
 	exports.default = NotFound;
 
 /***/ },
