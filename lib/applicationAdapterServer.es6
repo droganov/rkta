@@ -10,40 +10,45 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { match, RoutingContext } from "react-router";
 
 import middleware from "./middleware";
+import racer from "../tmp/racer-react/";
+
 
 function getInstance ({ stats, Layout, routes, Store, dataProvider }){
    const app = koa();
    middleware( app );
    app.use( function *( next ){
-      const context = this;
-      match({
-            routes: routes(),
-            location: this.originalUrl,
-         },
-         function( error, redirectLocation, renderProps ){
-            if( error ){
-               return context.throw( error.message, 500 );
+      try {
+         var body = yield racer.match(
+            {
+               routes: routes(),
+               location: this.originalUrl,
+               racerModel: this.req.getModel(),
+               onSuccess: function( renderProps, racerBundle ){
+                  const markup = renderToStaticMarkup(
+                     <RoutingContext { ...renderProps } />
+                  );
+                  const response = renderToStaticMarkup(
+                     <Layout
+                        hash = { stats.hash }
+                        isProduction = { process.env.NODE_ENV === "production" }
+                        helmet = { Helmet.rewind() }
+                        markup = { markup }
+                        racerBundle={ racerBundle }
+                     />
+                  );
+                  return response;
+               }
             }
-            if( redirectLocation ){
-               context.status = 301;
-               return context.redirect(redirectLocation.pathname + redirectLocation.search);
-            }
-            if( renderProps.routes.filter( route => route.name == "404" ).length > 0 ){
-               context.status = 404;
-            }
-            const markup = renderToStaticMarkup(
-               <RoutingContext {...renderProps} />
-            );
-            const response = renderToStaticMarkup(
-               <Layout
-                  hash = { stats.hash }
-                  isProduction = { process.env.NODE_ENV === "production" }
-                  helmet = { Helmet.rewind() }
-                  markup = { markup }
-               />
-            );
-            context.body = "<!DOCTYPE html>" + response;
-      });
+         );
+         this.body = "<!DOCTYPE html>" + body;
+      }
+      catch ( error ) {
+         if( error.status ){
+            this.status = error.status;
+            this.redirect( error.location.pathname + error.location.search );
+         }
+         this.throw( error.message, 500 );
+      }
    });
    return app;
 };

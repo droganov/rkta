@@ -12,7 +12,8 @@ const paths = {
    webpack: [
       "*.jsx",
       "*.es6",
-      "**.styl",
+      "*.styl",
+      "app/**",
       "com/**",
    ],
 }
@@ -62,4 +63,4 @@ gulp.task( "serve", ()=> {
 });
 
 
-gulp.task( "default", [ "serve", "watch" ] );
+gulp.task( "default", [ "serve", "watch", "uglify" ] );
