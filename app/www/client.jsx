@@ -17,15 +17,21 @@ adapter.attachStyle( require("./style.styl") );
 
 // render
 adapter.onReady( (ev) => {
-	const racerModel = racer.connect();
-	// const test = racerModel.query("test");
-	// test.subscribe( function(){
-	// 	console.log( "arguments" );
-	// });
-	console.log( racerModel.connection.state );
-	racerModel.add("test", {
-		ts: Date.now()
-	})
+	var racerModel = racer.connect();
+	racerModel.on("change", "$connection.state", (newValue, prevValue)=> {
+		console.log("new connection state is - ", newValue);
+	});
+
+	var test = racerModel.query("test", {
+		$query: {},
+		$orderby: {
+			ts:-1
+		},
+		$limit: 3
+	});
+	test.subscribe( function(err){
+		console.log(test.get());
+	});
 	const router = (
 		<Router
 			history={ createHistory() }
