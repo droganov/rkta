@@ -25963,17 +25963,20 @@
 	// components
 	adapter.onReady(function (ev) {
 		var racerModel = _racerReact2.default.connect();
-		// const test = racerModel.query("test");
-		// test.subscribe( function(){
-		// 	console.log( "arguments" );
-		// });
-		console.log(racerModel.connection.state);
-		setTimeout(function () {
-			console.log(2, racerModel.connection.state);
-		}, 5000);
-		// racerModel.add("test", {
-		// 	ts: Date.now()
-		// })
+		racerModel.on("change", "$connection.state", function (newValue, prevValue) {
+			console.log("new connection state is - ", newValue);
+		});
+
+		var test = racerModel.query("test", {
+			$query: {},
+			$orderby: {
+				ts: -1
+			},
+			$limit: 3
+		});
+		test.subscribe(function (err) {
+			console.log(test.get());
+		});
 		var router = _react2.default.createElement(
 			_reactRouter.Router,
 			{
