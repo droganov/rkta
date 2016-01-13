@@ -17,15 +17,18 @@ adapter.attachStyle( require("./style.styl") );
 
 // render
 adapter.onReady( (ev) => {
-	const racerModel = racer.connect();
+	var racerModel = racer.connect();
 	// const test = racerModel.query("test");
 	// test.subscribe( function(){
 	// 	console.log( "arguments" );
 	// });
 	console.log( racerModel.connection.state );
-	racerModel.add("test", {
-		ts: Date.now()
-	})
+	setTimeout(()=>{
+		console.log(2, racerModel.connection.state );
+	},5000);
+	// racerModel.add("test", {
+	// 	ts: Date.now()
+	// })
 	const router = (
 		<Router
 			history={ createHistory() }

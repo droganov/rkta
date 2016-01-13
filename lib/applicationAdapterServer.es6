@@ -14,7 +14,7 @@ import racer from "../tmp/racer-react/";
 
 
 function getInstance ({ stats, Layout, routes, Store, dataProvider }){
-   const app = koa();
+   var app = koa();
    middleware( app );
    app.use( function *( next ){
       try {
