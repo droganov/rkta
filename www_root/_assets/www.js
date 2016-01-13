@@ -8777,9 +8777,9 @@
 	InsertDiff.prototype.type = 'insert';
 	InsertDiff.prototype.toJSON = function() {
 	  return {
-	    type: this.type,
-	    index: this.index,
-	    values: this.values
+	    type: this.type
+	  , index: this.index
+	  , values: this.values
 	  };
 	};
 
@@ -8790,9 +8790,9 @@
 	RemoveDiff.prototype.type = 'remove';
 	RemoveDiff.prototype.toJSON = function() {
 	  return {
-	    type: this.type,
-	    index: this.index,
-	    howMany: this.howMany
+	    type: this.type
+	  , index: this.index
+	  , howMany: this.howMany
 	  };
 	};
 
@@ -8804,10 +8804,10 @@
 	MoveDiff.prototype.type = 'move';
 	MoveDiff.prototype.toJSON = function() {
 	  return {
-	    type: this.type,
-	    from: this.from,
-	    to: this.to,
-	    howMany: this.howMany
+	    type: this.type
+	  , from: this.from
+	  , to: this.to
+	  , howMany: this.howMany
 	  };
 	};
 
@@ -8822,8 +8822,8 @@
 	  // as moves. Many of these "moves" may end up being discarded in the last
 	  // pass if they are from an index to the same index, but we don't know this
 	  // up front, since we haven't yet offset the indices.
-	  //
-	  // Also keep a map of all the indices accounted for in the before and after
+	  // 
+	  // Also keep a map of all the indicies accounted for in the before and after
 	  // arrays. These maps are used next to create insert and remove diffs.
 	  var beforeLength = before.length;
 	  var afterLength = after.length;
@@ -8872,7 +8872,7 @@
 	  // Create an insert for all of the items in the after array that were
 	  // not marked as being matched in the before array as well
 	  var inserts = [];
-	  for (var afterIndex = 0; afterIndex < afterLength;) {
+	  for (afterIndex = 0; afterIndex < afterLength;) {
 	    if (afterMarked[afterIndex]) {
 	      afterIndex++;
 	      continue;
@@ -14647,11 +14647,7 @@
 
 	Agent.prototype._reply = function(request, err, message) {
 	  if (err) {
-	    request.error = {
-	      code: err.code,
-	      message: err.message,
-	      stack: err.stack
-	    };
+	    request.error = err;
 	    this.send(request);
 	    return;
 	  }
@@ -15085,6 +15081,9 @@
 	  // Equals agent.clientId on the server
 	  this.id = null;
 
+	  // Private variable to support clearing of op retry interval
+	  this._retryInterval = null;
+
 	  this.debug = false;
 
 	  this.bindToSocket(socket);
@@ -15301,6 +15300,22 @@
 	Connection.prototype._reset = function() {
 	  this.seq = 1;
 	  this.id = null;
+	  clearInterval(this._retryInterval);
+	  this._retryInterval = null;
+	};
+
+	Connection.prototype._setupRetry = function() {
+	  if (this._retryInterval != null) return;
+
+	  var connection = this;
+	  this._retryInterval = setInterval(function() {
+	    for (var collection in connection.collections) {
+	      var docs = connection.collections[collection];
+	      for (var id in docs) {
+	        docs[id].retry();
+	      }
+	    }
+	  }, 1000);
 	};
 
 	// Set the connection's state. The connection is basically a state machine.
@@ -15322,6 +15337,7 @@
 	  this.canSend = (newState === 'connected');
 
 	  if (newState === 'disconnected' || newState === 'stopped' || newState === 'closed') this._reset();
+	  if (this.canSend) this._setupRetry();
 
 	  // Group subscribes together to help server make more efficient calls
 	  this.startBulk();
@@ -15625,7 +15641,7 @@
 	 * A Doc is a client's view on a sharejs document.
 	 *
 	 * It is is uniquely identified by its `id` and `collection`.  Documents
-	 * should not be created directly. Create them with connection.get()
+	 * should not be created directly. Create them with Connection.get()
 	 *
 	 *
 	 * Subscriptions
@@ -15651,16 +15667,23 @@
 	 * ------
 	 *
 	 * You can use doc.on(eventName, callback) to subscribe to the following events:
-	 * - `before op (op, source)` Fired before a partial operation is applied to the data.
-	 *   It may be used to read the old data just before applying an operation
-	 * - `op (op, source)` Fired after every partial operation with this operation as the
-	 *   first argument
-	 * - `create (source)` The document was created. That means its type was
+	 * - `before op (op)` Fired before an operation is applied to the
+	 *   data. The document is already in locked state, so it is not allowed to
+	 *   submit further operations. It may be used to read the old data just
+	 *   before applying an operation. The callback is passed the operation if the
+	 *   operation originated locally and `false` otherwise
+	 * - `after op (op)` Fired after an operation has been applied to
+	 *   the data. The arguments are the same as for `before op`
+	 * - `op (op)` The same as `after op` unless incremental updates
+	 *   are enabled. In this case it is fired after every partial operation with
+	 *   this operation as the first argument. When fired the document is in a
+	 *   locked state which only allows reading operations.
+	 * - `create ()` The document was created. That means its type was
 	 *   set and it has some initial data.
-	 * - `del (data, source)` Fired after the document is deleted, that is
+	 * - `del (data)` Fired after the document is deleted, that is
 	 *   the data is null. It is passed the data before delteion as an
 	 *   arguments
-	 * - `load ()` Fired when a new snapshot is ingested from a fetch, subscribe, or query
+	 *
 	 */
 
 	module.exports = Doc;
@@ -15701,15 +15724,13 @@
 	  // This is a list of {[create:{...}], [del:true], [op:...], callbacks:[...]}
 	  this.pendingOps = [];
 
-	  // The OT type of this document. An uncreated document has type `null`
+	  // The OT type of this document.
+	  //
+	  // The document also responds to the api provided by the type
 	  this.type = null;
 
-	  // The applyStack enables us to track any ops submitted while we are
-	  // applying an op incrementally. This value is an array when we are
-	  // performing an incremental apply and null otherwise. When it is an array,
-	  // all submitted ops should be pushed onto it. The `_otApply` method will
-	  // reset it back to null when all incremental apply loops are complete.
-	  this.applyStack = null;
+	  // Prevents submit from accepting operations
+	  this.locked = false;
 
 	  // Disable the default behavior of composing submitted ops. This is read at
 	  // the time of op submit, so it may be toggled on before submitting a
@@ -16112,64 +16133,38 @@
 	 */
 	Doc.prototype._otApply = function(op, source) {
 	  if (op.op) {
+
 	    if (!this.type) {
 	      var err = new Error('Cannot apply op to uncreated document. ' + this.collection + '.' + this.id);
 	      return this.emit('error', err);
 	    }
+	    var type = this.type;
 
-	    // Iteratively apply multi-component remote operations and rollback ops
-	    // (source === false) for the default JSON0 OT type. It could use
-	    // type.shatter(), but since this code is so specific to use cases for the
-	    // JSON0 type and ShareDB explicitly bundles the default type, we might as
-	    // well write it this way and save needing to iterate through the op
-	    // components twice.
-	    //
-	    // Ideally, we would not need this extra complexity. However, it is
-	    // helpful for implementing bindings that update DOM nodes and other
-	    // stateful objects by translating op events directly into corresponding
-	    // mutations. Such bindings are most easily written as responding to
-	    // individual op components one at a time in order, and it is important
-	    // that the snapshot only include updates from the particular op component
-	    // at the time of emission. Eliminating this would require rethinking how
-	    // such external bindings are implemented.
-	    if (!source && this.type === types.defaultType && op.op.length > 1) {
-	      if (!this.applyStack) this.applyStack = [];
-	      var stackLength = this.applyStack.length;
-	      for (var i = 0; i < op.op.length; i++) {
-	        var component = op.op[i];
-	        var componentOp = {op: [component]};
-	        // Transform componentOp against any ops that have been submitted
-	        // sychronously inside of an op event handler since we began apply of
-	        // our operation
-	        for (var j = stackLength; j < this.applyStack.length; j++) {
-	          var transformErr = transformX(this.applyStack[j], componentOp);
-	          if (transformErr) return this._hardRollback(transformErr);
-	        }
-	        // Apply the individual op component
-	        this.emit('before op', componentOp.op, source);
-	        this.data = this.type.apply(this.data, componentOp.op);
-	        this.emit('op', componentOp.op, source);
-	      }
-	      // Pop whatever was submitted since we started applying this op
-	      this._popApplyStack(stackLength);
-	      return;
+	    // This exists so clients can pull any necessary data out of the snapshot
+	    // before it gets changed.
+	    this.emit('before op', op.op, source);
+
+	    // Apply the operation to the local data
+	    if (type.incrementalApply) {
+	      var doc = this;
+	      this.locked = true;
+	      type.incrementalApply(this.data, op.op, function(component, data) {
+	        doc.data = data;
+	        doc.emit('op', component, source);
+	      });
+	      this.locked = false;
+	    } else {
+	      this.data = type.apply(this.data, op.op);
+	      this.emit('op', op.op, source);
 	    }
 
-	    // The 'before op' event enables clients to pull any necessary data out of
-	    // the snapshot before it gets changed
-	    this.emit('before op', op.op, source);
-	    // Apply the operation to the local data, mutating it in place
-	    this.data = this.type.apply(this.data, op.op);
-	    // Emit an 'op' event once the local data includes the changes from the
-	    // op. For locally submitted ops, this will be synchronously with
-	    // submission and before the server or other clients have received the op.
-	    // For ops from other clients, this will be after the op has been
-	    // committed to the database and published
-	    this.emit('op', op.op, source);
+	    this.emit('after op', op.op, source);
 	    return;
 	  }
 
 	  if (op.create) {
+	    // If the type is currently set, it means we tried creating the document
+	    // and someone else won. client create x server create = server create.
 	    this._setType(op.create.type);
 	    this.data = this.type.create(op.create.data);
 	    this.emit('create', source);
@@ -16177,6 +16172,7 @@
 	  }
 
 	  if (op.del) {
+	    // The type should always exist in this case. del x _ = del
 	    var oldData = this.data;
 	    this._setType(null);
 	    this.emit('del', oldData, source);
@@ -16186,6 +16182,15 @@
 
 
 	// ***** Sending operations
+
+	Doc.prototype.retry = function() {
+	  if (!this.inflightOp) return;
+	  var threshold = 5000 * Math.pow(2, this.inflightOp.retries);
+	  if (this.inflightOp.sentAt < Date.now() - threshold) {
+	    this.connection.emit('retry', this);
+	    this._sendOp();
+	  }
+	};
 
 	// Actually send op to the server.
 	Doc.prototype._sendOp = function() {
@@ -16238,8 +16243,13 @@
 	// @param [op.create]
 	// @param [callback] called when operation is submitted
 	Doc.prototype._submit = function(op, source, callback) {
-	  // Locally submitted ops must always have a truthy source
-	  if (!source) source = true;
+	  if (source == null) source = true;
+
+	  if (this.locked) {
+	    var err = new Error('Cannot submit op inside an op event handler. ' + this.collection + '.' + this.id);
+	    if (callback) return callback(err);
+	    return this.emit('error', err);
+	  }
 
 	  // The op contains either op, create, delete, or none of the above (a no-op).
 	  if (op.op) {
@@ -16252,7 +16262,19 @@
 	    if (this.type.normalize) op.op = this.type.normalize(op.op);
 	  }
 
-	  this._pushOp(op, callback);
+	  op.type = this.type;
+	  op.callbacks = [];
+
+	  // If the type supports composes, try to compose the operation onto the end
+	  // of the last pending operation.
+	  var composed = this._tryCompose(op);
+	  if (composed) {
+	    composed.callbacks.push(callback);
+	  } else {
+	    op.callbacks.push(callback);
+	    this.pendingOps.push(op);
+	  }
+
 	  this._otApply(op, source);
 
 	  // The call to flush is delayed so if submit() is called multiple times
@@ -16261,53 +16283,6 @@
 	  process.nextTick(function() {
 	    doc.flush();
 	  });
-	};
-
-	Doc.prototype._pushOp = function(op, callback) {
-	  if (this.applyStack) {
-	    // If we are in the process of incrementally applying an operation, don't
-	    // compose the op and push it onto the applyStack so it can be transformed
-	    // against other components from the op or ops being applied
-	    this.applyStack.push(op);
-	  } else {
-	    // If the type supports composes, try to compose the operation onto the
-	    // end of the last pending operation.
-	    var composed = this._tryCompose(op);
-	    if (composed) {
-	      composed.callbacks.push(callback);
-	      return;
-	    }
-	  }
-	  // Push on to the pendingOps queue of ops to submit if we didn't compose
-	  op.type = this.type;
-	  op.callbacks = [callback];
-	  this.pendingOps.push(op);
-	};
-
-	Doc.prototype._popApplyStack = function(to) {
-	  if (to > 0) {
-	    this.applyStack.length = to;
-	    return;
-	  }
-	  // Once we have completed the outermost apply loop, reset to null and no
-	  // longer add ops to the applyStack as they are submitted
-	  var op = this.applyStack[0];
-	  this.applyStack = null;
-	  if (!op) return;
-	  // Compose the ops added since the beginning of the apply stack, since we
-	  // had to skip compose when they were originally pushed
-	  var i = this.pendingOps.indexOf(op);
-	  if (i === -1) return;
-	  var ops = this.pendingOps.splice(i);
-	  for (var i = 0; i < ops.length; i++) {
-	    var op = ops[i];
-	    var composed = this._tryCompose(op);
-	    if (composed) {
-	      composed.callbacks = composed.callbacks.concat(op.callbacks);
-	    } else {
-	      this.pendingOps.push(op);
-	    }
-	  }
 	};
 
 	// Try to compose a submitted op into the last pending op. Returns the
@@ -33832,7 +33807,7 @@
 /* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var async = __webpack_require__(161);
+	/* WEBPACK VAR INJECTION */(function(process) {var async = __webpack_require__(161);
 	var Agent = __webpack_require__(151);
 	var Connection = __webpack_require__(152);
 	var emitter = __webpack_require__(59);
@@ -34014,13 +33989,17 @@
 	Backend.prototype._sanitizeOps = function(agent, projection, collection, id, ops, callback) {
 	  var backend = this;
 	  async.each(ops, function(op, eachCb) {
-	    backend._sanitizeOp(agent, projection, collection, id, op, eachCb);
+	    process.nextTick(function() {
+	      backend._sanitizeOp(agent, projection, collection, id, op, eachCb);
+	    });
 	  }, callback);
 	};
 	Backend.prototype._sanitizeOpsBulk = function(agent, projection, collection, opsMap, callback) {
 	  var backend = this;
 	  async.forEachOf(opsMap, function(ops, id, eachCb) {
-	    backend._sanitizeOps(agent, projection, collection, id, ops, eachCb);
+	    process.nextTick(function() {
+	      backend._sanitizeOps(agent, projection, collection, id, ops, eachCb);
+	    });
 	  }, callback);
 	};
 
@@ -34037,13 +34016,17 @@
 	Backend.prototype._sanitizeSnapshots = function(agent, projection, collection, snapshots, callback) {
 	  var backend = this;
 	  async.each(snapshots, function(snapshot, eachCb) {
-	    backend._sanitizeSnapshot(agent, projection, collection, snapshot.id, snapshot, eachCb);
+	    process.nextTick(function() {
+	      backend._sanitizeSnapshot(agent, projection, collection, snapshot.id, snapshot, eachCb);
+	    });
 	  }, callback);
 	};
 	Backend.prototype._sanitizeSnapshotBulk = function(agent, projection, collection, snapshotMap, callback) {
 	  var backend = this;
 	  async.forEachOf(snapshotMap, function(snapshot, id, eachCb) {
-	    backend._sanitizeSnapshot(agent, projection, collection, id, snapshot, eachCb);
+	    process.nextTick(function() {
+	      backend._sanitizeSnapshot(agent, projection, collection, id, snapshot, eachCb);
+	    });
 	  }, callback);
 	};
 
@@ -34351,6 +34334,7 @@
 	  return ids;
 	}
 
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
 /* 287 */

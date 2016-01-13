@@ -61,7 +61,7 @@
     "koa-static": "^1.4.9",
     "koa-websocket": "^1.1.0",
     "racer": "^0.8.7",
-    "racer-highway": "git+https://github.com/derbyparty/racer-highway.git#backend",
+    "racer-highway": "git+https://github.com/droganov/racer-highway.git#patch-2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-helmet": "^2.2.0",
