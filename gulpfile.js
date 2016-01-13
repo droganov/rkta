@@ -15,6 +15,7 @@ const paths = {
       "*.styl",
       "app/**",
       "com/**",
+      "tmp/**",
    ],
 }
 

@@ -5,7 +5,7 @@ var highway = require( "racer-highway/lib/browser" );
 var matchRoutes = require( "react-router" ).match;
 
 var defaultOptions = {
-   base: "/channel",
+   base: "/racer-channel",
    reconnect: true,
    browserChannelOnly: false,
    // srvProtocol: undefined,

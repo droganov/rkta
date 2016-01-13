@@ -47203,7 +47203,7 @@
 	var matchRoutes = __webpack_require__( 95 ).match;
 
 	var defaultOptions = {
-	   base: "/channel",
+	   base: "/racer-channel",
 	   reconnect: true,
 	   browserChannelOnly: false,
 	   // srvProtocol: undefined,
