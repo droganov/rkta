@@ -17,27 +17,25 @@ adapter.attachStyle( require("./style.styl") );
 
 // render
 adapter.onReady( (ev) => {
-	var racerModel = racer.connect();
-	racerModel.on("change", "$connection.state", (newValue, prevValue)=> {
-		console.log("new connection state is - ", newValue);
-	});
-
-	var test = racerModel.query("test", {
+	var racerModel = racer.connectClient();
+	var test = racerModel.query( "test", {
 		$query: {},
 		$orderby: {
 			ts:-1
 		},
 		$limit: 3
 	});
-	test.subscribe( function(err){
-		console.log(test.get());
-	});
+	// test.subscribe( function(err){
+	// 	console.log( test.get() );
+	// });
 	const router = (
-		<Router
-			history={ createHistory() }
-		>
-			{ routes() }
-		</Router>
+		<racer.Provider racerModel={racerModel} >
+			<Router
+				history={ createHistory() }
+			>
+				{ routes() }
+			</Router>
+		</racer.Provider>
 	);
 	ReactDOM.render( router,  document.getElementById("app"));
 });
