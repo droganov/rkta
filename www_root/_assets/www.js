@@ -25962,15 +25962,15 @@
 	adapter.onReady(function (ev) {
 		var racerModel = _racerReact2.default.connectClient();
 		var test = racerModel.query("test", {
-			$query: {},
+			_id: "e042fa87-8d46-4e5d-8461-378fd23cbeee",
 			$orderby: {
-				ts: -1
+				ts: 1
 			},
 			$limit: 3
 		});
-		// test.subscribe( function(err){
-		// 	console.log( test.get() );
-		// });
+		test.subscribe(function (err) {
+			console.log(test.get());
+		});
 		var router = _react2.default.createElement(
 			_racerReact2.default.Provider,
 			{ racerModel: racerModel },
