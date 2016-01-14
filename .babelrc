@@ -1,6 +1,9 @@
 {
    "presets": [ "stage-0", "es2015", "react" ],
-   "plugins": [ "babel-plugin-transform-runtime" ],
+   "plugins": [
+      "babel-plugin-transform-runtime",
+      "transform-class-properties"
+   ],
    "sourceMaps": true,
    "only": [ "*.jsx", "*.es6" ]
 }

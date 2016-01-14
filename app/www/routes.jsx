@@ -11,11 +11,13 @@ module.exports = () => (
    <Route
       path="/"
       component={ App }
+      racerSubscriptions="piu"
    >
       <IndexRoute
          name="home"
          component={ FrontPage }
+         racerQueries="viu"
       />
-      <Route path="*" name="404" component={ NotFound } />
+   <Route path="*" name="404" racerQueries="notFound" component={ NotFound } />
    </Route>
 );

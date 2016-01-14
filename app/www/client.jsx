@@ -10,17 +10,22 @@ import { Router } from "react-router";
 import * as adapter from  "../../lib/applicationAdapterClient";
 import routes from "./routes";
 
+import racer from "../../tmp/racer-react";
+
 // append styles
 adapter.attachStyle( require("./style.styl") );
 
 // render
 adapter.onReady( (ev) => {
+	var racerModel = racer.connectClient();
 	const router = (
-		<Router
-			history={ createHistory() }
-		>
-			{ routes() }
-		</Router>
+		<racer.Provider racerModel={racerModel} >
+			<Router
+				history={ createHistory() }
+			>
+				{ routes() }
+			</Router>
+		</racer.Provider>
 	);
 	ReactDOM.render( router,  document.getElementById("app"));
 });
