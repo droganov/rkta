@@ -18,11 +18,17 @@ export default class FrontPage extends Component {
     const racerModel = props.racerModel || context.racerModel;
   }
 
+  _change( ev ){
+    console.log( ev );
+  }
+
   render() {
     return (
       <div className="FrontPage">
         <Helmet title="Home" />
         Hello
+        <hr/>
+        <textarea onChange={ this._change.bind( this ) } />
       </div>
     );
   }

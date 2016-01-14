@@ -26120,13 +26120,20 @@
 	  }
 
 	  (0, _createClass3.default)(FrontPage, [{
+	    key: "_change",
+	    value: function _change(ev) {
+	      console.log(ev);
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "FrontPage" },
 	        _react2.default.createElement(_reactHelmet2.default, { title: "Home" }),
-	        "Hello"
+	        "Hello",
+	        _react2.default.createElement("hr", null),
+	        _react2.default.createElement("textarea", { onChange: this._change.bind(this) })
 	      );
 	    }
 	  }]);
