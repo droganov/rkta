@@ -20,6 +20,13 @@ const paths = {
 
 gulp.task( "webpack", cb => {
    webpack( webpackConfig( false ), ( err, stats ) => {
+
+      let jsonStats = stats.toJson();
+
+      if(jsonStats.errors.length > 0) {
+         console.log(jsonStats.errors[0]);
+      };
+
       if( err ){
          throw( new gutil.PluginError( "webpack", err ) );
       }

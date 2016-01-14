@@ -14647,9 +14647,11 @@
 
 	Agent.prototype._reply = function(request, err, message) {
 	  if (err) {
-	    request.error = (typeof err === 'string') ?
-	      {message: err} :
-	      {code: err.code, message: err.message, stack: err.stack};
+	    request.error = {
+	      code: err.code,
+	      message: err.message,
+	      stack: err.stack
+	    };
 	    this.send(request);
 	    return;
 	  }
@@ -25961,16 +25963,6 @@
 	// components
 	adapter.onReady(function (ev) {
 		var racerModel = _racerReact2.default.connectClient();
-		var test = racerModel.query("test", {
-			_id: "e042fa87-8d46-4e5d-8461-378fd23cbeee",
-			$orderby: {
-				ts: 1
-			},
-			$limit: 3
-		});
-		test.subscribe(function (err) {
-			console.log(test.get());
-		});
 		var router = _react2.default.createElement(
 			_racerReact2.default.Provider,
 			{ racerModel: racerModel },
@@ -26116,17 +26108,78 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(FrontPage).call(this, props, context));
 
 	    var racerModel = props.racerModel || context.racerModel;
+	    _this.racerModel = racerModel;
+	    _this.state = {};
 	    return _this;
 	  }
 
 	  (0, _createClass3.default)(FrontPage, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var self = this;
+	      var $test = this.racerModel.query("test", {
+	        $orderby: {
+	          ts: -1
+	        },
+	        $limit: 3
+	      });
+	      $test.subscribe(function (err) {
+	        if (err) return console.log(err);
+	        self.getList($test);
+	        self.racerModel.on("load", "test.**", self.getList.bind(self, $test));
+	        self.racerModel.on("unload", "test.**", self.getList.bind(self, $test));
+	      });
+	    }
+	  }, {
+	    key: "getList",
+	    value: function getList($q, id, Obj, passedQuery) {
+	      var list = $q.get();
+	      this.setState({
+	        list: list
+	      });
+	    }
+	  }, {
+	    key: "dateFormat",
+	    value: function dateFormat(item) {
+	      var dt = new Date(item.ts);
+	      return dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds() + " " + dt.getDate() + "." + dt.getMonth() + "." + dt.getFullYear();
+	    }
+	  }, {
+	    key: "addTs",
+	    value: function addTs() {
+	      this.racerModel.add("test", { ts: Date.now() });
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
+	      var _this2 = this;
+
+	      var listNotEmpty = this.state.list && this.state.list.length > 0;
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "FrontPage" },
 	        _react2.default.createElement(_reactHelmet2.default, { title: "Home" }),
-	        "Hello"
+	        "Hello",
+	        listNotEmpty ? _react2.default.createElement(
+	          "div",
+	          { className: "FrontPage__listing" },
+	          this.state.list.map(function (item, inx) {
+	            return _react2.default.createElement(
+	              "div",
+	              { className: "FrontPage__listing-item", key: "item_" + inx },
+	              _this2.dateFormat(item)
+	            );
+	          })
+	        ) : null,
+	        _react2.default.createElement(
+	          "div",
+	          { className: "FrontPage__actions" },
+	          _react2.default.createElement(
+	            "button",
+	            { onClick: this.addTs.bind(this) },
+	            "Добавить время"
+	          )
+	        )
 	      );
 	    }
 	  }]);
