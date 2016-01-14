@@ -3,39 +3,73 @@
 // deps
 import React from "react";
 import ReactDOM from "react-dom";
-import { createHistory } from "history";
+import { createHistory, useBeforeUnload } from "history";
 import { Router } from "react-router";
 
 // components
 import * as adapter from  "../../lib/applicationAdapterClient";
-import routes from "./routes";
+import routesFunc from "./routes";
 
-import racer from "../../tmp/racer-react";
+import racer from "racer-react";
 
 // append styles
 adapter.attachStyle( require("./style.styl") );
 
 // render
 adapter.onReady( (ev) => {
-	var racerModel = racer.connectClient();
-	var test = racerModel.query( "test", {
-		_id: "e042fa87-8d46-4e5d-8461-378fd23cbeee",
-		$orderby: {
-			ts:1
-		},
-		$limit: 3
+	const racerModel = racer.connectClient();
+	const history = useBeforeUnload( createHistory )();
+	const relLocation = location.pathname + location.search;
+	const routes = routesFunc();
+
+	// var test = racerModel.query( "test", {
+	// 	_id: "e042fa87-8d46-4e5d-8461-378fd23cbeee",
+	// 	$orderby: {
+	// 		ts:1
+	// 	},
+	// 	$limit: 3
+	// });
+	// test.subscribe( function(err){
+	// 	console.log( test.get() );
+	// });
+
+
+	// data prefetcing during user site navigation
+	history.listenBefore( ( location, callback ) => {
+		if( location.action !== "PUSH" ) return callback();
+		racer
+			.match({
+				routes: routes,
+				location: relLocation,
+				racerModel: racerModel,
+			})
+			.then( renderProps => {
+				callback()
+			})
+			.catch( reason => console.error( reason ) );
 	});
-	test.subscribe( function(err){
-		console.log( test.get() );
+
+	// fix scrollop
+	history.listen( location => {
+		if( location.action === "PUSH" ) window.scrollTo(0, 0);
 	});
-	const router = (
-		<racer.Provider racerModel={racerModel} >
-			<Router
-				history={ createHistory() }
-			>
-				{ routes() }
-			</Router>
-		</racer.Provider>
-	);
+
+	history.listenBeforeUnload( () => {
+		// do something sync
+		// then return nothing
+		return;
+
+		// or warining
+		return "Are you sure you want to leave this page?";
+	});
+
+	// render onload
+	const router = <racer.Provider racerModel={racerModel} >
+		<Router
+			history={ history }
+		>
+			{ routes }
+		</Router>
+	</racer.Provider>
 	ReactDOM.render( router,  document.getElementById("app"));
 });
