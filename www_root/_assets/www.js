@@ -26126,13 +26126,12 @@
 	      $test.subscribe(function (err) {
 	        if (err) return console.log(err);
 	        self.getList($test);
-	        self.racerModel.on("load", "test.**", self.getList.bind(self, $test));
-	        self.racerModel.on("unload", "test.**", self.getList.bind(self, $test));
+	        self.racerModel.on("all", "$queries." + $test.hash + ".*", self.getList.bind(self, $test));
 	      });
 	    }
 	  }, {
 	    key: "getList",
-	    value: function getList($q, id, Obj, passedQuery) {
+	    value: function getList($q) {
 	      var list = $q.get();
 	      this.setState({
 	        list: list

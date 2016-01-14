@@ -31,12 +31,11 @@ export default class FrontPage extends Component {
     $test.subscribe((err)=>{
       if(err) return console.log(err);
       self.getList($test);
-      self.racerModel.on("load", "test.**", self.getList.bind(self,$test));
-      self.racerModel.on("unload", "test.**", self.getList.bind(self,$test));
+      self.racerModel.on("all", "$queries."+$test.hash+".*", self.getList.bind(self,$test));
     });
 
   }
-  getList($q,id,Obj,passedQuery) {
+  getList($q) {
     let list = $q.get();
     this.setState({
       list: list
