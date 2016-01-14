@@ -18,16 +18,6 @@ adapter.attachStyle( require("./style.styl") );
 // render
 adapter.onReady( (ev) => {
 	var racerModel = racer.connectClient();
-	var test = racerModel.query( "test", {
-		_id: "e042fa87-8d46-4e5d-8461-378fd23cbeee",
-		$orderby: {
-			ts:1
-		},
-		$limit: 3
-	});
-	test.subscribe( function(err){
-		console.log( test.get() );
-	});
 	const router = (
 		<racer.Provider racerModel={racerModel} >
 			<Router
