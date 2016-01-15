@@ -1,9 +1,24 @@
 // import passport from "koa-passport";
 import bodyParser from "koa-bodyparser";
 
-module.exports = function( app ){
-   app.keys = [ "you-have-to-create-your-own-key" ];
-   app.use( bodyParser() );
+module.exports = function( app, needHotReload ){
+	app.keys = [ "you-have-to-create-your-own-key" ];
+	app.use( bodyParser() );
+
+	if(needHotReload) {
+		var webpack = require('webpack');
+		var config = require('../config/config.webpack.js')();
+		var compiler = webpack(config);
+
+		app.use(require('koa-webpack-dev-middleware')(compiler, {
+		 	noInfo: true
+		}));
+
+		app.use( require("koa-webpack-hot-middleware")(compiler, {
+			heartbeat: 200
+		}));
+	}
+
 };
 
 // module.exports = ( app )->

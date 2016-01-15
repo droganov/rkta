@@ -8,7 +8,9 @@ module.exports = function ( compress ){
    var extention = compress ? ".min.js" : ".js";
    var plugins = [
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin()
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
    ];
    if( compress ){
       // uglify
@@ -37,12 +39,16 @@ module.exports = function ( compress ){
    return ({
       // cache: true,
       entry: {
-         www: [ "./app/www/client" ]
-         // exlab: [ "./app/exlab/client" ],
+         www: [
+            "./app/www/client",
+            'webpack-hot-middleware/client'
+         ]
+         // exlab: ["./app/exlab/client"]
       },
+      // devtool: '#source-map',
       output: {
          path: path.join( __dirname, "/../", "www_root/_assets"),
-         publicPath: "/build",
+         publicPath: "/",
          filename: "[name]" + extention,
          chunkFilename: "[name].[chunkhash]" + extention
       },
