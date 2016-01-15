@@ -11,13 +11,13 @@ import { match, RoutingContext } from "react-router";
 
 import middleware from "./middleware";
 
-function getInstance ({ stats, Layout, routes, Store, dataProvider }){
+function getInstance ({ stats, Layout, routes, Store, dataProvider, needHotReload }){
    const app = koa();
-   middleware( app );
+   middleware( app, needHotReload );
    app.use( function *( next ){
       const context = this;
       match({
-            routes: routes(),
+            routes: routes,
             location: this.originalUrl,
          },
          function( error, redirectLocation, renderProps ){
@@ -48,7 +48,7 @@ function getInstance ({ stats, Layout, routes, Store, dataProvider }){
    return app;
 };
 
-function mount( path, route ){
+function mount( path, route, needHotReload ){
    return koaMount(
       route,
       getInstance({
@@ -57,6 +57,7 @@ function mount( path, route ){
          routes: require( join( path, "routes")),
          // Store: require( join( path, "redux/store")),
          // dataProvider: require( join( path, "redux/dataProvider")),
+         needHotReload: needHotReload
       })
    )
 }

@@ -8,19 +8,35 @@ import { Router } from "react-router";
 
 // components
 import * as adapter from  "../../lib/applicationAdapterClient";
-import routes from "./routes";
+
+var appNode = null;
+var routes = null;
+var history = createHistory();
 
 // append styles
 adapter.attachStyle( require("./style.styl") );
 
-// render
-adapter.onReady( (ev) => {
+var renderRoutes = function () {
+	try {
+		ReactDOM.unmountComponentAtNode(appNode);
+	}catch(e) {}
+	routes =  require("./routes");
 	const router = (
 		<Router
-			history={ createHistory() }
-		>
-			{ routes() }
-		</Router>
+			history={ history }
+			routes={ routes }
+		/>
 	);
-	ReactDOM.render( router,  document.getElementById("app"));
+	ReactDOM.render( router,  appNode);
+}
+
+// hot loading
+if (module.hot) {
+	module.hot.accept(renderRoutes);
+}
+
+// render
+adapter.onReady(()=>{
+	appNode = document.getElementById("app");
+	renderRoutes();
 });

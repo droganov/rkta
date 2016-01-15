@@ -6,6 +6,7 @@ const gutil = require( "gulp-util" );
 const nodemon = require( "gulp-nodemon" );
 const uglify  = require( "gulp-uglify" );
 const webpack = require( "webpack" );
+var runSequence    = require( "run-sequence" );
 const webpackConfig = require( "./config/config.webpack" );
 
 const paths = {
@@ -14,6 +15,7 @@ const paths = {
       "*.es6",
       "**.styl",
       "com/**",
+      "app/**"
    ],
 }
 
@@ -37,7 +39,11 @@ gulp.task( "uglify", [ "webpack" ], ()=>{
 
 // watching file changes
 gulp.task( "watch", ()=> {
-   gulp.watch( paths.webpack, [ "uglify" ]);
+   gulp.watch(paths.webpack,(e)=>{
+      setTimeout(()=>{
+         runSequence("webpack");
+      },5000);
+   });
 });
 
 
@@ -52,9 +58,9 @@ gulp.task( "serve", ()=> {
       env: {
          "NODE_ENV": "development",
       },
-      ignore: [ "www_root/*" ],
+      ignore: [ "app/*", "com/*", "www_root/*" ],
       stdout: "false",
-      tasks: [ "webpack" ],
+      // tasks: [ "webpack" ],
    })
       .on( "restart", () => console.log("restarting dev server...") )
       .on( "start", () => console.log("starting dev server...") )
