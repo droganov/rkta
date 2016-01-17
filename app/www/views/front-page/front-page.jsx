@@ -1,22 +1,14 @@
 "use strict"
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import { Connect } from "racer-react";
 
-export default class FrontPage extends Component {
+class FrontPage extends Component {
   static statics = {
-    racerQueries: {
-      one: "query",
+    racer: ( query, promise ) => {
+      query( "test", {} ).fetchAs( "news" );
     }
   };
-
-  static contextTypes = {
-    racerModel: React.PropTypes.object.isRequired,
-  };
-
-  constructor( props, context ) {
-    super(props, context);
-    const racerModel = props.racerModel || context.racerModel;
-  }
 
   _change( ev ){
     console.log( ev );
@@ -29,7 +21,12 @@ export default class FrontPage extends Component {
         Hello
         <hr/>
         <textarea onChange={ this._change.bind( this ) } />
+        { this.props.news.map( item => {
+          return <div>ts: { item.ts }</div>
+        })}
       </div>
     );
   }
 }
+
+export default Connect( FrontPage );
