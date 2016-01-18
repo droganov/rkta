@@ -21,8 +21,8 @@ class FrontPage extends Component {
         Hello
         <hr/>
         <textarea onChange={ this._change.bind( this ) } />
-        { this.props.news.map( item => {
-          return <div>ts: { item.ts }</div>
+        { this.props.news.map( (item, i) => {
+          return <div key={ i } >ts: { item.ts }</div>
         })}
       </div>
     );

@@ -33,20 +33,21 @@ adapter.onReady( (ev) => {
 	// 	console.log( test.get() );
 	// });
 
-
-	// data prefetcing during user site navigation
-	history.listenBefore( ( location, callback ) => {
-		if( location.action !== "PUSH" ) return callback();
+	function match( cb ){
 		racer
 			.match({
 				routes: routes,
 				location: relLocation,
 				racerModel: racerModel,
-			})
-			.then( renderProps => {
-				callback()
-			})
-			.catch( reason => console.error( reason ) );
+			},
+			cb
+		);
+	}
+
+	// data prefetcing during user site navigation
+	history.listenBefore( ( location, cb ) => {
+		if( location.action !== "PUSH" ) return cb();
+		match( cb );
 	});
 
 	// fix scrollop
@@ -64,12 +65,17 @@ adapter.onReady( (ev) => {
 	});
 
 	// render onload
-	const router = <racer.Provider racerModel={racerModel} >
-		<Router
-			history={ history }
-		>
-			{ routes }
-		</Router>
-	</racer.Provider>
-	ReactDOM.render( router,  document.getElementById("app"));
+
+	match( function( err ){
+		if( err ) return console.log( err );
+		const router = <racer.Provider racerModel={racerModel} >
+			<Router
+				history={ history }
+			>
+				{ routes }
+			</Router>
+		</racer.Provider>
+		ReactDOM.render( router,  document.getElementById("app"));
+	})
+
 });

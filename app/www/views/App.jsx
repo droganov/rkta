@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import { Link } from "react-router";
 
 
 // import Mq from "../blocks/mq/mq";
@@ -14,7 +15,12 @@ export default ({ children }) => (
          titleTemplate="rkta: %s"
       />
       <div className="App__content">
-         { children }
+        <h1>App</h1>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/page">Page</Link>
+        </nav>
+        { children }
       </div>
    </div>
 );
