@@ -24,7 +24,7 @@ var renderRoutes = function () {
 	const router = (
 		<Router
 			history={ history }
-			routes={ routes }
+			routes={ routes() }
 		/>
 	);
 	ReactDOM.render( router,  appNode);

@@ -4,15 +4,26 @@ var webpack = require("webpack");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 // var ExtractTextPlugin      = require("extract-text-webpack-plugin");
 
-module.exports = function ( compress ){
-   var extention = compress ? ".min.js" : ".js";
+module.exports = function ( pro ){
+   var extention = ".js";
    var plugins = [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
    ];
-   if( compress ){
+
+   var targetDir = "www_root/_assets";
+   if(pro) {
+      targetDir = "www_root/assets";
+      plugins.push( new webpack.DefinePlugin({
+         'process.env': {
+            'NODE_ENV': JSON.stringify('production')
+         }
+      }));
+   }
+
+   if( false ){ // оключено, жмет gulp
       // uglify
       plugins.push( new webpack.optimize.UglifyJsPlugin(
          {
@@ -36,18 +47,16 @@ module.exports = function ( compress ){
 
    // TODO: extruct styles
 
-   return ({
+   var cfg = {
       // cache: true,
       entry: {
          www: [
-            "./app/www/client",
-            'webpack-hot-middleware/client'
+            "./app/www/client"
          ]
          // exlab: ["./app/exlab/client"]
       },
-      // devtool: '#source-map',
       output: {
-         path: path.join( __dirname, "/../", "www_root/_assets"),
+         path: path.join( __dirname, "/../", targetDir),
          publicPath: "/",
          filename: "[name]" + extention,
          chunkFilename: "[name].[chunkhash]" + extention
@@ -93,6 +102,12 @@ module.exports = function ( compress ){
       stylus: {
          use: [ require("nib")() ],
       },
-   });
+   };
+
+   if(!pro) {
+      cfg.entry.www.push('webpack-hot-middleware/client');
+   }
+
+   return cfg;
 
 }

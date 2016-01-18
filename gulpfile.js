@@ -1,5 +1,6 @@
 "use strict"
 
+var fs       = require("fs");
 const gulp = require( "gulp" );
 const babel = require( "gulp-babel" );
 const gutil = require( "gulp-util" );
@@ -19,29 +20,46 @@ const paths = {
    ],
 }
 
-gulp.task( "webpack", cb => {
-   webpack( webpackConfig( false ), ( err, stats ) => {
+var hashHistory = [];
+function webpackFn (pro, cb) {
+   webpack( webpackConfig( pro ), ( err, stats ) => {
       if( err ){
          throw( new gutil.PluginError( "webpack", err ) );
       }
-      cb()
+
+      if(!pro) {
+         hashHistory.unshift(stats.hash);
+         hashHistory = hashHistory.slice(0,2);
+         console.log(hashHistory);
+      }
+
+      cb(err);
    });
-});
+}
+
+gulp.task( "webpack", (cb)=> webpackFn(false, cb) );
 
 // compressing js
-gulp.task( "uglify", [ "webpack" ], ()=>{
-   gulp
-      .src( "www_root/_assets/*.js" )
-      .pipe( uglify() )
-      .pipe( gulp.dest("www_root/assets") );
+gulp.task( "release", (cb)=>{
+   webpackFn(true, (err)=> {
+      gulp
+         .src( "www_root/assets/*.js" )
+         .pipe( uglify() )
+         .pipe( gulp.dest("www_root/assets") );
+   });
+   cb();
 });
-
 
 // watching file changes
 gulp.task( "watch", ()=> {
    gulp.watch(paths.webpack,(e)=>{
       setTimeout(()=>{
-         runSequence("webpack");
+         var hl = hashHistory.length;
+         runSequence("webpack", ()=> {
+            if(hl<2||hashHistory[0]!==hashHistory[1]) {
+               runSequence("release");
+            }
+         });
       },5000);
    });
 });
@@ -68,4 +86,4 @@ gulp.task( "serve", ()=> {
 });
 
 
-gulp.task( "default", [ "serve", "uglify", "watch" ] );
+gulp.task( "default", [ "serve", "webpack", "watch" ] );

@@ -17,7 +17,7 @@ function getInstance ({ stats, Layout, routes, Store, dataProvider, needHotReloa
    app.use( function *( next ){
       const context = this;
       match({
-            routes: routes,
+            routes: routes(),
             location: this.originalUrl,
          },
          function( error, redirectLocation, renderProps ){
