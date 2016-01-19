@@ -2,37 +2,32 @@
 var path = require("path");
 var webpack = require("webpack");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
-// var ExtractTextPlugin      = require("extract-text-webpack-plugin");
+var ExtractTextPlugin      = require("extract-text-webpack-plugin");
 
 module.exports = function ( pro ){
    var extention = ".js";
    var plugins = [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new ExtractTextPlugin("[name].css", {
+         allChunks: true
+      })
    ];
 
    var targetDir = "www_root/_assets";
+   var stylusLoaderString = "css-loader!stylus-loader";
    if(pro) {
       targetDir = "www_root/assets";
+      stylusLoaderString = "css-loader?minimize!stylus-loader";
       plugins.push( new webpack.DefinePlugin({
          'process.env': {
             'NODE_ENV': JSON.stringify('production')
          }
       }));
+   } else {
+      plugins.push(new webpack.HotModuleReplacementPlugin());
    }
-
-   if( false ){ // оключено, жмет gulp
-      // uglify
-      plugins.push( new webpack.optimize.UglifyJsPlugin(
-         {
-            compressor: {
-               warnings: false,
-            },
-         }
-      ));
-   };
 
    // write stats
    plugins.push(
@@ -65,16 +60,12 @@ module.exports = function ( pro ){
       module: {
          loaders: [
             {
-               test: /\.css$/,
-               loader: "style-loader!css-loader",
+               test: /\.styl$/,
+               loader: ExtractTextPlugin.extract(stylusLoaderString)
             },
             {
                test: /\.svg$/,
                loader: "svg-inline",
-            },
-            {
-               test: /\.styl$/,
-               loader: "css-loader!stylus-loader",
             },
             {
                test: /\.(woff|woff2)/,

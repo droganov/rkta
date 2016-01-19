@@ -14,7 +14,7 @@ var routes = null;
 var history = createHistory();
 
 // append styles
-adapter.attachStyle( require("./style.styl") );
+require("./style.styl")
 
 var renderRoutes = function () {
 	try {
@@ -28,6 +28,16 @@ var renderRoutes = function () {
 		/>
 	);
 	ReactDOM.render( router,  appNode);
+
+	// костыль автообновления, не ждет формирования нового файла со стилями
+	const links = document.getElementsByTagName( "link" );
+	for (var i = 0; i < links.length; i++) {
+		var link = links[i];
+		if(link.rel=="stylesheet") {
+			link.href = link.href.replace(/\?\d+$/,"?"+Date.now())
+			break;
+		}
+	};
 }
 
 // hot loading

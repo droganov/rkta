@@ -30,7 +30,6 @@ function webpackFn (pro, cb) {
       if(!pro) {
          hashHistory.unshift(stats.hash);
          hashHistory = hashHistory.slice(0,2);
-         console.log(hashHistory);
       }
 
       cb(err);

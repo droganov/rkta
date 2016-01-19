@@ -1,10 +1,11 @@
 "use strict"
 import React from "react";
-import { getBundleScriptName } from "../../com/util";
+import { getBundleScriptName, getBundleStyleName } from "../../com/util";
 
 module.exports = ({ hash, helmet, isProduction, markup }) => {
    const { base, link, meta, script, title } = helmet;
    const scriptName = getBundleScriptName( isProduction, hash );
+   const styleName = getBundleStyleName( isProduction, hash );
    return (
       <html lang="en">
          <head>
@@ -16,6 +17,7 @@ module.exports = ({ hash, helmet, isProduction, markup }) => {
             { meta.toComponent() }
             { script.toComponent() }
             { title.toComponent() }
+            <link rel="stylesheet" href={ styleName } />
          </head>
          <body>
             <div id="app" className="App" dangerouslySetInnerHTML={{ __html: markup }} />
