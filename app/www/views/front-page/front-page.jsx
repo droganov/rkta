@@ -7,11 +7,36 @@ class FrontPage extends Component {
   static statics = {
     racer: ( query, promise ) => {
       query( "test", {} ).fetchAs( "news" );
+      query( "test", {
+        $orderby: {
+          ts: -1,
+        }
+      } ).subscribeAs( "views" );
     }
   };
+  state = { message: "", };
 
+  setMessage( message){
+    this.setState({
+      message: message,
+    });
+    this.refs.message.value = message;
+  }
   _change( ev ){
-    console.log( ev );
+    this.setMessage( ev.target.value );
+  }
+
+  _del( id ){
+    this.props.racerModel.del( "test." + id );
+  }
+
+  _submit( ev ){
+    ev.preventDefault();
+    this.props.racerModel.add( "test", {
+      ts: Date.now(),
+      message: this.state.message,
+    });
+    this.setMessage( "" );
   }
 
   render() {
@@ -20,10 +45,27 @@ class FrontPage extends Component {
         <Helmet title="Home" />
         Hello
         <hr/>
-        <textarea onChange={ this._change.bind( this ) } />
-        { this.props.news.map( (item, i) => {
-          return <div key={ i } >ts: { item.ts }</div>
-        })}
+        <form onSubmit={ this._submit.bind( this ) }>
+          <textarea ref="message" onChange={ this._change.bind( this ) } />
+          <button disabled={ this.state.message === "" } >Add</button>
+        </form>
+        <ul style={{
+            listStyleType: "none",
+            margin: 0,
+            padding: 0,
+          }}>
+          { this.props.views.map( (item, i) => {
+            return <li key={ i } style={{ marginBottom: "1em", }} >
+              <div>
+                <strong>{ item.message }</strong> — <span
+                  onClick={ this._del.bind( this, item.id ) }
+                  style={{ cursor: "pointer", }}
+                  >×</span>
+              </div>
+              <small>{ item.ts }</small>
+            </li>
+          })}
+        </ul>
       </div>
     );
   }
