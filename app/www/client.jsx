@@ -9,6 +9,9 @@ import { Router } from "react-router";
 // components
 import * as adapter from  "../../lib/applicationAdapterClient";
 
+// webpack styles connect
+require("./style.styl");
+
 var appNode = null;
 var routes = null;
 var history = createHistory();

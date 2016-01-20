@@ -13,11 +13,12 @@ module.exports = function( app, needHotReload ){
 		var compiler = webpack(config);
 
 		app.use(require('koa-webpack-dev-middleware')(compiler, {
-		 	noInfo: true
+		 	noInfo: true,
+		 	useNodeFileSystem: true
 		}));
 
 		app.use( require("koa-webpack-hot-middleware")(compiler, {
-			heartbeat: 200
+			heartbeat: 1000
 		}));
 	}
 

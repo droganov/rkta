@@ -18,83 +18,73 @@ const paths = {
       "com/**",
       "app/**"
    ],
+   stats: "build/stats.json"
 }
 
-var hashHistory = [];
-function webpackFn (pro, cb) {
-   webpack( webpackConfig( pro ), ( err, stats ) => {
-      if( err ){
-         throw( new gutil.PluginError( "webpack", err ) );
-      }
-
-      if(!pro) {
-         hashHistory.unshift(stats.hash);
-         hashHistory = hashHistory.slice(0,2);
-      }
-
-      cb(err);
-   });
-}
-
-gulp.task( "webpack", (cb)=> webpackFn(false, cb) );
-
-// compressing js
+// make release bundle
 gulp.task( "release", (cb)=>{
-   webpackFn(true, (err)=> {
+   webpack( webpackConfig( true ), ( err, stats ) => {
+      if( err ){
+         throw( new gutil.PluginError( "release", err ) );
+      }
+
       gulp
          .src( "www_root/assets/*.js" )
          .pipe( uglify() )
          .pipe( gulp.dest("www_root/assets") );
+      cb();
    });
-   cb();
 });
 
-// build bundles
-gulp.task( "build", (cb)=> {
-   var hl = hashHistory.length;
-   runSequence("webpack", ()=> {
-      // make release if first time running or dev bundle changed
-      if(hl<2||hashHistory[0]!==hashHistory[1]) {
-         runSequence("release", cb);
-      } else {
-         cb();
+// clean hot load patches
+gulp.task( "clean", (cb)=> {
+   var cfg = webpackConfig();
+   fs.readdir(cfg.output.path, (err, list)=>{
+      var flist = list.filter((f)=> f.search(/\.hot-update\./i)>-1 );
+      flist.forEach((f)=>{
+         var filepath = cfg.output.path+"/"+f;
+         fs.unlink(filepath, (err)=>{
+            if(err) console.log(filepath,":",err);
+         });
+      });
+   });
+});
+
+// watch stats file
+var timer = null;
+var lastHash = null;
+gulp.task( "watch", ()=> {
+   gulp.watch(paths.stats, ()=>{
+      var stats = JSON.parse(fs.readFileSync(paths.stats).toString());
+
+      if(lastHash!==stats.hash) {
+         lastHash = stats.hash;
+         clearTimeout(timer);
+         timer = setTimeout(()=>{
+            runSequence("release");
+         },5000);
       }
    });
 });
-
-// watch files
-var timer = null
-gulp.task( "watch", ()=> {
-   gulp.watch(paths.webpack, ()=>{
-      clearTimeout(timer);
-      timer = setTimeout(()=>{
-         runSequence("build");
-      },5000);
-   });
-});
-
 
 // running dev server
 gulp.task( "serve", ()=> {
    // http://stackoverflow.com/questions/29217978/gulp-to-watch-when-node-app-listen-is-invoked-or-to-port-livereload-nodejs-a
    nodemon({
       script: "lib/server.js",
-      ext: "jsx es6 styl",
+      ext: "jsx js es6",
       args: [ "--harmony", "--debug-break", "--trace_opt", "--trace_deopt", "--allow-natives-syntax" ],
       env: {
          "NODE_ENV": "development",
       },
-      ignore: ["*" ],
+      ignore: [ "app/*", "com/*", "build/*", "test/*", "www_root/" ],
       stdout: "false",
-      // tasks: [ "build" ]
+      // tasks: [ "clean" ]
    })
-      .on( "restart", () => {
-         console.log("restarting dev server...")
-         runSequence("build");
-      })
+      .on( "restart", ()=> console.log("restarting dev server...") )
       .on( "start", () => console.log("starting dev server...") )
       .on( "readable", data => console.log("readable") );
 });
 
 
-gulp.task( "default", [ "serve", "build", "watch" ] );
+gulp.task( "default", [ "clean", "watch", "serve" ] );
