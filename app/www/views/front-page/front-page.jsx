@@ -5,13 +5,13 @@ import { Connect } from "racer-react";
 
 class FrontPage extends Component {
   static statics = {
-    racer: ( query, promise ) => {
-      query( "test", {} ).fetchAs( "news" );
+    racer: query => {
+      // query( "test", {} ).fetchAs( "news" );
       query( "test", {
-        $orderby: {
+        $orderby:{
           ts: -1,
         }
-      } ).subscribeAs( "views" );
+      }).subscribeAs( "testList" );
     }
   };
   state = { message: "", };
@@ -39,6 +39,10 @@ class FrontPage extends Component {
     this.setMessage( "" );
   }
 
+  componentDidMount(){
+    // this.racerQuery( "test", {} ).subscribeAs( "testCount" )
+  }
+
   render() {
     return (
       <div className="FrontPage">
@@ -54,7 +58,7 @@ class FrontPage extends Component {
             margin: 0,
             padding: 0,
           }}>
-          { this.props.views.map( (item, i) => {
+          { this.props.testList.map( (item, i) => {
             return <li key={ i } style={{ marginBottom: "1em", }} >
               <div>
                 <strong>{ item.message }</strong> — <span
