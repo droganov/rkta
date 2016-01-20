@@ -1,6 +1,8 @@
 // import passport from "koa-passport";
 import bodyParser from "koa-bodyparser";
 
+var fs 			= require("fs");
+
 module.exports = function( app, needHotReload ){
 	app.keys = [ "you-have-to-create-your-own-key" ];
 	app.use( bodyParser() );

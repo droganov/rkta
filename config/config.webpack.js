@@ -10,40 +10,45 @@ module.exports = function ( pro ){
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.NoErrorsPlugin(),
-      new ExtractTextPlugin("[name].css", {
-         allChunks: true
+      new webpack.DefinePlugin({
+         'process.env': {
+            'NODE_ENV': JSON.stringify( pro?'production':'development')
+         }
       })
    ];
 
    var targetDir = "www_root/_assets";
    var stylusLoaderString = "css-loader!stylus-loader";
+
    if(pro) {
+
       targetDir = "www_root/assets";
       stylusLoaderString = "css-loader?minimize!stylus-loader";
-      plugins.push( new webpack.DefinePlugin({
-         'process.env': {
-            'NODE_ENV': JSON.stringify('production')
-         }
+
+      // extract styles
+      plugins.push( new ExtractTextPlugin("[name].css", {
+         allChunks: true
       }));
+
    } else {
+
+      // hot reload in development mode
       plugins.push(new webpack.HotModuleReplacementPlugin());
+
+      // write stats
+      plugins.push(
+         new StatsWriterPlugin(
+            {
+               chunkModules: true,
+               filename: "../../build/stats.json",
+               fields: [ "hash", "version", "errorDetails" ]
+            }
+         )
+      );
+
    }
 
-   // write stats
-   plugins.push(
-      new StatsWriterPlugin(
-         {
-            chunkModules: true,
-            filename: "../../build/stats.json",
-            fields: [ "hash", "version", "errorDetails" ]
-         }
-      )
-   );
-
-   // TODO: extruct styles
-
    var cfg = {
-      // cache: true,
       entry: {
          www: [
             "./app/www/client"
@@ -61,7 +66,7 @@ module.exports = function ( pro ){
          loaders: [
             {
                test: /\.styl$/,
-               loader: ExtractTextPlugin.extract(stylusLoaderString)
+               loader: ( pro? ExtractTextPlugin.extract(stylusLoaderString): stylusLoaderString)
             },
             {
                test: /\.svg$/,
@@ -96,6 +101,7 @@ module.exports = function ( pro ){
    };
 
    if(!pro) {
+      // hot load client script
       cfg.entry.www.push('webpack-hot-middleware/client');
    }
 

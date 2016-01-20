@@ -13,9 +13,6 @@ var appNode = null;
 var routes = null;
 var history = createHistory();
 
-// append styles
-require("./style.styl")
-
 var renderRoutes = function () {
 	try {
 		ReactDOM.unmountComponentAtNode(appNode);
@@ -28,21 +25,15 @@ var renderRoutes = function () {
 		/>
 	);
 	ReactDOM.render( router,  appNode);
-
-	// костыль автообновления, не ждет формирования нового файла со стилями
-	const links = document.getElementsByTagName( "link" );
-	for (var i = 0; i < links.length; i++) {
-		var link = links[i];
-		if(link.rel=="stylesheet") {
-			link.href = link.href.replace(/\?\d+$/,"?"+Date.now())
-			break;
-		}
-	};
 }
 
 // hot loading
 if (module.hot) {
 	module.hot.accept(renderRoutes);
+	module.hot.accept("./style.styl", function () {
+		adapter.attachStyle(require("./style.styl"));
+	});
+	adapter.attachStyle(require("./style.styl"));
 }
 
 // render

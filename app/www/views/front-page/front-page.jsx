@@ -6,12 +6,12 @@ import Testblock from "../../blocks/testblock/testblock";
 
 export default class FrontPage extends Component {
    render() {
-      return (
-         <div className="FrontPage">
-            <Helmet title="Home" />
-            Hello
-            <Testblock />
-         </div>
-      );
+    	return (
+        	<div className="FrontPage">
+            	<Helmet title="Home" />
+            	Hello
+            	<Testblock />
+         	</div>
+      	);
    }
 }

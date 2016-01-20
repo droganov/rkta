@@ -49,16 +49,26 @@ gulp.task( "release", (cb)=>{
    cb();
 });
 
-// watching file changes
+// build bundles
+gulp.task( "build", (cb)=> {
+   var hl = hashHistory.length;
+   runSequence("webpack", ()=> {
+      // make release if first time running or dev bundle changed
+      if(hl<2||hashHistory[0]!==hashHistory[1]) {
+         runSequence("release", cb);
+      } else {
+         cb();
+      }
+   });
+});
+
+// watch files
+var timer = null
 gulp.task( "watch", ()=> {
-   gulp.watch(paths.webpack,(e)=>{
-      setTimeout(()=>{
-         var hl = hashHistory.length;
-         runSequence("webpack", ()=> {
-            if(hl<2||hashHistory[0]!==hashHistory[1]) {
-               runSequence("release");
-            }
-         });
+   gulp.watch(paths.webpack, ()=>{
+      clearTimeout(timer);
+      timer = setTimeout(()=>{
+         runSequence("build");
       },5000);
    });
 });
@@ -66,7 +76,6 @@ gulp.task( "watch", ()=> {
 
 // running dev server
 gulp.task( "serve", ()=> {
-   // todo: live reload
    // http://stackoverflow.com/questions/29217978/gulp-to-watch-when-node-app-listen-is-invoked-or-to-port-livereload-nodejs-a
    nodemon({
       script: "lib/server.js",
@@ -75,14 +84,17 @@ gulp.task( "serve", ()=> {
       env: {
          "NODE_ENV": "development",
       },
-      ignore: [ "app/*", "com/*", "www_root/*" ],
+      ignore: ["*" ],
       stdout: "false",
-      // tasks: [ "webpack" ],
+      // tasks: [ "build" ]
    })
-      .on( "restart", () => console.log("restarting dev server...") )
+      .on( "restart", () => {
+         console.log("restarting dev server...")
+         runSequence("build");
+      })
       .on( "start", () => console.log("starting dev server...") )
       .on( "readable", data => console.log("readable") );
 });
 
 
-gulp.task( "default", [ "serve", "webpack", "watch" ] );
+gulp.task( "default", [ "serve", "build", "watch" ] );

@@ -2,9 +2,6 @@ module.exports = {
    getBundleScriptName( isProduction, hash ){
       return ( isProduction ? "/assets" : "/_assets" ) + "/www.js?" + hash;
    },
-   getBundleStyleName( isProduction, hash ){
-      return ( isProduction ? "/assets" : "/_assets" ) + "/www.css?" + (isProduction ? hash : new Date().getTime());
-   },
    isServer(){
       return process.title !== "browser";
    },
