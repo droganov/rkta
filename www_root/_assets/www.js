@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6bde30947a9d6a27b44d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8c298b7f8ec1e3178bed"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -26511,27 +26511,14 @@
 	adapter.onReady(function (ev) {
 		appNode = document.getElementById("app");
 		var racerModel = _racerReact2.default.connectClient();
-		var relLocation = location.pathname + location.search;
 
-		var loadRoutes = function loadRoutes() {
-			routes = __webpack_require__(229)();
-		};
+		var relLocation = null;
 
-		var renderRoutes = function renderRoutes() {
-			try {
-				_reactDom2.default.unmountComponentAtNode(appNode);
-			} catch (e) {}
-			loadRoutes();
-			var router = _react2.default.createElement(
-				_racerReact2.default.Provider,
-				{ racerModel: racerModel },
-				_react2.default.createElement(_reactRouter.Router, {
-					history: history,
-					routes: routes
-				})
-			);
-			_reactDom2.default.render(router, appNode);
-		};
+		function updateRelLocation(loc) {
+			loc = loc || location;
+			relLocation = loc.pathname + loc.search;
+		}
+		updateRelLocation();
 
 		function match(cb) {
 			_racerReact2.default.match({
@@ -26541,9 +26528,31 @@
 			}, cb);
 		}
 
+		function renderRoutes() {
+			try {
+				_reactDom2.default.unmountComponentAtNode(appNode);
+			} catch (e) {}
+
+			routes = __webpack_require__(229)();
+
+			match(function (err) {
+				if (err) return console.log(err);
+				var router = _react2.default.createElement(
+					_racerReact2.default.Provider,
+					{ racerModel: racerModel },
+					_react2.default.createElement(_reactRouter.Router, {
+						history: history,
+						routes: routes
+					})
+				);
+				_reactDom2.default.render(router, appNode);
+			});
+		}
+
 		// data prefetcing during user site navigation
 		history.listenBefore(function (location, cb) {
 			if (location.action !== "PUSH") return cb();
+			updateRelLocation(location);
 			match(cb);
 		});
 
@@ -26562,11 +26571,7 @@
 		});
 
 		// render onload
-		loadRoutes();
-		match(function (err) {
-			if (err) return console.log(err);
-			renderRoutes();
-		});
+		renderRoutes();
 
 		// hot loading
 		if (true) {
@@ -26742,6 +26747,7 @@
 
 	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_Object$getPrototypeO = (0, _getPrototypeOf2.default)(FrontPage)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = { message: "" }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
+	  // }).fetchAs( "testList" );
 
 	  (0, _createClass3.default)(FrontPage, [{
 	    key: "setMessage",
@@ -30812,7 +30818,9 @@
 	var isServer = __webpack_require__( 5 ).isServer;
 
 	module.exports = function ( options, cb ){
-	  // TODO: reset модели options.racerModel if !isServer
+	  if(!isServer) {
+	    options.racerModel.unloadAll();
+	  }
 	  match(
 	    {
 	      routes: options.routes,

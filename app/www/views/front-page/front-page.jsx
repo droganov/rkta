@@ -12,6 +12,7 @@ class FrontPage extends Component {
           ts: -1,
         }
       }).subscribeAs( "testList" );
+      // }).fetchAs( "testList" );
     }
   };
   state = { message: "", };

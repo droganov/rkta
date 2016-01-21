@@ -21,27 +21,14 @@ var history = useBeforeUnload( createHistory )();
 adapter.onReady( (ev) => {
 	appNode = document.getElementById("app");
 	const racerModel = racer.connectClient();
-	const relLocation = location.pathname + location.search;
 
-	var loadRoutes = function () {
-		routes =  require("./routes")();
-	}
+	var relLocation = null;
 
-	var renderRoutes = function () {
-		try {
-			ReactDOM.unmountComponentAtNode(appNode);
-		}catch(e) {}
-		loadRoutes();
-		const router = (
-			<racer.Provider racerModel={racerModel} >
-				<Router
-					history={ history }
-					routes={ routes }
-				/>
-			</racer.Provider>
-		);
-		ReactDOM.render( router,  appNode);
+	function updateRelLocation (loc) {
+		loc = loc || location;
+		relLocation = loc.pathname + loc.search;
 	}
+	updateRelLocation();
 
 	function match( cb ){
 		racer
@@ -54,9 +41,31 @@ adapter.onReady( (ev) => {
 		);
 	}
 
+	function renderRoutes() {
+		try {
+			ReactDOM.unmountComponentAtNode(appNode);
+		}catch(e) {}
+
+		routes =  require("./routes")();
+
+		match( function( err ){
+			if( err ) return console.log( err );
+			const router = (
+				<racer.Provider racerModel={racerModel} >
+					<Router
+						history={ history }
+						routes={ routes }
+					/>
+				</racer.Provider>
+			);
+			ReactDOM.render( router,  appNode);
+		});
+	}
+
 	// data prefetcing during user site navigation
 	history.listenBefore( ( location, cb ) => {
 		if( location.action !== "PUSH" ) return cb();
+		updateRelLocation(location);
 		match( cb );
 	});
 
@@ -75,11 +84,7 @@ adapter.onReady( (ev) => {
 	});
 
 	// render onload
-	loadRoutes();
-	match( function( err ){
-		if( err ) return console.log( err );
-		renderRoutes();
-	});
+	renderRoutes();
 
 	// hot loading
 	if (module.hot) {
