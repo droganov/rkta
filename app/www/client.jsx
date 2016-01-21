@@ -18,14 +18,16 @@ adapter.attachStyle( require("./style.styl") );
 // render
 adapter.onReady( (ev) => {
 	const racerModel = racer.connect();
-	// const test = racerModel.query("test");
-	// test.subscribe( function(){
-	// 	console.log( "arguments" );
-	// });
-	console.log( racerModel.connection.state );
-	racerModel.add("test", {
-		ts: Date.now()
-	})
+	var $test = racerModel.query("test", {
+		$orderby:{
+			ts: -1
+		},
+		$limit: 2
+	});
+	$test.subscribe( function(){
+		console.log( $test.get() );
+	});
+	// racerModel.add("test",{ts:Date.now()});
 	const router = (
 		<Router
 			history={ createHistory() }

@@ -1,8 +1,8 @@
 var Duplex = require("stream").Duplex;
 var util = require("util");
-var WebSocket = require("ws");
+var WebSocket = require("koa-websocket/node_modules/ws");
 
-module.exports = ClientStream;
+module.exports = createWebSocketStream;
 
 function createWebSocketStream(client) {
   var stream = new ClientStream(client);
@@ -23,11 +23,6 @@ function ClientStream(client) {
   this.client = client;
 
   var self = this;
-
-  this.on("error", function(error) {
-    console.warn("BrowserChannel client message stream error", error);
-    self._stopClient();
-  });
 
   // The server ended the writable stream. Triggered by calling stream.end()
   // in agent.close()

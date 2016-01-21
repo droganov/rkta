@@ -18,15 +18,11 @@ Racer.prototype.createTransport = function( options ){
    return this;
 }
 Racer.prototype.use = function( app ){
-   // var store = racer.createStore( this.otionsBackend );
    var racerStore = racer.createBackend( this.otionsBackend );
-   // var transport = highway( racerStore, this.otionsTransport );
    var transport = new Transport( racerStore, this.otionsTransport );
    transport.connect( app );
    app
-      .use( c2k( racerStore.modelMiddleware() ) )
-      // .use( c2k( transport.middleware ) );
-   // return transport;
+      .use( c2k( racerStore.modelMiddleware() ) );
 }
 
 module.exports = Racer;

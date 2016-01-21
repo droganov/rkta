@@ -1,13 +1,12 @@
 "use strict"
 
 var racer = require( "racer" );
-var highway = require( "racer-highway/lib/browser" );
+var transport = require( "../racer-transport-koa/client" );
 var matchRoutes = require( "react-router" ).match;
 
 var defaultOptions = {
    base: "/racer-channel",
    reconnect: true,
-   browserChannelOnly: false,
    // srvProtocol: undefined,
    // srvHost: undefined,
    // srvPort: undefined,
@@ -19,7 +18,7 @@ var defaultOptions = {
 function connect( options, bundle ){
    var clientOptions = Object.assign( {}, defaultOptions, options );
    var bundle = bundle || getClientBundle();
-   highway( racer, clientOptions );
+   transport( racer, clientOptions );
    var model = racer.createModel( bundle );
    return model;
 }
