@@ -86,6 +86,7 @@ module.exports = function ( compress ){
       plugins: plugins,
       stylus: {
          use: [ require("nib")() ],
+         import: [ "~nib/lib/nib/index.styl" ],
       },
    });
 
