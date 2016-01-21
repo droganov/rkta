@@ -14,7 +14,8 @@ const paths = {
    webpack: [
       "*.jsx",
       "*.es6",
-      "**.styl",
+      "*.styl",
+      "app/**",
       "com/**",
       "app/**"
    ],
@@ -85,6 +86,5 @@ gulp.task( "serve", ()=> {
       .on( "start", () => console.log("starting dev server...") )
       .on( "readable", data => console.log("readable") );
 });
-
 
 gulp.task( "default", [ "clean", "watch", "serve" ] );
