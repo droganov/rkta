@@ -40,14 +40,14 @@ class FrontPage extends Component {
   }
 
   componentDidMount(){
-    // this.racerQuery( "test", {} ).subscribeAs( "testCount" )
+    this.racerQuery("test", {}).observeAs("sometest");
   }
 
   render() {
     return (
       <div className="FrontPage">
         <Helmet title="Home" />
-        Hello
+        Hello { this.props.sometest && this.props.sometest.length }
         <hr/>
         <form onSubmit={ this._submit.bind( this ) }>
           <textarea ref="message" onChange={ this._change.bind( this ) } />
