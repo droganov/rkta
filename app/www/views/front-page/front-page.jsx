@@ -3,10 +3,11 @@ import React, { Component } from "react";
 import Helmet from "react-helmet";
 import { Connect } from "racer-react";
 
+import Testblock from "../../blocks/testblock/testblock";
+
 class FrontPage extends Component {
   static statics = {
     racer: query => {
-      // query( "test", {} ).fetchAs( "news" );
       query( "test", {
         $orderby:{
           ts: -1,
@@ -47,7 +48,6 @@ class FrontPage extends Component {
   }
 
   componentDidMount(){
-    // this.racerQuery( "test", {} ).subscribeAs( "testCount" )
     var self = this;
     this.interval = setInterval(()=>{self.tick()},1000);
   }
@@ -91,6 +91,9 @@ class FrontPage extends Component {
             </li>
           })}
         </ul>
+        <Testblock title="first block" limit={1} />
+        <Testblock title="second block" limit={2} />
+        <Testblock title="third block" limit={3} />
       </div>
     );
   }
