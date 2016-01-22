@@ -175,7 +175,7 @@ webpackHotUpdate(0,{
 	      $orderby: {
 	        ts: -1
 	      }
-	    }).subscribeAs("testList");
+	    }).pipeAs("testList");
 	  }
 	};
 	exports.default = (0, _racerReact.Connect)(FrontPage);

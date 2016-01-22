@@ -14104,7 +14104,7 @@
 	        sendQuery( name, type.FETCH );
 	        return queryHandler;
 	      },
-	      subscribeAs: function( name ){
+	      pipeAs: function( name ){
 	        sendQuery( name, type.SUBSCRIPTION );
 	        return queryHandler;
 	      },
@@ -26322,7 +26322,7 @@
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.racerQuery("test", {}).observeAs("sometest");
+	      this.racerQuery("test", {}).pipeAs("sometest");
 	    }
 	  }, {
 	    key: "render",
@@ -26396,7 +26396,7 @@
 	      $orderby: {
 	        ts: -1
 	      }
-	    }).subscribeAs("testList");
+	    }).pipeAs("testList");
 	  }
 	};
 	exports.default = (0, _racerReact.Connect)(FrontPage);

@@ -11,7 +11,7 @@ class FrontPage extends Component {
         $orderby:{
           ts: -1,
         }
-      }).subscribeAs( "testList" );
+      }).pipeAs( "testList" );
     }
   };
   state = { message: "", };
@@ -40,7 +40,7 @@ class FrontPage extends Component {
   }
 
   componentDidMount(){
-    this.racerQuery("test", {}).observeAs("sometest");
+    this.racerQuery("test", {}).pipeAs("sometest");
   }
 
   render() {
