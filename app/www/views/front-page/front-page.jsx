@@ -15,7 +15,13 @@ class FrontPage extends Component {
       // }).fetchAs( "testList" );
     }
   };
-  state = { message: "", };
+
+  constructor(props,context) {
+    super(props,context);
+    this.state = {
+      message: ""
+    };
+  }
 
   setMessage( message){
     this.setState({
@@ -42,13 +48,27 @@ class FrontPage extends Component {
 
   componentDidMount(){
     // this.racerQuery( "test", {} ).subscribeAs( "testCount" )
+    var self = this;
+    this.interval = setInterval(()=>{self.tick()},1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  tick() {
+    let s = this.state;
+    let cnt = s.cnt || 0;
+    this.setState({
+      cnt: ++cnt
+    });
   }
 
   render() {
     return (
       <div className="FrontPage">
         <Helmet title="Home" />
-        Hello
+        Hello, my counter is { this.state.cnt }
         <hr/>
         <form onSubmit={ this._submit.bind( this ) }>
           <textarea ref="message" onChange={ this._change.bind( this ) } />

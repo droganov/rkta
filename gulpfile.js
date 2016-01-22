@@ -5,7 +5,6 @@ const gulp = require( "gulp" );
 const babel = require( "gulp-babel" );
 const gutil = require( "gulp-util" );
 const nodemon = require( "gulp-nodemon" );
-const uglify  = require( "gulp-uglify" );
 const webpack = require( "webpack" );
 var runSequence    = require( "run-sequence" );
 const webpackConfig = require( "./config/config.webpack" );
@@ -28,11 +27,6 @@ gulp.task( "release", (cb)=>{
       if( err ){
          throw( new gutil.PluginError( "release", err ) );
       }
-
-      gulp
-         .src( "www_root/assets/*.js" )
-         .pipe( uglify() )
-         .pipe( gulp.dest("www_root/assets") );
       cb();
    });
 });
@@ -48,6 +42,7 @@ gulp.task( "clean", (cb)=> {
             if(err) console.log(filepath,":",err);
          });
       });
+      cb();
    });
 });
 
@@ -62,7 +57,7 @@ gulp.task( "watch", ()=> {
          lastHash = stats.hash;
          clearTimeout(timer);
          timer = setTimeout(()=>{
-            runSequence("release");
+            runSequence("clean","release");
          },5000);
       }
    });
@@ -87,4 +82,4 @@ gulp.task( "serve", ()=> {
       .on( "readable", data => console.log("readable") );
 });
 
-gulp.task( "default", [ "clean", "watch", "serve" ] );
+gulp.task( "default", [ "watch", "serve" ] );

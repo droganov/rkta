@@ -19,6 +19,7 @@ module.exports = function ( pro ){
 
    var targetDir = "www_root/_assets";
    var stylusLoaderString = "css-loader!stylus-loader";
+   var babelPresets = ["es2015", "stage-0", "react"];
 
    if(pro) {
 
@@ -30,7 +31,20 @@ module.exports = function ( pro ){
          allChunks: true
       }));
 
+      // compress js
+      plugins.push(new webpack.optimize.UglifyJsPlugin({
+         compressor: {
+            warnings: false
+         },
+         output: {
+            // all comments cut
+            comments: function () { return false; }
+         }
+      }));
+
    } else {
+
+      babelPresets.push("react-hmre");
 
       // hot reload in development mode
       plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -82,10 +96,9 @@ module.exports = function ( pro ){
                test: /\.(jsx|es6)/,
                exclude: /(node_modules|www_root\/bower)/,
                loader: "babel",
-               // query: {
-               //    stage: 0,
-               //    presets:[ "react", "es2015", "stage-0" ],
-               // }
+               query: {
+                  presets: babelPresets
+               }
             }
          ]
       },

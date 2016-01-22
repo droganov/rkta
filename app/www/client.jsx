@@ -88,7 +88,7 @@ adapter.onReady( (ev) => {
 
 	// hot loading
 	if (module.hot) {
-		module.hot.accept(renderRoutes);
+		module.hot.accept("./routes", renderRoutes);
 		module.hot.accept("./style.styl", function () {
 			adapter.attachStyle(require("./style.styl"));
 		});

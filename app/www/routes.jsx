@@ -18,6 +18,6 @@ module.exports = () => (
          component={ FrontPage }
       />
       <Route path="/page" component={ TestPage } />
-   <Route path="*" name="404" racerQueries="notFound" component={ NotFound } />
+      <Route path="*" name="404" racerQueries="notFound" component={ NotFound } />
    </Route>
 );
