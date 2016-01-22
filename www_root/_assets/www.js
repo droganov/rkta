@@ -27352,7 +27352,6 @@
 	          this.addSubscriber( queryObj );
 	          break;
 	        case type.OBSERVER:
-	          console.log( queryObj );
 	          this.addObserver( queryObj );
 	          break;
 	      }
@@ -27361,15 +27360,15 @@
 
 	    addObserver: function( queryObj ){
 	      this.observers.push( queryObj );
-	      this.checkOnscreen();
+	      if( this.state.isOnscreen ) this.enableObserver( queryObj );
 	    },
-	    enableObservers: function(){
+	    enableObserver: function( queryObj ){
+	      queryObj.query.subscribe();
+	      this.addSubscriber( queryObj );
+	    },
+	    enableAllObservers: function(){
 	      for (var i = 0; i < this.observers.length; i++){
-	        var observer = this.observers[ i ];
-	        observer.query.subscribe( function( err ){
-	          console.log( "observer subscribed" );
-	          this.addSubscriber( observer );
-	        });
+	        this.enableObserver( this.observers[ i ] );
 	      }
 	    },
 	    disableObservers: function(){
@@ -27411,7 +27410,7 @@
 	    checkOnscreen: function( ev ){
 	      var isOnscreen = this.isOnscreen();
 	      if( isOnscreen === this.state.isOnscreen ) return;
-	      isOnscreen ? this.enableObservers() : disableObservers();
+	      isOnscreen ? this.enableAllObservers() : disableObservers();
 	      this.setState({
 	        isOnscreen: isOnscreen
 	      });
@@ -27448,6 +27447,7 @@
 	    componentDidMount: function(){
 	      var self = this;
 	      this.domNode = findDOMNode( this );
+	      // if( this.isOnscreen() ) this.enableAllObservers();
 	      this.checkOnscreen();
 	      window.addEventListener( "scroll", this.checkOnscreen );
 	      if( isTouchDevice() ) window.addEventListener( "touchmove", this.checkOnscreen );
