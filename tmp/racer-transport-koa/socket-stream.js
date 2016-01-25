@@ -24,6 +24,11 @@ function ClientStream(client) {
 
   var self = this;
 
+  this.on('error', function(error) {
+    console.warn('BrowserChannel client message stream error', error);
+    self._stopClient();
+  });
+
   // The server ended the writable stream. Triggered by calling stream.end()
   // in agent.close()
   this.on("finish", function() {
@@ -35,11 +40,19 @@ util.inherits(ClientStream, Duplex);
 ClientStream.prototype._read = function() {};
 
 ClientStream.prototype._write = function(chunk, encoding, callback) {
-  // Silently drop messages after the session is closed
-  if ( this.client.readyState !== WebSocket.OPEN ) return callback();
-  this.client.send(JSON.stringify(chunk), function(err){
-    if (err) console.error("[racer-highway] send:", err);
-  });
+  if(typeof this.client.readyState !== "undefined") {
+
+    if ( this.client.readyState !== WebSocket.OPEN ) return callback();
+    this.client.send(JSON.stringify(chunk), function(err){
+      if (err) console.error("racer transport send:", err);
+    });
+
+  } else {
+    
+    if (this.client.state === 'closed') return callback();
+    this.client.send(chunk);
+    
+  }
   callback();
 };
 

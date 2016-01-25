@@ -7,6 +7,7 @@ var matchRoutes = require( "react-router" ).match;
 var defaultOptions = {
    base: "/racer-channel",
    reconnect: true,
+   browserChannelOnly: true,
    // srvProtocol: undefined,
    // srvHost: undefined,
    // srvPort: undefined,

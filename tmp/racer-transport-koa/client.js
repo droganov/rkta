@@ -1,12 +1,11 @@
-var racer = require('racer');
-
 module.exports = function( racer, CLIENT_OPTIONS ){
   racer.Model.prototype._createSocket = function( bundle ) {
     return new Socket( CLIENT_OPTIONS );
   };
 }
 
-// WebSocket Defenition
+var BCSocket = require('browserchannel/dist/bcsocket-uncompressed').BCSocket;
+
 function Socket(options) {
   this._options = options;
   this._messageQueue = [];
@@ -14,10 +13,11 @@ function Socket(options) {
   this._attemptNum = 0;
   this._url = getWebSocketURL(options);
 
-  if (!supportWebSockets()) {
-    return console.log("WebSockets is not supporting!");
+  if (supportWebSockets() && !options.browserChannelOnly) {
+    this._createWebSocket();
+  } else {
+    this._createBrowserChannel();
   }
-  this._createWebSocket();
 }
 
 Socket.prototype._createWebSocket = function() {
@@ -31,7 +31,18 @@ Socket.prototype._createWebSocket = function() {
   this._socket.onmessage = this._ws_onmessage.bind(this);
   this._socket.onopen = this._ws_onopen.bind(this);
   this._socket.onclose = this._ws_onclose.bind(this);
+};
 
+Socket.prototype._createBrowserChannel = function() {
+  this._type = 'browserchannel';
+  this._socket = BCSocket(this._options.base, this._options);
+
+  this.open = this._createBrowserChannel.bind(this);
+  this._syncState();
+
+  this._socket.onmessage = this._bc_onmessage.bind(this);
+  this._socket.onopen = this._bc_onopen.bind(this);
+  this._socket.onclose = this._bc_onclose.bind(this);
 };
 
 Socket.prototype._ws_onmessage = function(message) {
@@ -77,6 +88,21 @@ Socket.prototype._getTimeout = function(){
   var increment = this._options.timeoutIncrement * this._attemptNum;
   var maxTimeout = base + increment;
   return getRandom(maxTimeout / 3, maxTimeout);
+};
+
+Socket.prototype._bc_onmessage = function(data) {
+  this._syncState();
+  this.onmessage && this.onmessage(data);
+};
+
+Socket.prototype._bc_onopen = function(event) {
+  this._syncState();
+  this.onopen && this.onopen(event);
+};
+
+Socket.prototype._bc_onclose = function(event) {
+  this._syncState();
+  this.onclose && this.onclose(event);
 };
 
 Socket.prototype._flushQueue = function(){
