@@ -3,8 +3,7 @@ var   router = require( "koa-router" )(),
       SocketStream = require( "./socket-stream" ),
       BrowserChannelServer = require('browserchannel').server,
       c2k = require("koa-connect"),
-      connect = require("browserchannel/node_modules/connect"),
-      middelwareWrap = require("./middlewareWrap.js");
+      connect = require("browserchannel/node_modules/connect");
 
 function Transport( racerStore, options ){
    this.racerStore = racerStore;
@@ -42,12 +41,8 @@ Transport.prototype.connect = function( app ){
          var originalEnd = res.end;
          res.end = function() {
             originalEnd.apply(this, arguments);
-            // done(null,false);
+            done(null,false);
          };
-         // readonly session koa -> connect
-         if(sessionEnable) {
-            req.session = this.session;
-         }
          BCmiddleware(req, res, function (err) {
             res.end = originalEnd;
             done(err,true);
