@@ -60,6 +60,8 @@
     "koa-passport": "^1.2.0",
     "koa-response-time": "^1.0.2",
     "koa-router": "^5.2.3",
+    "koa-session-mongo": "^1.1.0",
+    "koa-session-store": "^1.1.1",
     "koa-static": "^1.4.9",
     "koa-websocket": "^1.1.0",
     "racer": "^0.8.7",

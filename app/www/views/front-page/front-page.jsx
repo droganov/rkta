@@ -12,7 +12,7 @@ class FrontPage extends Component {
         $orderby:{
           ts: -1,
         }
-      }).subscribeAs( "testList" );
+      }).pipeAs( "testList" );
       // }).fetchAs( "testList" );
     }
   };
@@ -91,9 +91,6 @@ class FrontPage extends Component {
             </li>
           })}
         </ul>
-        <Testblock title="first block" limit={1} />
-        <Testblock title="second block" limit={2} />
-        <Testblock title="third block" limit={3} />
       </div>
     );
   }

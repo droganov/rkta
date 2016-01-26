@@ -10,20 +10,20 @@ function Transport( racerStore, options ){
    this.options = options;
 }
 Transport.prototype.connect = function( app ){
+   var sessionEnable = !!this.options.session;
    var racerStore = this.racerStore;
 
-   var sessionEnable = !!this.options.session;
-
+   // web socket
    websockify( app );
    
-   if( sessionEnable ) app.ws.use( this.options.session );
-
-   // web socket
-   router.get( "/racer-channel", function *( next ){
+   router.get( this.options.base, function *( next ){
       var stream = new SocketStream( this.websocket );
+      if(this.session) stream.session = this.session;
       racerStore.listen( stream, this.websocket.upgradeReq );
       yield next;
    });
+
+   if( sessionEnable ) app.ws.use( this.options.session );
 
    app.ws.use( router.routes() );
 
@@ -34,22 +34,13 @@ Transport.prototype.connect = function( app ){
       racerStore.listen( stream, connectRequest );
    });
 
-   app.use( function *(next) {
-      var req = this.req;
-      var res = this.res;
-      var gotoNext = yield function(done) {
-         var originalEnd = res.end;
-         res.end = function() {
-            originalEnd.apply(this, arguments);
-            done(null,false);
-         };
-         BCmiddleware(req, res, function (err) {
-            res.end = originalEnd;
-            done(err,true);
-         });
+   app.use( function * (next) {
+      if(sessionEnable) {
+         // readonly session koa -> connect (BCmiddleware stop generator chain and session difference not saved)
+         this.req.session = this.session;
       }
-      if(gotoNext && next)
-         yield* next;
+      yield BCmiddleware.bind(null, this.req, this.res);
+      yield next;
    });
 };
 
