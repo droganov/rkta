@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Helmet from "react-helmet";
 import { Connect } from "racer-react";
 
+import Testblock from "../../blocks/testblock/testblock";
+
 class FrontPage extends Component {
   static statics = {
     racer: query => {
@@ -53,6 +55,12 @@ class FrontPage extends Component {
           <textarea ref="message" onChange={ this._change.bind( this ) } />
           <button disabled={ this.state.message === "" } >Add</button>
         </form>
+        <div style={{height:"800px",width:"100%",backgroundColor:"#eeffee"}} />
+        <Testblock
+          title="first testblock"
+          text="first testblock text first testblock text first testblock text first testblock text first testblock text "
+          query={{ $count:true }}
+        />
         <ul style={{
             listStyleType: "none",
             margin: 0,
@@ -70,6 +78,8 @@ class FrontPage extends Component {
             </li>
           })}
         </ul>
+        <div style={{height:"800px",width:"100%",backgroundColor:"#eeffee"}} />
+
       </div>
     );
   }
