@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e0471788018f41bf7101"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5913b7e86732e399fd9a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -15461,7 +15461,7 @@
 	module.exports = {
 	   base: "/racer-channel",
 	   reconnect: true,
-	   browserChannelOnly: true,
+	   browserChannelOnly: false,
 	   timeout: 10000,
 	   timeoutIncrement: 0
 	}
