@@ -13,7 +13,6 @@ class FrontPage extends Component {
           ts: -1,
         }
       }).pipeAs( "testList" );
-      // }).fetchAs( "testList" );
     }
   };
 
@@ -48,32 +47,25 @@ class FrontPage extends Component {
   }
 
   componentDidMount(){
-    var self = this;
-    this.interval = setInterval(()=>{self.tick()},1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  tick() {
-    let s = this.state;
-    let cnt = s.cnt || 0;
-    this.setState({
-      cnt: ++cnt
-    });
+    this.racerQuery("test", {}).pipeAs("sometest");
   }
 
   render() {
     return (
       <div className="FrontPage">
         <Helmet title="Home" />
-        Hello, my counter is { this.state.cnt }
+        Hello { this.props.sometest && this.props.sometest.length }
         <hr/>
         <form onSubmit={ this._submit.bind( this ) }>
           <textarea ref="message" onChange={ this._change.bind( this ) } />
           <button disabled={ this.state.message === "" } >Add</button>
         </form>
+        <div style={{height:"800px",width:"100%",backgroundColor:"#eeffee"}} />
+        <Testblock
+          title="first testblock"
+          text="first testblock text first testblock text first testblock text first testblock text first testblock text "
+          query={{ $count:true }}
+        />
         <ul style={{
             listStyleType: "none",
             margin: 0,
@@ -91,6 +83,8 @@ class FrontPage extends Component {
             </li>
           })}
         </ul>
+        <div style={{height:"800px",width:"100%",backgroundColor:"#eeffee"}} />
+
       </div>
     );
   }
