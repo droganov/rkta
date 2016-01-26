@@ -2,7 +2,7 @@
 import React from "react";
 import { getBundleScriptName } from "../../com/util";
 
-module.exports = ({ hash, helmet, isProduction, markup }) => {
+module.exports = ({ hash, helmet, isProduction, markup, racerBundle }) => {
    const { base, link, meta, script, title } = helmet;
    const scriptName = getBundleScriptName( isProduction, hash );
    return (
@@ -16,9 +16,11 @@ module.exports = ({ hash, helmet, isProduction, markup }) => {
             { meta.toComponent() }
             { script.toComponent() }
             { title.toComponent() }
+            { isProduction ? <link rel="stylesheet" href={ "/assets/www.css?"+hash } /> : null }
          </head>
          <body>
             <div id="app" className="App" dangerouslySetInnerHTML={{ __html: markup }} />
+            <div id="racerBundle" data-json={ racerBundle }></div>
          </body>
       </html>
    );

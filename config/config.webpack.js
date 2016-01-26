@@ -2,52 +2,75 @@
 var path = require("path");
 var webpack = require("webpack");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
-// var ExtractTextPlugin      = require("extract-text-webpack-plugin");
+var ExtractTextPlugin      = require("extract-text-webpack-plugin");
 
-module.exports = function ( compress ){
-   var extention = compress ? ".min.js" : ".js";
+module.exports = function ( pro ){
+   var extention = ".js";
    var plugins = [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new webpack.DefinePlugin({
+         'process.env': {
+            'NODE_ENV': JSON.stringify( pro?'production':'development')
+         }
+      })
    ];
-   if( compress ){
-      // uglify
-      plugins.push( new webpack.optimize.UglifyJsPlugin(
-         {
-            compressor: {
-               warnings: false,
-            },
+
+   var targetDir = "www_root/_assets";
+   var stylusLoaderString = "css-loader!stylus-loader";
+   var babelPresets = ["es2015", "stage-0", "react"];
+
+   if(pro) {
+
+      targetDir = "www_root/assets";
+      stylusLoaderString = "css-loader?minimize!stylus-loader";
+
+      // extract styles
+      plugins.push( new ExtractTextPlugin("[name].css", {
+         allChunks: true
+      }));
+
+      // compress js
+      plugins.push(new webpack.optimize.UglifyJsPlugin({
+         compressor: {
+            warnings: false
+         },
+         output: {
+            // all comments cut
+            comments: function () { return false; }
          }
-      ));
-   };
+      }));
 
-   // write stats
-   plugins.push(
-      new StatsWriterPlugin(
-         {
-            chunkModules: true,
-            filename: "../../build/stats.json",
-            fields: [ "hash", "version", "errorDetails" ]
-         }
-      )
-   );
+   } else {
 
-   // TODO: extruct styles
+      babelPresets.push("react-hmre");
 
-   return ({
-      // cache: true,
+      // hot reload in development mode
+      plugins.push(new webpack.HotModuleReplacementPlugin());
+
+      // write stats
+      plugins.push(
+         new StatsWriterPlugin(
+            {
+               chunkModules: true,
+               filename: "../../build/stats.json",
+               fields: [ "hash", "version", "errorDetails" ]
+            }
+         )
+      );
+
+   }
+
+   var cfg = {
       entry: {
          www: [
-            "./app/www/client",
-            'webpack-hot-middleware/client'
+            "./app/www/client"
          ]
          // exlab: ["./app/exlab/client"]
       },
-      // devtool: '#source-map',
       output: {
-         path: path.join( __dirname, "/../", "www_root/_assets"),
+         path: path.join( __dirname, "/../", targetDir),
          publicPath: "/",
          filename: "[name]" + extention,
          chunkFilename: "[name].[chunkhash]" + extention
@@ -56,16 +79,12 @@ module.exports = function ( compress ){
       module: {
          loaders: [
             {
-               test: /\.css$/,
-               loader: "style-loader!css-loader",
+               test: /\.styl$/,
+               loader: ( pro? ExtractTextPlugin.extract(stylusLoaderString): stylusLoaderString)
             },
             {
                test: /\.svg$/,
                loader: "svg-inline",
-            },
-            {
-               test: /\.styl$/,
-               loader: "css-loader!stylus-loader",
             },
             {
                test: /\.(woff|woff2)/,
@@ -77,10 +96,9 @@ module.exports = function ( compress ){
                test: /\.(jsx|es6)/,
                exclude: /(node_modules|www_root\/bower)/,
                loader: "babel",
-               // query: {
-               //    stage: 0,
-               //    presets:[ "react", "es2015", "stage-0" ],
-               // }
+               query: {
+                  presets: babelPresets
+               }
             }
          ]
       },
@@ -92,7 +110,15 @@ module.exports = function ( compress ){
       plugins: plugins,
       stylus: {
          use: [ require("nib")() ],
+         import: [ "~nib/lib/nib/index.styl" ],
       },
-   });
+   };
+
+   if(!pro) {
+      // hot load client script
+      cfg.entry.www.push('webpack-hot-middleware/client');
+   }
+
+   return cfg;
 
 }

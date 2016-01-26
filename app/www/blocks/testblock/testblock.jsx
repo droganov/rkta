@@ -1,28 +1,22 @@
 "use strict"
 
 import React, { Component } from "react";
-import { Link } from "react-router";
+import { Connect } from "racer-react";
 
-var testblock = React.createClass({
-	getInitialState: function () {
-		return {
-			list: [
-				"foo",
-				"bar",
-				"neck"
-			]
-		}
-	},
-	render: function () {
-		return (
-			<ul>
-				{this.state.list.map((item,inx)=>{
-					return (
-						<li key={"li_"+inx}>{item}</li>
-					);
-				})}
-			</ul>
-		);
-	}
-});
-export default testblock;
+class Testblock extends Component {
+   componentDidMount() {
+      if(this.props.query){
+         this.racerQuery("test",this.props.query).observeAs("qresult");
+      }
+   }
+   render() {
+      return (
+         <div className={"Testblock onscreen_"+this.props.isOnscreen}>
+            <h2>{this.props.title} ={this.props.qresultExtra||''}=</h2>
+            <div>{this.props.text}</div>
+         </div>
+      );
+   }
+}
+
+export default Connect( Testblock );
