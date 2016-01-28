@@ -5,9 +5,9 @@ import { isServer } from "../../../../com/util"
 import MediaQuery from "react-responsive"
 
 export default class Mq extends Component {
-   propTypes: {
+   static propTypes = {
       name: React.PropTypes.string.isRequired
-   }
+   };
    render() {
       let props = {};
       let query;

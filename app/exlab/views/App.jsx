@@ -2,7 +2,6 @@
 
 import React, { Component } from "react";
 import Helmet from "react-helmet";
-// import Relay from "react-relay";
 
 import { Nav, NavLink } from "../blocks/nav/nav";
 import Mq from "../blocks/mq/mq";
@@ -24,6 +23,7 @@ export default class App extends Component {
                <NavLink to="/exlab" name="Exlab Home"></NavLink>
                <NavLink to="/exlab/1" name="Link 1">child</NavLink>
                <NavLink to="/exlab/2" name="Link 2"></NavLink>
+               <NavLink to="/exlab/issue" name="Query Handler issue"></NavLink>
             </Nav>
             <div className="App__content">
                <div className="content-box">

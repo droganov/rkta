@@ -64,10 +64,8 @@ module.exports = function ( pro ){
 
    var cfg = {
       entry: {
-         www: [
-            "./app/www/client"
-         ]
-         // exlab: ["./app/exlab/client"]
+         www: [ "./app/www/client" ],
+         exlab: ["./app/exlab/client"]
       },
       output: {
          path: path.join( __dirname, "/../", targetDir),
@@ -116,7 +114,9 @@ module.exports = function ( pro ){
 
    if(!pro) {
       // hot load client script
-      cfg.entry.www.push('webpack-hot-middleware/client');
+      for(var key in cfg.entry) {
+         cfg.entry[key].push('webpack-hot-middleware/client');
+      }
    }
 
    return cfg;
