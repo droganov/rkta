@@ -47,7 +47,7 @@ class FrontPage extends Component {
   }
 
   componentDidMount(){
-    this.racerQuery("test", {}).pipeAs("sometest");
+    this.props.racerQuery("test", {}).pipeAs("sometest");
   }
 
   render() {
@@ -60,7 +60,6 @@ class FrontPage extends Component {
           <textarea ref="message" onChange={ this._change.bind( this ) } />
           <button disabled={ this.state.message === "" } >Add</button>
         </form>
-        <div style={{height:"800px",width:"100%",backgroundColor:"#eeffee"}} />
         <Testblock
           title="first testblock"
           text="first testblock text first testblock text first testblock text first testblock text first testblock text "
@@ -83,7 +82,11 @@ class FrontPage extends Component {
             </li>
           })}
         </ul>
-        <div style={{height:"800px",width:"100%",backgroundColor:"#eeffee"}} />
+        <Testblock
+          title="first testblock"
+          text="first testblock text first testblock text first testblock text first testblock text first testblock text "
+          query={{ $count:true }}
+        />
 
       </div>
     );
