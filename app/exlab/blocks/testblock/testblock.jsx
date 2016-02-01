@@ -4,7 +4,7 @@ import { Connect } from "racer-react";
 
 export default class TestBlock extends Component {
 	componentDidMount() {
-		this.racerQuery("test",{
+		this.props.racerQuery("test",{
 			$limit: (this.props.limit || 1),
 			$orderby: {
 				ts:-1
