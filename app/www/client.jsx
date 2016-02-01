@@ -4,7 +4,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createHistory, useBeforeUnload } from "history";
+import { Provider } from 'react-redux';
 import { Router } from "react-router";
+import configureStore from './store';
 
 // components
 import * as adapter from  "../../lib/applicationAdapterClient";
@@ -16,6 +18,7 @@ require("./style.styl");
 var appNode = null;
 var routes = null;
 var history = useBeforeUnload( createHistory )();
+const store  = configureStore();
 
 // render
 adapter.onReady( (ev) => {
@@ -51,12 +54,14 @@ adapter.onReady( (ev) => {
 		match( function( err ){
 			if( err ) return console.log( err );
 			const router = (
-				<racer.Provider racerModel={racerModel} >
-					<Router
-						history={ history }
-						routes={ routes }
-					/>
-				</racer.Provider>
+				<Provider store={store}>
+					<racer.Provider racerModel={racerModel} >
+						<Router
+							history={ history }
+							routes={ routes }
+						/>
+					</racer.Provider>
+				</Provider>
 			);
 			ReactDOM.render( router,  appNode);
 		});
