@@ -63,7 +63,7 @@
     "racer": "^0.8.9",
     "racer-koa": "git+https://github.com/droganov/racer-koa.git",
     "racer-react": "git+https://github.com/droganov/racer-react.git",
-    "racer-transport-koa": "git+https://github.com/droganov/racer-transport-koa.git",
+    "racer-transport-koa": "0.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-form-to-props": "0.0.2",
