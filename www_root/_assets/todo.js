@@ -225,7 +225,7 @@
 /******/ 			hotSetStatus("prepare");
 /******/ 			hotCallback = callback;
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = 0;
+/******/ 			var chunkId = 1;
 /******/ 			{ // eslint-disable-line no-lone-blocks
 /******/ 				/*globals chunkId */
 /******/ 				hotEnsureUpdateChunk(chunkId);
@@ -571,7 +571,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(506);
+	__webpack_require__(501);
 	module.exports = __webpack_require__(482);
 
 
@@ -27569,8 +27569,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(7)))
 
 /***/ },
-/* 243 */,
-/* 244 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(309)();
@@ -27578,12 +27577,13 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic&subset=latin,latin-ext);", ""]);
 
 	// module
-	exports.push([module.id, "body {\n  color: #414141;\n  margin: 0;\n  padding: 0;\n  background-color: #fff;\n  font-family: \"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif;\n  font-size: 14px;\n  font-variant-ligatures: common-ligatures;\n  line-height: 24px;\n  text-rendering: optimizeLegibility !important;\n  -webkit-font-smoothing: antialiased !important;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {\n  body {\n    font-weight: 100;\n    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);\n  }\n}\n.App {\n  background-color: #fff;\n}\n.content-box,\n.FrontPage,\n.NotFound {\n  max-width: 1200px;\n  margin: auto;\n}\n@media screen and (min-width: 1200px) {\n  .FrontPage {\n    padding-bottom: 72px;\n  }\n}\n.NotFound {\n  padding: 80px 0;\n  text-align: center;\n}\n.Testblock.onscreen_true {\n  background-color: #fdd;\n}\n", ""]);
+	exports.push([module.id, "body {\n  color: #414141;\n  margin: 0;\n  padding: 0;\n  background-color: #fff;\n  font-family: \"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif;\n  font-size: 14px;\n  font-variant-ligatures: common-ligatures;\n  line-height: 24px;\n  text-rendering: optimizeLegibility !important;\n  -webkit-font-smoothing: antialiased !important;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {\n  body {\n    font-weight: 100;\n    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);\n  }\n}\n.App {\n  background-color: #fff;\n}\n.content-box,\n.NotFound {\n  max-width: 1200px;\n  margin: auto;\n}\n.NotFound {\n  padding: 80px 0;\n  text-align: center;\n}\n.Testblock.onscreen_true {\n  background-color: #fdd;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
+/* 244 */,
 /* 245 */
 /***/ function(module, exports) {
 
@@ -33451,7 +33451,7 @@
 
 /***/ },
 /* 315 */
-[512, 317, 316],
+[513, 317, 316],
 /* 316 */
 /***/ function(module, exports) {
 
@@ -41211,7 +41211,7 @@
 
 /***/ },
 /* 389 */
-[512, 391, 390],
+[513, 391, 390],
 /* 390 */
 316,
 /* 391 */
@@ -52125,8 +52125,7 @@
 	/* (ignored) */
 
 /***/ },
-/* 499 */,
-/* 500 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -52137,289 +52136,26 @@
 
 	var _reactRouter = __webpack_require__(73);
 
-	var _App = __webpack_require__(507);
+	var _app = __webpack_require__(502);
 
-	var _App2 = _interopRequireDefault(_App);
+	var _app2 = _interopRequireDefault(_app);
 
-	var _frontPage = __webpack_require__(508);
-
-	var _frontPage2 = _interopRequireDefault(_frontPage);
-
-	var _testPage = __webpack_require__(510);
-
-	var _testPage2 = _interopRequireDefault(_testPage);
-
-	var _notFound = __webpack_require__(509);
+	var _notFound = __webpack_require__(503);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = function () {
-	   return _react2.default.createElement(
-	      _reactRouter.Route,
-	      {
-	         path: "/",
-	         component: _App2.default
-	      },
-	      _react2.default.createElement(_reactRouter.IndexRoute, {
-	         name: "home",
-	         component: _frontPage2.default
-	      }),
-	      _react2.default.createElement(_reactRouter.Route, { path: "/page", component: _testPage2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: "*", name: "404", racerQueries: "notFound", component: _notFound2.default })
-	   );
+	   return _react2.default.createElement(_reactRouter.Route, {
+	      path: "/todo",
+	      component: _app2.default
+	   });
 	};
 
 /***/ },
-/* 501 */,
-/* 502 */,
-/* 503 */,
-/* 504 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _getPrototypeOf = __webpack_require__(89);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(90);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(91);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(93);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _index = __webpack_require__(88);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(83);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(84);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reactFormToProps = __webpack_require__(511);
-
-	var _reactFormToProps2 = _interopRequireDefault(_reactFormToProps);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	  Form: {
-	    displayName: "Form"
-	  }
-	};
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/form/form.jsx",
-	  components: _components,
-	  locals: [module],
-	  imports: [_react3.default]
-	});
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/form/form.jsx",
-	  components: _components,
-	  locals: [],
-	  imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	  };
-	}
-
-	var Form = _wrapComponent("Form")(function (_Component) {
-	  (0, _inherits3.default)(Form, _Component);
-
-	  function Form() {
-	    (0, _classCallCheck3.default)(this, Form);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Form).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(Form, [{
-	    key: "_submit",
-	    value: function _submit(ev) {
-	      ev.preventDefault();
-	      console.log(this.state.loginForm);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react3.default.createElement(
-	        "form",
-	        { onSubmit: this._submit.bind(this) },
-	        _react3.default.createElement("input", { type: "text", valueLink: this.props.bindAs("login", "loginForm") }),
-	        _react3.default.createElement("input", { type: "password", valueLink: this.props.bindAs("password", "loginForm") }),
-	        _react3.default.createElement(
-	          "label",
-	          null,
-	          _react3.default.createElement("input", { type: "checkbox", checkedLink: this.props.bindAs("remember", "loginForm") }),
-	          "Keep me signed in"
-	        ),
-	        _react3.default.createElement(
-	          "button",
-	          null,
-	          "Submit"
-	        )
-	      );
-	    }
-	  }]);
-	  return Form;
-	}(_react2.Component));
-
-	exports.default = (0, _reactFormToProps2.default)(Form);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
-
-/***/ },
-/* 505 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _getPrototypeOf = __webpack_require__(89);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(90);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(91);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(93);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _index = __webpack_require__(88);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(83);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(84);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _racerReact = __webpack_require__(164);
-
-	var _form = __webpack_require__(504);
-
-	var _form2 = _interopRequireDefault(_form);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	  Testblock: {
-	    displayName: "Testblock"
-	  }
-	};
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/testblock/testblock.jsx",
-	  components: _components,
-	  locals: [module],
-	  imports: [_react3.default]
-	});
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/testblock/testblock.jsx",
-	  components: _components,
-	  locals: [],
-	  imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	  };
-	}
-
-	var Testblock = _wrapComponent("Testblock")(function (_Component) {
-	  (0, _inherits3.default)(Testblock, _Component);
-
-	  function Testblock() {
-	    (0, _classCallCheck3.default)(this, Testblock);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Testblock).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(Testblock, [{
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      if (this.props.query) {
-	        this.props.racerQuery("test", this.props.query).observeAs("qresult");
-	      }
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react3.default.createElement(
-	        "div",
-	        { className: "Testblock onscreen_" + this.props.isOnscreen },
-	        _react3.default.createElement(
-	          "h2",
-	          null,
-	          this.props.title,
-	          " =",
-	          this.props.qresult,
-	          "="
-	        ),
-	        _react3.default.createElement(
-	          "div",
-	          null,
-	          this.props.text
-	        ),
-	        _react3.default.createElement(_form2.default, null)
-	      );
-	    }
-	  }]);
-	  return Testblock;
-	}(_react2.Component));
-
-	exports.default = (0, _racerReact.Connect)(Testblock);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
-
-/***/ },
-/* 506 */
+/* 500 */,
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -52453,7 +52189,7 @@
 	// webpack styles connect
 
 	// components
-	__webpack_require__(244);
+	__webpack_require__(243);
 
 	var appNode = null;
 	var routes = null;
@@ -52485,7 +52221,7 @@
 				_reactDom2.default.unmountComponentAtNode(appNode);
 			} catch (e) {}
 
-			routes = __webpack_require__(500)();
+			routes = __webpack_require__(499)();
 
 			match(function (err) {
 				if (err) return console.log(err);
@@ -52527,16 +52263,16 @@
 
 		// hot loading
 		if (true) {
-			module.hot.accept(500, renderRoutes);
-			module.hot.accept(244, function () {
-				adapter.attachStyle(__webpack_require__(244));
+			module.hot.accept(499, renderRoutes);
+			module.hot.accept(243, function () {
+				adapter.attachStyle(__webpack_require__(243));
 			});
-			adapter.attachStyle(__webpack_require__(244));
+			adapter.attachStyle(__webpack_require__(243));
 		}
 	});
 
 /***/ },
-/* 507 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -52574,249 +52310,14 @@
 	         _react2.default.createElement(
 	            "h1",
 	            null,
-	            "App"
-	         ),
-	         _react2.default.createElement(
-	            "nav",
-	            null,
-	            _react2.default.createElement(
-	               _reactRouter.Link,
-	               { to: "/" },
-	               "Home"
-	            ),
-	            _react2.default.createElement(
-	               _reactRouter.Link,
-	               { to: "/page" },
-	               "Page"
-	            )
-	         ),
-	         children
+	            "App 1"
+	         )
 	      )
 	   );
 	};
 
 /***/ },
-/* 508 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _getPrototypeOf = __webpack_require__(89);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(90);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(91);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(93);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _index = __webpack_require__(88);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(83);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(84);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	var _class, _temp;
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reactHelmet = __webpack_require__(139);
-
-	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
-
-	var _racerReact = __webpack_require__(164);
-
-	var _testblock = __webpack_require__(505);
-
-	var _testblock2 = _interopRequireDefault(_testblock);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	  FrontPage: {
-	    displayName: "FrontPage"
-	  }
-	};
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/front-page/front-page.jsx",
-	  components: _components,
-	  locals: [module],
-	  imports: [_react3.default]
-	});
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/front-page/front-page.jsx",
-	  components: _components,
-	  locals: [],
-	  imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	  };
-	}
-
-	var FrontPage = _wrapComponent("FrontPage")((_temp = _class = function (_Component) {
-	  (0, _inherits3.default)(FrontPage, _Component);
-
-	  function FrontPage(props, context) {
-	    (0, _classCallCheck3.default)(this, FrontPage);
-
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(FrontPage).call(this, props, context));
-
-	    _this.state = {
-	      message: ""
-	    };
-	    return _this;
-	  }
-
-	  (0, _createClass3.default)(FrontPage, [{
-	    key: "setMessage",
-	    value: function setMessage(message) {
-	      this.setState({
-	        message: message
-	      });
-	      this.refs.message.value = message;
-	    }
-	  }, {
-	    key: "_change",
-	    value: function _change(ev) {
-	      this.setMessage(ev.target.value);
-	    }
-	  }, {
-	    key: "_del",
-	    value: function _del(id) {
-	      this.props.racerModel.del("test." + id);
-	    }
-	  }, {
-	    key: "_submit",
-	    value: function _submit(ev) {
-	      ev.preventDefault();
-	      this.props.racerModel.add("test", {
-	        ts: Date.now(),
-	        message: this.state.message
-	      });
-	      this.setMessage("");
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      this.props.racerQuery("test", {}).pipeAs("sometest");
-	      console.log(this.props.racerModel);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var _this2 = this;
-
-	      return _react3.default.createElement(
-	        "div",
-	        { className: "FrontPage" },
-	        _react3.default.createElement(_reactHelmet2.default, { title: "Home" }),
-	        "Hello ",
-	        this.props.sometest && this.props.sometest.length,
-	        _react3.default.createElement("hr", null),
-	        _react3.default.createElement(
-	          "form",
-	          { onSubmit: this._submit.bind(this) },
-	          _react3.default.createElement("textarea", { ref: "message", onChange: this._change.bind(this) }),
-	          _react3.default.createElement(
-	            "button",
-	            { disabled: this.state.message === "" },
-	            "Add"
-	          )
-	        ),
-	        _react3.default.createElement(_testblock2.default, {
-	          title: "first testblock",
-	          text: "first testblock text first testblock text first testblock text first testblock text first testblock text ",
-	          query: { $count: true }
-	        }),
-	        _react3.default.createElement(
-	          "ul",
-	          { style: {
-	              listStyleType: "none",
-	              margin: 0,
-	              padding: 0
-	            } },
-	          this.props.testList.map(function (item, i) {
-	            return _react3.default.createElement(
-	              "li",
-	              { key: i, style: { marginBottom: "1em" } },
-	              _react3.default.createElement(
-	                "div",
-	                null,
-	                _react3.default.createElement(
-	                  "strong",
-	                  null,
-	                  item.message
-	                ),
-	                " — ",
-	                _react3.default.createElement(
-	                  "span",
-	                  {
-	                    onClick: _this2._del.bind(_this2, item.id),
-	                    style: { cursor: "pointer" }
-	                  },
-	                  "×"
-	                )
-	              ),
-	              _react3.default.createElement(
-	                "small",
-	                null,
-	                item.ts
-	              )
-	            );
-	          })
-	        ),
-	        _react3.default.createElement(_testblock2.default, {
-	          title: "first testblock",
-	          text: "first testblock text first testblock text first testblock text first testblock text first testblock text ",
-	          query: { $count: true }
-	        })
-	      );
-	    }
-	  }]);
-	  return FrontPage;
-	}(_react2.Component), _class.statics = {
-	  racer: function racer(query) {
-	    query("test", {
-	      $orderby: {
-	        ts: -1
-	      }
-	    }).pipeAs("testList");
-	  }
-	}, _temp));
-
-	exports.default = (0, _racerReact.Connect)(FrontPage);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
-
-/***/ },
-/* 509 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -52876,14 +52377,14 @@
 	};
 
 	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/not-found/not-found.jsx",
+	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [module],
 	   imports: [_react3.default]
 	});
 
 	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/not-found/not-found.jsx",
+	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [],
 	   imports: [_react3.default, _index2.default]
@@ -52945,155 +52446,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
 
 /***/ },
-/* 510 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _getPrototypeOf = __webpack_require__(89);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(90);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(91);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(93);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(92);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _index = __webpack_require__(88);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(83);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _react2 = __webpack_require__(4);
-
-	var _react3 = _interopRequireDefault(_react2);
-
-	var _index5 = __webpack_require__(84);
-
-	var _index6 = _interopRequireDefault(_index5);
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var _components = {
-	  MyComponent: {
-	    displayName: "MyComponent"
-	  }
-	};
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/test-page/test-page.jsx",
-	  components: _components,
-	  locals: [module],
-	  imports: [_react3.default]
-	});
-
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/test-page/test-page.jsx",
-	  components: _components,
-	  locals: [],
-	  imports: [_react3.default, _index2.default]
-	});
-
-	function _wrapComponent(id) {
-	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
-	  };
-	}
-
-	var MyComponent = _wrapComponent("MyComponent")(function (_Component) {
-	  (0, _inherits3.default)(MyComponent, _Component);
-
-	  function MyComponent() {
-	    (0, _classCallCheck3.default)(this, MyComponent);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(MyComponent).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(MyComponent, [{
-	    key: "render",
-
-	    // static displayName = "";
-	    // static propTypes = {};
-	    // static childContextTypes = {};
-	    // static defaultProps = {};
-	    // static state = {};
-	    // static statics = {};
-
-	    // constructor(props, context) {
-	    //   super(props, context);
-	    // }
-	    // componentWillMount(){}
-	    // componentDidMount(){}
-	    // componentWillReceiveProps(nextProps){}
-	    // shouldComponentUpdate(nextProps, nextState){}
-	    // componentWillUpdate(nextProps, nextState){}
-	    // componentDidUpdate(prevProps, prevState){}
-	    // componentWillUnmount(){}
-	    value: function render() {
-	      return _react3.default.createElement(
-	        "div",
-	        { className: "TestPage" },
-	        "Test page"
-	      );
-	    }
-	  }]);
-	  return MyComponent;
-	}(_react2.Component));
-
-	exports.default = MyComponent;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
-
-/***/ },
-/* 511 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict"
-	var React = __webpack_require__( 4 );
-
-	module.exports = function( Component ){
-	  return React.createClass({
-	    displayName: Component.displayName || Component.name || "FormComponent",
-	    statics: Component.statics,
-	    bindAs: function( fieldName, formName ){
-	      var ctx = this;
-	      var formName = formName || "form";
-	      return {
-	        value: ctx.state && formName in ctx.state && fieldName in ctx.state[ formName ] ? ctx.state[ formName ][ fieldName ] : "",
-	        requestChange: function( newValue ) {
-	          var defaultState = {};
-	          defaultState[ formName ] = {};
-	          var newState = Object.assign( defaultState, ctx.state );
-	          newState[ formName ][ fieldName ] = newValue;
-	          ctx.setState( newState );
-	        }
-	      }
-	    },
-	    render: function() {
-	      return React.createElement( Component, Object.assign( {}, this.props, this.state, { bindAs: this.bindAs } ) );
-	    },
-	  });
-	}
-
-
-/***/ },
-/* 512 */
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	var pSlice = Array.prototype.slice;
