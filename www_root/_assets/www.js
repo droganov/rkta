@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8aa1ac3d3c005113a13b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0b0b497f1493fb6e37a8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -27718,7 +27718,7 @@
 	    key: "_submit",
 	    value: function _submit(ev) {
 	      ev.preventDefault();
-	      console.log(this.props.loginForm);
+	      console.log(this.state.loginForm);
 	    }
 	  }, {
 	    key: "render",
@@ -28181,6 +28181,7 @@
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.props.racerQuery("test", {}).pipeAs("sometest");
+	      console.log(this.props.racerModel);
 	    }
 	  }, {
 	    key: "render",

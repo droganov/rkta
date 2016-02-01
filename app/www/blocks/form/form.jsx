@@ -4,7 +4,7 @@ import connectForm from "react-form-to-props"
 class Form extends Component {
   _submit( ev ){
     ev.preventDefault()
-    console.log( this.props.loginForm );
+    console.log( this.state.loginForm );
   }
   render(){
     return <form onSubmit={ this._submit.bind( this ) }>

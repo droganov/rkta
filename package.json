@@ -69,6 +69,7 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-form-to-props": "0.0.2",
+    "react-form-to-state": "0.0.1",
     "react-helmet": "^2.2.0",
     "react-intl": "^1.2.2",
     "react-redux": "^4.0.6",
