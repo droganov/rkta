@@ -2,9 +2,9 @@
 import React from "react";
 import { getBundleScriptName } from "../../com/util";
 
-module.exports = ({ hash, helmet, isProduction, markup, racerBundle }) => {
+module.exports = ({ name, hash, helmet, isProduction, markup, racerBundle }) => {
    const { base, link, meta, script, title } = helmet;
-   const scriptName = getBundleScriptName( isProduction, hash );
+   const scriptName = getBundleScriptName( name, isProduction, hash );
    return (
       <html lang="en">
          <head>
@@ -16,7 +16,7 @@ module.exports = ({ hash, helmet, isProduction, markup, racerBundle }) => {
             { meta.toComponent() }
             { script.toComponent() }
             { title.toComponent() }
-            { isProduction ? <link rel="stylesheet" href={ "/assets/www.css?"+hash } /> : null }
+            { isProduction ? <link rel="stylesheet" href={ "/assets/"+name+".css?"+hash } /> : null }
          </head>
          <body>
             <div id="app" className="App" dangerouslySetInnerHTML={{ __html: markup }} />

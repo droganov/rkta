@@ -15,8 +15,7 @@ const paths = {
       "*.es6",
       "*.styl",
       "app/**",
-      "com/**",
-      "app/**"
+      "com/**"
    ],
    stats: "build/stats.json"
 }
@@ -47,20 +46,23 @@ gulp.task( "clean", (cb)=> {
 });
 
 // watch stats file
-var timer = null;
-var lastHash = null;
+var releaseTimer = null,
+    cleanTimer = null,
+    lastHash = null;
 gulp.task( "watch", ()=> {
-   gulp.watch(paths.stats, ()=>{
-      var stats = JSON.parse(fs.readFileSync(paths.stats).toString());
+  gulp.watch(paths.stats, ()=>{
+    var stats = JSON.parse(fs.readFileSync(paths.stats).toString());
 
-      if(lastHash!==stats.hash) {
-         lastHash = stats.hash;
-         clearTimeout(timer);
-         timer = setTimeout(()=>{
-            runSequence("clean","release");
-         },5000);
-      }
-   });
+    if(lastHash!==stats.hash) {
+      lastHash = stats.hash;
+
+      clearTimeout(releaseTimer);
+      releaseTimer = setTimeout(()=>{ runSequence("release"); },30000);
+
+      clearTimeout(cleanTimer);
+      cleanTimer = setTimeout(()=>{ runSequence("clean"); },5000);
+    }
+  });
 });
 
 // running dev server

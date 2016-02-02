@@ -9,7 +9,6 @@ var applications = [ "www", "todo" ];
 module.exports = function ( isProduction ){
   var extention = ".js";
   var plugins = [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -26,6 +25,9 @@ module.exports = function ( isProduction ){
   if( isProduction ){
     putAssetsTo = "www_root/assets";
     stylusLoaderString = "css-loader?minimize!stylus-loader";
+
+    // deduplicate modules
+    plugins.push( new webpack.optimize.DedupePlugin() );
 
     // extract styles
     plugins.push( new ExtractTextPlugin("[name].css", {
