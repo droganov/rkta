@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Helmet from "react-helmet";
 
 export default class NotFound extends Component {
-   // propTypes: {}
+   static propTypes = {};
    // constructor(props) {
    //    super(props);
    //    this.state = {};

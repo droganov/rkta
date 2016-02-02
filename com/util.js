@@ -1,6 +1,6 @@
 module.exports = {
-   getBundleScriptName( isProduction, hash ){
-      return ( isProduction ? "/assets" : "/_assets" ) + "/www.js?" + hash;
+   getBundleScriptName( appName, isProduction, hash ){
+      return ( isProduction ? "/assets" : "/_assets" ) + "/" + appName + ".js?" + hash;
    },
    isServer(){
       return process.title !== "browser";
