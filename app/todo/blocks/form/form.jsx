@@ -2,17 +2,20 @@ import React, { Component } from "react"
 import connectForm from "react-form-to-props"
 
 class Form extends Component {
+  static propTypes = {
+    onSubmit: React.PropTypes.func.isRequired,
+  };
   _submit( ev ){
     ev.preventDefault()
-    this.refs.form.reset()
-    console.log( this.props.form );
+    this.props.onSubmit( this.props.form )
+    this.props.resetForm()
   }
   render(){
-    const todo = this.props.form && this.props.form.todo;
+    const text = this.props.form && this.props.form.text;
     return <form ref="form" className="form" onSubmit={ this._submit.bind( this ) }>
-      <textarea valueLink={ this.props.bindAs( "todo" ) }></textarea>
+      <textarea valueLink={ this.props.bindAs( "text" ) }></textarea>
       <button
-        disabled={ !todo }
+        disabled={ !text }
       >Add todo</button>
     </form>;
   }
