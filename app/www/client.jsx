@@ -3,35 +3,43 @@
 // deps
 import React from "react";
 import ReactDOM from "react-dom";
+
 import { createHistory, useBeforeUnload } from "history";
+import { Router } from 'react-router';
+
+import { syncHistory } from 'react-router-redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { Router } from "react-router";
-import configureStore from './store';
 
 // components
 import * as adapter from  "../../lib/applicationAdapterClient";
 import racer from "racer-react";
 
+var history = useBeforeUnload( createHistory )();
+var reducers = require("./reducers/reducers");
+
+const reduxRouterMiddleware = syncHistory(history);
+const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStore);
+const store = createStoreWithMiddleware(reducers);
+
+reduxRouterMiddleware.listenForReplays(store);
+
 // webpack styles connect
 require("./style.styl");
 
-var appNode = null;
-var routes = null;
-var history = useBeforeUnload( createHistory )();
-const store  = configureStore();
+var appNode = null,
+	routes = null,
+	relLocation = null;
 
 // render
 adapter.onReady( (ev) => {
 	appNode = document.getElementById("app");
 	const racerModel = racer.connectClient();
 
-	var relLocation = null;
-
 	function updateRelLocation (loc) {
 		loc = loc || location;
 		relLocation = loc.pathname + loc.search;
 	}
-	updateRelLocation();
 
 	function match( cb ){
 		racer
@@ -44,7 +52,7 @@ adapter.onReady( (ev) => {
 		);
 	}
 
-	function renderRoutes() {
+	function renderRoutes () {
 		try {
 			ReactDOM.unmountComponentAtNode(appNode);
 		}catch(e) {}
@@ -54,16 +62,13 @@ adapter.onReady( (ev) => {
 		match( function( err ){
 			if( err ) return console.log( err );
 			const router = (
-				<Provider store={store}>
-					<racer.Provider racerModel={racerModel} >
-						<Router
-							history={ history }
-							routes={ routes }
-						/>
-					</racer.Provider>
-				</Provider>
+				<racer.Provider racerModel={racerModel} >
+					<Provider store={store} >
+						<Router history={history} routes={routes} />
+					</Provider>
+				</racer.Provider>
 			);
-			ReactDOM.render( router,  appNode);
+			ReactDOM.render( router,  document.getElementById("app"));
 		});
 	}
 
@@ -76,7 +81,7 @@ adapter.onReady( (ev) => {
 
 	// fix scrollop
 	history.listen( location => {
-		if( location.action === "PUSH" ) window.scrollTo(0, 0);
+		if( location && location.action === "PUSH" ) window.scrollTo(0, 0);
 	});
 
 	history.listenBeforeUnload( () => {
@@ -89,14 +94,19 @@ adapter.onReady( (ev) => {
 	});
 
 	// render onload
+	updateRelLocation();
 	renderRoutes();
 
 	// hot loading
 	if (module.hot) {
-		module.hot.accept("./routes", renderRoutes);
+		module.hot.accept("./reducers/reducers", function () {
+	    	const nextRootReducer = require('./reducers/reducers');
+    		store.replaceReducer(nextRootReducer);
+    	});
 		module.hot.accept("./style.styl", function () {
 			adapter.attachStyle(require("./style.styl"));
 		});
 		adapter.attachStyle(require("./style.styl"));
+		module.hot.accept();
 	}
 });
