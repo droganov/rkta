@@ -41,7 +41,6 @@ class App extends Component {
               delete={ this.deleteTodo.bind( this ) }
             />
           })}
-          piu
         </div>
         <div className="App__footer">
           <Form onSubmit={ this.createTodo.bind( this ) } />

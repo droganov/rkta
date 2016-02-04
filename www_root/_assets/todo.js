@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dfe9b5dcc561addf8fa2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "266f41f4ffec2cf9c7b4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -31129,86 +31129,85 @@
 	var type = __webpack_require__( 99 );
 	var isTouchDevice = __webpack_require__( 325 );
 
-	module.exports = function( Component ){
-	  var componentName = Component.displayName || Component.name || "RacerReactComponent";
-
+	module.exports = function( Child ){
 	  return React.createClass({
-	    displayName: componentName,
+	    displayName: Child.displayName || Child.name || "RacerReact",
 	    propTypes:{ racerModel: React.PropTypes.object },
 	    contextTypes: { racerModel: React.PropTypes.object.isRequired },
-	    statics: Component.statics,
+	    statics: Child.statics,
 
-	    activeEventEmitters: [],
+	    queries: [],
 	    observers: [],
+	    wasOnscreen: false,
 
-	    // component methods
-	    connectChargedQuery: function( queryObj ){
-	      var queryData = queryObj.query.get();
-	      if( isServer ) return queryData;
-	      switch ( queryObj.type ) {
-	        case type.SUBSCRIPTION:
-	          this.addSubscriber( queryObj );
-	          break;
-	        case type.OBSERVER:
-	          this.addObserver( queryObj );
-	          break;
-	      }
-	      return queryData;
+	    // query methods
+	    queryMount: function( queryObj ){
+	      var query = queryObj.query;
+	      var projectionPath = this.projectionComputePath( queryObj.name );
+
+	      this.queryHasExtra( query ) ? query.refExtra( projectionPath ) : query.ref( projectionPath );
+	      this.queries.push( queryObj );
+
+	      if( isServer ) return;
+	      if( queryObj.type === type.OBSERVER ) this.queryRegisterAsObserver( queryObj );
 	    },
-
-	    addObserver: function( queryObj ){
+	    queryHasExtra: function( query ){ return typeof query.getExtra() !== "undefined" },
+	    queryRegisterAsObserver: function( queryObj ){
 	      this.observers.push( queryObj );
-	      if( this.state.isOnscreen ) this.enableObserver( queryObj );
+	      if( this.state.isOnscreen ) this.queryStartObserving( queryObj );
 	    },
-	    enableObserver: function( queryObj ){
-	      this.addSubscriber( queryObj );
+	    queryStartObserving: function( queryObj ){
 	      queryObj.query.subscribe();
 	    },
-	    enableAllObservers: function(){
+	    queryStartAllObservers: function(){
 	      for (var i = 0; i < this.observers.length; i++){
-	        this.enableObserver( this.observers[ i ] );
+	        this.queryStartObserving( this.observers[ i ] );
 	      }
 	    },
-	    disableObservers: function(){
+	    queryStopAllObservers: function(){
 	      for (var i = 0; i < this.observers.length; i++){
 	        var observer = this.observers[ i ].query;
 	        observer.unsubscribe();
-	        this.removeSubcriber( observer );
 	      }
 	    },
 
-	    getRefPath: function( queryName ){
-	      return "_page." + queryName;
+	    // projection methods
+	    projectionComputePath: function( name ){ return ( this.id + "." + name ) },
+	    projectionGetData: function(){
+	      return this.scopedModel.get();
+	    },
+	    projectionResloveUpdate: function( newProps ){
+	      var newState = Object.assign( {}, this.projectionGetData( newProps ) );
+
+	      for ( var key in newState ) {
+	        var item = newState[ key ];
+	        // if ( !Array.isArray( item ) ) { continue; }
+	        if ( this.state[ key ] === item || !Array.isArray( item ) ) { continue; }
+	        newState[ key ] = item.filter(
+	          function( el ){
+	            return typeof el !== "undefined";
+	          }
+	        );
+	      }
+	      this.wrappeePassProps( newState );
 	    },
 
-	    getRacerModel: function(){
-	      return this.context.racerModel || this.props.racerModel;
+	    // component methods
+	    wrappeeResolveQueries: function( handler ){
+	      var racerQueries = this.constructor.racerQueries || [];
+	      for (var i = 0; i < racerQueries.length; i++) {
+	        this.queryMount( racerQueries[ i ] );
+	      }
+	    },
+	    wrappeePassProps: function( newProps ){
+	      var newState = Object.assign( {}, this.projectionGetData(), newProps );
+	      this.setState( newState );
 	    },
 
-	    addSubscriber: function( queryObj ){
-	      var query = queryObj.query;
-	      var model = this.getRacerModel();
-	      var self = this;
-	      var newPath = this.getRefPath( queryObj.name );
-
-	      console.log( newPath );
-
-	      query.ref( newPath );
-	      model.on( "all", newPath + "**", function(){
-	        var state = {};
-	        state[ queryObj.name ] = query.getExtra() || query.get();
-	        self.setState( state );
-	      });
-	      this.activeEventEmitters.push( query );
-	    },
-	    removeSubcriber: function( query ){
-	      query.model.removeAllListeners( "all", "$queries." + query.hash + ".**" );
-	      var i = this.activeEventEmitters.indexOf( query );
-	      if( i > -1 ) this.activeEventEmitters.splice( i, 1 );
-	    },
-
+	    // getRe
 	    isOnscreen: function(){
-	      var domNode = this.domNode;
+	      // var domNode = this.domNode;
+	      var domNode = this.refs.self;
 
 	      var windowTop = document.body.scrollTop;
 	      var windowBottom = windowTop + window.innerHeight;
@@ -31219,68 +31218,55 @@
 	      return !(( windowBottom < elementTop) || (windowTop > elementBottom));
 	    },
 
-	    handleQueries: function( handler ){
-	      var racerQueries = this.constructor.racerQueries || [];
-	      for (var i = 0; i < racerQueries.length; i++) {
-	        handler( racerQueries[ i ] );
-	      }
-	    },
-
 	    checkOnscreen: function( ev ){
 	      var isOnscreen = this.isOnscreen();
-	      if( isOnscreen === this.state.isOnscreen ) return;
-	      isOnscreen ? this.enableAllObservers() : this.disableObservers();
-	      this.setState({
-	        isOnscreen: isOnscreen
-	      });
+	      if( isOnscreen === this.wasOnscreen ) return;
+	      isOnscreen ? this.queryStartAllObservers() : this.queryStopAllObservers();
+	      this.wasOnscreen = isOnscreen;
 	    },
 
 	    // react methods
 	    getInitialState: function(){
-	       return {
-	         isOnscreen: false
-	       }
+	      return { isOnscreen: false }
 	    },
 
 	    componentWillMount: function(){
-	      var newState = {};
-	      var racerModel = this.context.racerModel;
+	      var racerModel = this.racerModel = this.context.racerModel;
 	      var ctx = this;
-
-	      this.handleQueries( function( queryObj ){
-	        newState[ queryObj.name ] = ctx.connectChargedQuery( queryObj );
-	      });
-	      newState.racerQuery = new QueryHandler( racerModel, function( queryObj ){
+	      this.id = this._reactInternalInstance._rootNodeID.toString().split(".").join("_");
+	      this.scopedModel = racerModel.at( this.id );
+	      this.wrappeeResolveQueries();
+	      var racerQuery = new QueryHandler( racerModel, function( queryObj ){
 	        var query = queryObj.query;
-	        var state = {};
 	        var cb = function(){
-	          state[ queryObj.name ] = ctx.connectChargedQuery( queryObj );
-	          ctx.setState( state );
+	          ctx.queryMount( queryObj );
 	        }
 	        queryObj.type === type.SUBSCRIPTION ? query.subscribe( cb ) : query.fetch( cb );
 	      });
-	      this.setState( newState );
+	      ctx.projectionResloveUpdate({
+	        racerQuery: racerQuery,
+	      });
+	      this.scopedModel.on( "all", "**", ctx.projectionResloveUpdate );
 	    },
 
 	    componentDidMount: function(){
-	      var self = this;
-	      this.domNode = findDOMNode( this );
-	      // if( this.isOnscreen() ) this.enableAllObservers();
 	      this.checkOnscreen();
 	      window.addEventListener( "scroll", this.checkOnscreen );
 	      if( isTouchDevice() ) window.addEventListener( "touchmove", this.checkOnscreen );
 	    },
 
 	    componentWillUnmount: function(){
-	      for (var i = 0; i < this.activeEventEmitters.length; i++) {
-	        this.removeSubcriber( this.activeEventEmitters[ i ] );
-	      }
 	      window.removeEventListener( "scroll", this.checkOnscreen );
-	      window.removeEventListener( "touchmove", this.checkOnscreen );
+	      if( isTouchDevice() ) window.removeEventListener( "touchmove", this.checkOnscreen );
+	      this.scopedModel.removeAllListeners();
+
+	      var silentModel = this.racerModel.silent();
+	      silentModel.destroy && silentModel.destroy( this.id );
+	      silentModel.unloadAll && silentModel.unloadAll();
 	    },
 
 	    render: function() {
-	      return React.createElement( Component, Object.assign( {}, this.state, this.props, this.context ) );
+	      return React.createElement( Child, Object.assign( { ref: "self" }, this.props, this.state, this.context ) );
 	    },
 	  });
 	}
@@ -53320,8 +53306,7 @@
 	              markComplete: _this2.markComplete.bind(_this2),
 	              "delete": _this2.deleteTodo.bind(_this2)
 	            });
-	          }),
-	          "piu"
+	          })
 	        ),
 	        _react3.default.createElement(
 	          "div",
