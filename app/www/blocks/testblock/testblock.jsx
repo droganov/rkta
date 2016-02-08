@@ -16,7 +16,7 @@ class Testblock extends Component {
   render() {
     return (
       <div className={"Testblock onscreen_" + this.props.isOnscreen}>
-        <h2>{this.props.title} ={this.props.qresult}=</h2>
+        <h2>{this.props.title} ={this.props.qresult}</h2>
         <div>{this.props.text}</div>
         <div>переменная stylusEnviron.var1.var2={stylusEnviron.var1.var2}</div>
         <Form/>
