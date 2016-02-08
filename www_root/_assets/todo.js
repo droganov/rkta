@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "266f41f4ffec2cf9c7b4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "26df7d3cd0be79479c58"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -7737,7 +7737,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(4);
 
@@ -29369,7 +29369,9 @@
 	  '__set__': __Rewire__,
 	  '__ResetDependency__': __ResetDependency__
 	};
-	var filenameWithoutLoaders = function filenameWithoutLoaders(filename) {
+	var filenameWithoutLoaders = function filenameWithoutLoaders() {
+	  var filename = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
 	  var index = filename.lastIndexOf('!');
 
 	  return index < 0 ? filename : filename.substr(index + 1);
@@ -29412,7 +29414,8 @@
 
 	exports.filenameHasLoaders = _filenameHasLoaders;
 	var filenameHasSchema = function filenameHasSchema(filename) {
-	  return /^[\w]+\:/.test(filename);
+	  return (/^[\w]+\:/.test(filename)
+	  );
 	};
 
 	var _filenameHasSchema = filenameHasSchema;
@@ -31136,9 +31139,9 @@
 	    contextTypes: { racerModel: React.PropTypes.object.isRequired },
 	    statics: Child.statics,
 
-	    queries: [],
-	    observers: [],
-	    wasOnscreen: false,
+	    // queries: [],
+	    // observers: [],
+	    // wasOnscreen: false,
 
 	    // query methods
 	    queryMount: function( queryObj ){
@@ -31177,7 +31180,8 @@
 	      return this.scopedModel.get();
 	    },
 	    projectionResloveUpdate: function( newProps ){
-	      var newState = Object.assign( {}, this.projectionGetData( newProps ) );
+	      var localNewProps = typeof newProps === "object" ? newProps : null;
+	      var newState = Object.assign( {}, localNewProps, this.projectionGetData() );
 
 	      for ( var key in newState ) {
 	        var item = newState[ key ];
@@ -31207,7 +31211,7 @@
 	    // getRe
 	    isOnscreen: function(){
 	      // var domNode = this.domNode;
-	      var domNode = this.refs.self;
+	      var domNode = findDOMNode(this.refs.self);
 
 	      var windowTop = document.body.scrollTop;
 	      var windowBottom = windowTop + window.innerHeight;
@@ -31223,10 +31227,15 @@
 	      if( isOnscreen === this.wasOnscreen ) return;
 	      isOnscreen ? this.queryStartAllObservers() : this.queryStopAllObservers();
 	      this.wasOnscreen = isOnscreen;
+	      this.setState({isOnscreen:isOnscreen});
 	    },
 
 	    // react methods
 	    getInitialState: function(){
+	      this.queries = [];
+	      this.observers = [];
+	      this.wasOnscreen = false;
+
 	      return { isOnscreen: false }
 	    },
 
@@ -52832,15 +52841,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/form/form.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/form/form.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/form/form.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/form/form.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -52848,7 +52857,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -52953,15 +52962,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/todo/todo.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/todo/todo.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/todo/todo.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/todo/todo.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -52969,7 +52978,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -53233,15 +53242,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/app/app.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/todo/views/app/app.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/app/app.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/todo/views/app/app.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -53249,7 +53258,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -53386,15 +53395,15 @@
 	   }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/not-found/not-found.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	   filename: "/home/paul/root/rkta/public_html/app/todo/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [module],
 	   imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/not-found/not-found.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	   filename: "/home/paul/root/rkta/public_html/app/todo/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [],
 	   imports: [_react3.default, _index2.default]
@@ -53402,7 +53411,7 @@
 
 	function _wrapComponent(id) {
 	   return function (Component) {
-	      return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	      return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	   };
 	}
 

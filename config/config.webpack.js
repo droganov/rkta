@@ -93,6 +93,10 @@ module.exports = function ( isProduction ){
         {
           test: /\.(woff|woff2)/,
           loader: "url?limit=100000",
+        },
+        {
+          test: /\.json$/,
+          loader: "json"
         }
       ],
       postLoaders: [

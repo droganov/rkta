@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "266f41f4ffec2cf9c7b4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "26df7d3cd0be79479c58"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -7737,7 +7737,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(4);
 
@@ -27773,7 +27773,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic&subset=latin,latin-ext);", ""]);
 
 	// module
-	exports.push([module.id, "body {\n  color: #414141;\n  margin: 0;\n  padding: 0;\n  background-color: #fff;\n  font-family: \"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif;\n  font-size: 14px;\n  font-variant-ligatures: common-ligatures;\n  line-height: 24px;\n  text-rendering: optimizeLegibility !important;\n  -webkit-font-smoothing: antialiased !important;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {\n  body {\n    font-weight: 100;\n    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);\n  }\n}\n.App {\n  background-color: #fff;\n}\n.content-box,\n.FrontPage,\n.NotFound {\n  max-width: 1200px;\n  margin: auto;\n}\n@media screen and (min-width: 1200px) {\n  .FrontPage {\n    padding-bottom: 72px;\n  }\n}\n.NotFound {\n  padding: 80px 0;\n  text-align: center;\n}\n.Testblock.onscreen_true {\n  background-color: #fdd;\n}\n", ""]);
+	exports.push([module.id, "body {\n  color: #414141;\n  margin: 0;\n  padding: 0;\n  background-color: #fff;\n  font-family: \"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif;\n  font-size: 14px;\n  font-variant-ligatures: common-ligatures;\n  line-height: 24px;\n  text-rendering: optimizeLegibility !important;\n  -webkit-font-smoothing: antialiased !important;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {\n  body {\n    font-weight: 100;\n    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);\n  }\n}\n.App {\n  background-color: #fff;\n}\n.content-box,\n.FrontPage,\n.NotFound {\n  max-width: 1200px;\n  margin: auto;\n}\n@media screen and (min-width: 1200px) {\n  .FrontPage {\n    padding-bottom: 72px;\n  }\n}\n.NotFound {\n  padding: 80px 0;\n  text-align: center;\n}\n.Testblock.onscreen_true {\n  background-color: #faa;\n}\n", ""]);
 
 	// exports
 
@@ -29369,7 +29369,9 @@
 	  '__set__': __Rewire__,
 	  '__ResetDependency__': __ResetDependency__
 	};
-	var filenameWithoutLoaders = function filenameWithoutLoaders(filename) {
+	var filenameWithoutLoaders = function filenameWithoutLoaders() {
+	  var filename = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
 	  var index = filename.lastIndexOf('!');
 
 	  return index < 0 ? filename : filename.substr(index + 1);
@@ -29412,7 +29414,8 @@
 
 	exports.filenameHasLoaders = _filenameHasLoaders;
 	var filenameHasSchema = function filenameHasSchema(filename) {
-	  return /^[\w]+\:/.test(filename);
+	  return (/^[\w]+\:/.test(filename)
+	  );
 	};
 
 	var _filenameHasSchema = filenameHasSchema;
@@ -31136,9 +31139,9 @@
 	    contextTypes: { racerModel: React.PropTypes.object.isRequired },
 	    statics: Child.statics,
 
-	    queries: [],
-	    observers: [],
-	    wasOnscreen: false,
+	    // queries: [],
+	    // observers: [],
+	    // wasOnscreen: false,
 
 	    // query methods
 	    queryMount: function( queryObj ){
@@ -31177,7 +31180,8 @@
 	      return this.scopedModel.get();
 	    },
 	    projectionResloveUpdate: function( newProps ){
-	      var newState = Object.assign( {}, this.projectionGetData( newProps ) );
+	      var localNewProps = typeof newProps === "object" ? newProps : null;
+	      var newState = Object.assign( {}, localNewProps, this.projectionGetData() );
 
 	      for ( var key in newState ) {
 	        var item = newState[ key ];
@@ -31207,7 +31211,7 @@
 	    // getRe
 	    isOnscreen: function(){
 	      // var domNode = this.domNode;
-	      var domNode = this.refs.self;
+	      var domNode = findDOMNode(this.refs.self);
 
 	      var windowTop = document.body.scrollTop;
 	      var windowBottom = windowTop + window.innerHeight;
@@ -31223,10 +31227,15 @@
 	      if( isOnscreen === this.wasOnscreen ) return;
 	      isOnscreen ? this.queryStartAllObservers() : this.queryStopAllObservers();
 	      this.wasOnscreen = isOnscreen;
+	      this.setState({isOnscreen:isOnscreen});
 	    },
 
 	    // react methods
 	    getInitialState: function(){
+	      this.queries = [];
+	      this.observers = [];
+	      this.wasOnscreen = false;
+
 	      return { isOnscreen: false }
 	    },
 
@@ -52847,15 +52856,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/form/form.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/blocks/form/form.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/form/form.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/blocks/form/form.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -52863,7 +52872,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -52961,6 +52970,10 @@
 
 	var _form2 = _interopRequireDefault(_form);
 
+	var _stylusEnv = __webpack_require__(518);
+
+	var _stylusEnv2 = _interopRequireDefault(_stylusEnv);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _components = {
@@ -52969,15 +52982,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/testblock/testblock.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/blocks/testblock/testblock.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/blocks/testblock/testblock.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/blocks/testblock/testblock.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -52985,7 +52998,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -53022,6 +53035,12 @@
 	          "div",
 	          null,
 	          this.props.text
+	        ),
+	        _react3.default.createElement(
+	          "div",
+	          null,
+	          "переменная stylusEnviron.var1.var2=",
+	          _stylusEnv2.default.var1.var2
 	        ),
 	        _react3.default.createElement(_form2.default, null)
 	      );
@@ -53276,15 +53295,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/front-page/front-page.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/views/front-page/front-page.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/front-page/front-page.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/views/front-page/front-page.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -53292,7 +53311,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -53490,15 +53509,15 @@
 	   }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/not-found/not-found.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	   filename: "/home/paul/root/rkta/public_html/app/www/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [module],
 	   imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/not-found/not-found.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	   filename: "/home/paul/root/rkta/public_html/app/www/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [],
 	   imports: [_react3.default, _index2.default]
@@ -53506,7 +53525,7 @@
 
 	function _wrapComponent(id) {
 	   return function (Component) {
-	      return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	      return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	   };
 	}
 
@@ -53613,15 +53632,15 @@
 	  }
 	};
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/test-page/test-page.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/views/test-page/test-page.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/www/views/test-page/test-page.jsx",
+	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/home/paul/root/rkta/public_html/app/www/views/test-page/test-page.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -53629,7 +53648,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -53674,6 +53693,21 @@
 
 	exports.default = MyComponent;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
+
+/***/ },
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"var1": {
+			"var2": "#faa",
+			"comment": "вложенные переменные используются так background-color var1-var2, пример использования в testblock"
+		},
+		"var3": "#f50"
+	};
 
 /***/ }
 /******/ ]);
