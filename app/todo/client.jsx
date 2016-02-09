@@ -17,22 +17,34 @@ require("./style.styl");
 
 const history = useBeforeUnload( createHistory )();
 
-function match( location, racerModel, cb ){
-	racer
-		.match({
-			routes,
-			location,
-			racerModel,
-		},
-		cb
-	);
-}
 
 // render
 adapter.onReady( (ev) => {
 	let appNode = document.getElementById( "app" );
 	const racerModel = racer.connectClient();
 
+	// data prefetcing during user site navigation
+	history.listenBefore( ( location, cb ) => {
+		if( location.action !== "PUSH" ) return cb();
+		racer.match(
+			{
+				routes,
+				location,
+				racerModel,
+			}, cb );
+	});
+
+	// fix scrollop
+	history.listen( location => {
+		if( location.action === "PUSH" ) window.scrollTo( 0, 0 );
+		console.log( location );
+	});
+
+	// history.listenBeforeUnload( () => {
+	// 	return "Are you sure you want to leave this page?";
+	// });
+
+	// rendering and hotload
 	function renderRoutes() {
 		try {
 			ReactDOM.unmountComponentAtNode(appNode);
@@ -59,27 +71,6 @@ adapter.onReady( (ev) => {
 					),  appNode);
 			});
 	}
-
-	// data prefetcing during user site navigation
-	history.listenBefore( ( location, cb ) => {
-		if( location.action !== "PUSH" ) return cb();
-		racer.match(
-			{
-				routes,
-				location,
-				racerModel,
-			}, cb );
-	});
-
-	// fix scrollop
-	history.listen( location => {
-		if( location.action === "PUSH" ) window.scrollTo( 0, 0 );
-		console.log( location );
-	});
-
-	// history.listenBeforeUnload( () => {
-	// 	return "Are you sure you want to leave this page?";
-	// });
 
 	// render onload
 	renderRoutes();

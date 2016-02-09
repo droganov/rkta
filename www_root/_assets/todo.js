@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "efc21fe45a1333fa919b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bf05f2a16627fd45dd30"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -53083,19 +53083,32 @@
 
 	var history = (0, _history.useBeforeUnload)(_history.createHistory)();
 
-	function match(location, racerModel, cb) {
-		_racerReact2.default.match({
-			routes: routes,
-			location: location,
-			racerModel: racerModel
-		}, cb);
-	}
-
 	// render
 	adapter.onReady(function (ev) {
 		var appNode = document.getElementById("app");
 		var racerModel = _racerReact2.default.connectClient();
 
+		// data prefetcing during user site navigation
+		history.listenBefore(function (location, cb) {
+			if (location.action !== "PUSH") return cb();
+			_racerReact2.default.match({
+				routes: routes,
+				location: location,
+				racerModel: racerModel
+			}, cb);
+		});
+
+		// fix scrollop
+		history.listen(function (location) {
+			if (location.action === "PUSH") window.scrollTo(0, 0);
+			console.log(location);
+		});
+
+		// history.listenBeforeUnload( () => {
+		// 	return "Are you sure you want to leave this page?";
+		// });
+
+		// rendering and hotload
 		function renderRoutes() {
 			try {
 				_reactDom2.default.unmountComponentAtNode(appNode);
@@ -53119,26 +53132,6 @@
 				), appNode);
 			});
 		}
-
-		// data prefetcing during user site navigation
-		history.listenBefore(function (location, cb) {
-			if (location.action !== "PUSH") return cb();
-			_racerReact2.default.match({
-				routes: routes,
-				location: location,
-				racerModel: racerModel
-			}, cb);
-		});
-
-		// fix scrollop
-		history.listen(function (location) {
-			if (location.action === "PUSH") window.scrollTo(0, 0);
-			console.log(location);
-		});
-
-		// history.listenBeforeUnload( () => {
-		// 	return "Are you sure you want to leave this page?";
-		// });
 
 		// render onload
 		renderRoutes();
