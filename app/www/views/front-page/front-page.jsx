@@ -48,7 +48,7 @@ class FrontPage extends Component {
 
   componentDidMount(){
     this.props.racerQuery("test", {}).pipeAs("sometest");
-    console.log( this.props.racerModel );
+    // console.log( this.props.racerModel );
   }
 
   render() {
