@@ -37,7 +37,7 @@ adapter.onReady( (ev) => {
 	// fix scrollop
 	history.listen( location => {
 		if( location.action === "PUSH" ) window.scrollTo( 0, 0 );
-		console.log( location );
+		// console.log( location );
 	});
 
 	// history.listenBeforeUnload( () => {

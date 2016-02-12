@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "70741c4592eee4901b0f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "619e0ae2bd413529e80f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -4717,7 +4717,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var getLength = __webpack_require__(270),
-	    isLength = __webpack_require__(70);
+	    isLength = __webpack_require__(65);
 
 	/**
 	 * Checks if `value` is array-like.
@@ -4765,7 +4765,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(3);
 
@@ -8047,10 +8047,58 @@
 /* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(291), __esModule: true };
+	var isNative = __webpack_require__(275);
+
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = object == null ? undefined : object[key];
+	  return isNative(value) ? value : undefined;
+	}
+
+	module.exports = getNative;
+
 
 /***/ },
 /* 65 */
+/***/ function(module, exports) {
+
+	/**
+	 * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	module.exports = isLength;
+
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(291), __esModule: true };
+
+/***/ },
+/* 67 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -8064,7 +8112,7 @@
 	};
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -8096,7 +8144,7 @@
 	})();
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -8111,7 +8159,7 @@
 
 	var _create2 = _interopRequireDefault(_create);
 
-	var _typeof2 = __webpack_require__(144);
+	var _typeof2 = __webpack_require__(139);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -8134,14 +8182,14 @@
 	};
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _typeof2 = __webpack_require__(144);
+	var _typeof2 = __webpack_require__(139);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -8154,54 +8202,6 @@
 
 	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
 	};
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isNative = __webpack_require__(275);
-
-	/**
-	 * Gets the native function at `key` of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @param {string} key The key of the method to get.
-	 * @returns {*} Returns the function if it's native, else `undefined`.
-	 */
-	function getNative(object, key) {
-	  var value = object == null ? undefined : object[key];
-	  return isNative(value) ? value : undefined;
-	}
-
-	module.exports = getNative;
-
-
-/***/ },
-/* 70 */
-/***/ function(module, exports) {
-
-	/**
-	 * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
-	 * of an array-like value.
-	 */
-	var MAX_SAFE_INTEGER = 9007199254740991;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	module.exports = isLength;
-
 
 /***/ },
 /* 71 */
@@ -9610,8 +9610,8 @@
 /* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(69),
-	    isLength = __webpack_require__(70),
+	var getNative = __webpack_require__(64),
+	    isLength = __webpack_require__(65),
 	    isObjectLike = __webpack_require__(47);
 
 	/** `Object#toString` result references. */
@@ -14315,6 +14315,26 @@
 /* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _symbol = __webpack_require__(288);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _typeof(obj) { return obj && typeof _Symbol !== "undefined" && obj.constructor === _Symbol ? "symbol" : typeof obj; }
+
+	exports.default = function (obj) {
+	  return obj && typeof _symbol2.default !== "undefined" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+	};
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict"
 
 	var serverRequire = __webpack_require__(5).serverRequire;
@@ -14336,7 +14356,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	Object.defineProperty(exports, "__esModule", {
@@ -14367,7 +14387,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14387,7 +14407,7 @@
 	};
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports) {
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -14451,10 +14471,10 @@
 
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(69),
+	var getNative = __webpack_require__(64),
 	    isArrayLike = __webpack_require__(46),
 	    isObject = __webpack_require__(38),
 	    shimKeys = __webpack_require__(273);
@@ -14500,26 +14520,6 @@
 
 	module.exports = keys;
 
-
-/***/ },
-/* 144 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _symbol = __webpack_require__(288);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _typeof(obj) { return obj && typeof _Symbol !== "undefined" && obj.constructor === _Symbol ? "symbol" : typeof obj; }
-
-	exports.default = function (obj) {
-	  return obj && typeof _symbol2.default !== "undefined" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
-	};
 
 /***/ },
 /* 145 */
@@ -27923,7 +27923,7 @@
 
 	var _deleteUnknownAutoBindMethods2 = _interopRequireDefault(_deleteUnknownAutoBindMethods);
 
-	var _supportsProtoAssignment = __webpack_require__(141);
+	var _supportsProtoAssignment = __webpack_require__(142);
 
 	var _supportsProtoAssignment2 = _interopRequireDefault(_supportsProtoAssignment);
 
@@ -28379,7 +28379,7 @@
 	});
 	exports.getForceUpdate = exports.createProxy = undefined;
 
-	var _supportsProtoAssignment = __webpack_require__(141);
+	var _supportsProtoAssignment = __webpack_require__(142);
 
 	var _supportsProtoAssignment2 = _interopRequireDefault(_supportsProtoAssignment);
 
@@ -28408,7 +28408,7 @@
 	    baseFlatten = __webpack_require__(262),
 	    isArrayLike = __webpack_require__(46),
 	    isObjectLike = __webpack_require__(47),
-	    restParam = __webpack_require__(142);
+	    restParam = __webpack_require__(143);
 
 	/**
 	 * Creates an array of unique `array` values not included in the other
@@ -28440,7 +28440,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var cachePush = __webpack_require__(267),
-	    getNative = __webpack_require__(69);
+	    getNative = __webpack_require__(64);
 
 	/** Native method references. */
 	var Set = getNative(global, 'Set');
@@ -28501,7 +28501,7 @@
 /* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(143);
+	var keys = __webpack_require__(144);
 
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -28540,7 +28540,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseCopy = __webpack_require__(260),
-	    keys = __webpack_require__(143);
+	    keys = __webpack_require__(144);
 
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -28852,7 +28852,7 @@
 
 	var bindCallback = __webpack_require__(265),
 	    isIterateeCall = __webpack_require__(272),
-	    restParam = __webpack_require__(142);
+	    restParam = __webpack_require__(143);
 
 	/**
 	 * Creates a `_.assign`, `_.defaults`, or `_.merge` function.
@@ -28898,7 +28898,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var SetCache = __webpack_require__(256),
-	    getNative = __webpack_require__(69);
+	    getNative = __webpack_require__(64);
 
 	/** Native method references. */
 	var Set = getNative(global, 'Set');
@@ -29012,7 +29012,7 @@
 	var isArguments = __webpack_require__(94),
 	    isArray = __webpack_require__(95),
 	    isIndex = __webpack_require__(93),
-	    isLength = __webpack_require__(70),
+	    isLength = __webpack_require__(65),
 	    keysIn = __webpack_require__(277);
 
 	/** Used for native method references. */
@@ -29206,7 +29206,7 @@
 	var isArguments = __webpack_require__(94),
 	    isArray = __webpack_require__(95),
 	    isIndex = __webpack_require__(93),
-	    isLength = __webpack_require__(70),
+	    isLength = __webpack_require__(65),
 	    isObject = __webpack_require__(38);
 
 	/** Used for native method references. */
@@ -29370,9 +29370,7 @@
 	  '__set__': __Rewire__,
 	  '__ResetDependency__': __ResetDependency__
 	};
-	var filenameWithoutLoaders = function filenameWithoutLoaders() {
-	  var filename = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
+	var filenameWithoutLoaders = function filenameWithoutLoaders(filename) {
 	  var index = filename.lastIndexOf('!');
 
 	  return index < 0 ? filename : filename.substr(index + 1);
@@ -29415,8 +29413,7 @@
 
 	exports.filenameHasLoaders = _filenameHasLoaders;
 	var filenameHasSchema = function filenameHasSchema(filename) {
-	  return (/^[\w]+\:/.test(filename)
-	  );
+	  return /^[\w]+\:/.test(filename);
 	};
 
 	var _filenameHasSchema = filenameHasSchema;
@@ -31138,11 +31135,9 @@
 	    displayName: Child.displayName || Child.name || "RacerReact",
 	    propTypes:{ racerModel: React.PropTypes.object },
 	    contextTypes: { racerModel: React.PropTypes.object.isRequired },
-	    statics: Child.statics,
-
-	    // queries: [],
-	    // observers: [],
-	    // wasOnscreen: false,
+	    statics: {
+	      racer: Child.racer || null
+	    },
 
 	    // query methods
 	    queryMount: function( queryObj ){
@@ -31181,9 +31176,7 @@
 	      return this.scopedModel.get();
 	    },
 	    projectionResloveUpdate: function( newProps ){
-	      var localNewProps = typeof newProps === "object" ? newProps : null;
-	      var newState = Object.assign( {}, localNewProps, this.projectionGetData() );
-
+	      var newState = Object.assign( {}, this.projectionGetData(), newProps );
 	      for ( var key in newState ) {
 	        var item = newState[ key ];
 	        // if ( !Array.isArray( item ) ) { continue; }
@@ -31213,10 +31206,8 @@
 	    isOnscreen: function(){
 	      // var domNode = this.domNode;
 	      var domNode = findDOMNode(this.refs.self);
-
 	      var windowTop = document.body.scrollTop;
 	      var windowBottom = windowTop + window.innerHeight;
-
 	      var elementTop = domNode.offsetTop;
 	      var elementBottom = elementTop + domNode.offsetHeight;
 
@@ -31228,25 +31219,24 @@
 	      if( isOnscreen === this.wasOnscreen ) return;
 	      isOnscreen ? this.queryStartAllObservers() : this.queryStopAllObservers();
 	      this.wasOnscreen = isOnscreen;
-	      this.setState({isOnscreen:isOnscreen});
 	    },
 
 	    // react methods
 	    getInitialState: function(){
-	      this.queries = [];
-	      this.observers = [];
-	      this.wasOnscreen = false;
-
-	      return { isOnscreen: false }
+	      return {}
 	    },
 
 	    componentWillMount: function(){
-	      var racerModel = this.racerModel = this.context.racerModel;
-	      var ctx = this;
+	      this.racerModel = this.context.racerModel;
+	      this.queries = [];
+	      this.observers = [];
+	      this.wasOnscreen = false;
 	      this.id = this._reactInternalInstance._rootNodeID.toString().split(".").join("_");
-	      this.scopedModel = racerModel.at( this.id );
+	      this.scopedModel = this.racerModel.at( this.id );
 	      this.wrappeeResolveQueries();
-	      var racerQuery = new QueryHandler( racerModel, function( queryObj ){
+
+	      var ctx = this;
+	      var racerQuery = new QueryHandler( ctx.racerModel, function( queryObj ){
 	        var query = queryObj.query;
 	        var cb = function(){
 	          ctx.queryMount( queryObj );
@@ -31256,7 +31246,7 @@
 	      ctx.projectionResloveUpdate({
 	        racerQuery: racerQuery,
 	      });
-	      this.scopedModel.on( "all", "**", ctx.projectionResloveUpdate );
+	      ctx.scopedModel.on( "all", "**", ctx.projectionResloveUpdate );
 	    },
 
 	    componentDidMount: function(){
@@ -31309,7 +31299,7 @@
 	      if( error ) return reject( error );
 	      if( redirectLocation ) return reject({ location: redirectLocation, status: 301 });
 
-	      var queryAggregator = new QueryAggregator( racerModel );
+	      var queryAggregator = new QueryAggregator( racerModel, renderProps );
 
 	      for (var i = 0; i < renderProps.components.length; i++) {
 	        var component = renderProps.components[ i ];
@@ -31365,7 +31355,7 @@
 	var QueryHandler = __webpack_require__( 166 );
 	var type = __webpack_require__( 99 );
 
-	function QueryAggregator( racerModel ) {
+	function QueryAggregator( racerModel, renderProps ) {
 	  var queryStack = [];
 
 	  this.use = function( component ){
@@ -31374,7 +31364,7 @@
 	      queryStack.push( queryObj );
 	      component.racerQueries.push( queryObj );
 	    });
-	    component.racer( queryHandler );
+	    component.racer( queryHandler, renderProps );
 	  }
 	  this.run = function( cb ){
 	    var jobs = [];
@@ -52794,23 +52784,23 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
-	var _getPrototypeOf = __webpack_require__(64);
+	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(65);
+	var _classCallCheck2 = __webpack_require__(67);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(66);
+	var _createClass2 = __webpack_require__(68);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(68);
+	var _possibleConstructorReturn2 = __webpack_require__(70);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(67);
+	var _inherits2 = __webpack_require__(69);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -52848,15 +52838,15 @@
 	  }
 	};
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/form/form.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/form/form.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/form/form.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/form/form.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -52864,7 +52854,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -52919,23 +52909,23 @@
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _getPrototypeOf = __webpack_require__(64);
+	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(65);
+	var _classCallCheck2 = __webpack_require__(67);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(66);
+	var _createClass2 = __webpack_require__(68);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(68);
+	var _possibleConstructorReturn2 = __webpack_require__(70);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(67);
+	var _inherits2 = __webpack_require__(69);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -52969,15 +52959,15 @@
 	  }
 	};
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/todo/todo.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/todo/todo.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/home/paul/root/rkta/public_html/app/todo/blocks/todo/todo.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/blocks/todo/todo.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -52985,7 +52975,7 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
@@ -53007,7 +52997,9 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var item = this.props.item;
+	      var _props = this.props;
+	      var item = _props.item;
+	      var isPending = _props.isPending;
 
 	      var textStyle = {
 	        width: "100%"
@@ -53026,7 +53018,8 @@
 	          _react3.default.createElement("input", {
 	            type: "checkbox",
 	            checked: item.isComplete,
-	            onChange: this._change.bind(this)
+	            onChange: this._change.bind(this),
+	            disabled: isPending
 	          })
 	        ),
 	        _react3.default.createElement(
@@ -53038,6 +53031,7 @@
 	          "button",
 	          {
 	            className: "todo__del",
+	            disabled: isPending,
 	            onClick: function onClick(ev) {
 	              return _this2.props.delete(item.id);
 	            }
@@ -53050,7 +53044,10 @@
 	  return Todo;
 	}(_react2.Component), _class.propTypes = {
 	  markComplete: _react2.PropTypes.func.isRequired,
-	  delete: _react2.PropTypes.func.isRequired
+	  delete: _react2.PropTypes.func.isRequired,
+	  isPending: _react2.PropTypes.bool
+	}, _class.defaultProps = {
+	  isPending: false
 	}, _temp));
 
 	exports.default = Todo;
@@ -53076,7 +53073,7 @@
 
 	var _reactRouter = __webpack_require__(81);
 
-	var _racerReact = __webpack_require__(139);
+	var _racerReact = __webpack_require__(140);
 
 	var _racerReact2 = _interopRequireDefault(_racerReact);
 
@@ -53117,7 +53114,7 @@
 		// fix scrollop
 		history.listen(function (location) {
 			if (location.action === "PUSH") window.scrollTo(0, 0);
-			console.log(location);
+			// console.log( location );
 		});
 
 		// history.listenBeforeUnload( () => {
@@ -53168,29 +53165,13 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
+	var _typeof2 = __webpack_require__(139);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
 	var _assign = __webpack_require__(503);
 
 	var _assign2 = _interopRequireDefault(_assign);
-
-	var _getPrototypeOf = __webpack_require__(64);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(65);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(66);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(68);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(67);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _index = __webpack_require__(48);
 
@@ -53208,19 +53189,21 @@
 
 	var _index6 = _interopRequireDefault(_index5);
 
-	var _class, _temp;
-
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _reactHelmet = __webpack_require__(140);
+	var _reactHelmet = __webpack_require__(141);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
 	var _reactRouter = __webpack_require__(81);
 
-	var _racerReact = __webpack_require__(139);
+	var _racerReact = __webpack_require__(140);
+
+	var _reactMixinQ = __webpack_require__(527);
+
+	var _reactMixinQ2 = _interopRequireDefault(_reactMixinQ);
 
 	var _form = __webpack_require__(510);
 
@@ -53233,20 +53216,18 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _components = {
-	  App: {
-	    displayName: "App"
-	  }
+	  _component: {}
 	};
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	  filename: "/home/paul/root/rkta/public_html/app/todo/views/app/app.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/app/app.jsx",
 	  components: _components,
 	  locals: [module],
 	  imports: [_react3.default]
 	});
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	  filename: "/home/paul/root/rkta/public_html/app/todo/views/app/app.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	  filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/app/app.jsx",
 	  components: _components,
 	  locals: [],
 	  imports: [_react3.default, _index2.default]
@@ -53254,79 +53235,123 @@
 
 	function _wrapComponent(id) {
 	  return function (Component) {
-	    return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	    return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	  };
 	}
 
-	var App = _wrapComponent("App")((_temp = _class = function (_Component) {
-	  (0, _inherits3.default)(App, _Component);
+	var App = _wrapComponent("_component")(_react3.default.createClass({
+	  displayName: "App",
 
-	  function App() {
-	    (0, _classCallCheck3.default)(this, App);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(App).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(App, [{
-	    key: "createTodo",
-	    value: function createTodo(form) {
-	      var item = (0, _assign2.default)({}, form, { isComplete: false });
-	      this.props.racerModel.add("todos", item);
+	  mixins: [_reactMixinQ2.default],
+	  statics: {
+	    racer: function racer(query) {
+	      query("todos", {}).pipeAs("todos");
 	    }
-	  }, {
-	    key: "markComplete",
-	    value: function markComplete(todoID, isComplete) {
-	      this.props.racerModel.set("todos." + todoID + ".isComplete", isComplete);
-	    }
-	  }, {
-	    key: "deleteTodo",
-	    value: function deleteTodo(todoID) {
-	      this.props.racerModel.del("todos." + todoID);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var _this2 = this;
+	  },
+	  createTodo: function createTodo(form) {
+	    var _this = this;
 
-	      var todos = this.props.todos;
+	    var item = (0, _assign2.default)({}, form, { isComplete: false });
+	    this.q.add(item);
+	    this.props.racerModel.add("todos", item, function (err) {
+	      return _this.q.del(item);
+	    });
+	  },
+	  markComplete: function markComplete(todoID, isComplete) {
+	    this.props.racerModel.set("todos." + todoID + ".isComplete", isComplete);
+	  },
+	  deleteTodo: function deleteTodo(todoID) {
+	    this.props.racerModel.del("todos." + todoID);
+	  },
+	  render: function render() {
+	    var _this2 = this;
 
-	      return _react3.default.createElement(
+	    var todos = this.props.todos;
+
+	    return _react3.default.createElement(
+	      "div",
+	      { className: "App" },
+	      _react3.default.createElement(_reactHelmet2.default, {
+	        title: "My Title",
+	        titleTemplate: "rkta: %s"
+	      }),
+	      _react3.default.createElement(
 	        "div",
-	        { className: "App" },
-	        _react3.default.createElement(_reactHelmet2.default, {
-	          title: "My Title",
-	          titleTemplate: "rkta: %s"
+	        { className: "App__header" },
+	        "Todos"
+	      ),
+	      _react3.default.createElement(
+	        "div",
+	        { className: "App__content" },
+	        (0, _typeof3.default)(this.q),
+	        todos && todos.map(function (todo, i) {
+	          return _react3.default.createElement(_todo2.default, {
+	            key: i,
+	            item: todo,
+	            markComplete: _this2.markComplete,
+	            "delete": _this2.deleteTodo
+	          });
 	        }),
-	        _react3.default.createElement(
-	          "div",
-	          { className: "App__header" },
-	          "Todos"
-	        ),
-	        _react3.default.createElement(
-	          "div",
-	          { className: "App__content" },
-	          todos && todos.map(function (todo, i) {
-	            return _react3.default.createElement(_todo2.default, {
-	              key: i,
-	              item: todo,
-	              markComplete: _this2.markComplete.bind(_this2),
-	              "delete": _this2.deleteTodo.bind(_this2)
-	            });
-	          })
-	        ),
-	        _react3.default.createElement(
-	          "div",
-	          { className: "App__footer" },
-	          _react3.default.createElement(_form2.default, { onSubmit: this.createTodo.bind(this) })
-	        )
-	      );
-	    }
-	  }]);
-	  return App;
-	}(_react2.Component), _class.statics = {
-	  racer: function racer(query) {
-	    return query("todos", {}).pipeAs("todos");
+	        this.q.map(function (todo, i) {
+	          return _react3.default.createElement(_todo2.default, {
+	            key: i,
+	            item: todo,
+	            markComplete: _this2.markComplete,
+	            "delete": _this2.deleteTodo,
+	            isPending: true
+	          });
+	        })
+	      ),
+	      _react3.default.createElement(
+	        "div",
+	        { className: "App__footer" },
+	        _react3.default.createElement(_form2.default, { onSubmit: this.createTodo })
+	      )
+	    );
 	  }
-	}, _temp));
+	}));
+
+	// @q
+	// class App extends Component {
+	//   static statics = {
+	//     racer: query => query( "todos", {} ).pipeAs( "todos" )
+	//   };
+	//   createTodo( form ){
+	//     const item = Object.assign( {}, form, { isComplete: false } )
+	//     this.props.racerModel.add( "todos", item )
+	//   }
+	//   markComplete( todoID, isComplete ){
+	//     this.props.racerModel.set( "todos." + todoID + ".isComplete", isComplete )
+	//   }
+	//   deleteTodo( todoID ){
+	//     this.props.racerModel.del( "todos." + todoID )
+	//   }
+	//   render() {
+	//     const { todos } = this.props
+	//     return (
+	//       <div className="App">
+	//         <Helmet
+	//           title="My Title"
+	//           titleTemplate="rkta: %s"
+	//         />
+	//         <div className="App__header">Todos</div>
+	//         <div className="App__content">
+	//           { todos && todos.map( ( todo, i ) => {
+	//             return <Todo
+	//               key={ i }
+	//               item={ todo }
+	//               markComplete={ this.markComplete.bind( this ) }
+	//               delete={ this.deleteTodo.bind( this ) }
+	//             />
+	//           })}
+	//         </div>
+	//         <div className="App__footer">
+	//           <Form onSubmit={ this.createTodo.bind( this ) } />
+	//         </div>
+	//       </div>
+	//     );
+	//   }
+	// }
 
 	exports.default = (0, _racerReact.Connect)(App);
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
@@ -53337,23 +53362,23 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
-	var _getPrototypeOf = __webpack_require__(64);
+	var _getPrototypeOf = __webpack_require__(66);
 
 	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _classCallCheck2 = __webpack_require__(65);
+	var _classCallCheck2 = __webpack_require__(67);
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _createClass2 = __webpack_require__(66);
+	var _createClass2 = __webpack_require__(68);
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _possibleConstructorReturn2 = __webpack_require__(68);
+	var _possibleConstructorReturn2 = __webpack_require__(70);
 
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _inherits2 = __webpack_require__(67);
+	var _inherits2 = __webpack_require__(69);
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -53379,7 +53404,7 @@
 	   value: true
 	});
 
-	var _reactHelmet = __webpack_require__(140);
+	var _reactHelmet = __webpack_require__(141);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
@@ -53391,15 +53416,15 @@
 	   }
 	};
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
-	   filename: "/home/paul/root/rkta/public_html/app/todo/views/not-found/not-found.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [module],
 	   imports: [_react3.default]
 	});
 
-	var _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
-	   filename: "/home/paul/root/rkta/public_html/app/todo/views/not-found/not-found.jsx",
+	var _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+	   filename: "/Users/se/Dropbox/www/maintined/rkta/app/todo/views/not-found/not-found.jsx",
 	   components: _components,
 	   locals: [],
 	   imports: [_react3.default, _index2.default]
@@ -53407,7 +53432,7 @@
 
 	function _wrapComponent(id) {
 	   return function (Component) {
-	      return _homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_homePaulRootRktaPublic_htmlNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+	      return _UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformHmrLibIndexJs2(_UsersSeDropboxWwwMaintinedRktaNode_modulesBabelPresetReactHmreNode_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
 	   };
 	}
 
@@ -53521,6 +53546,30 @@
 	var $export = __webpack_require__(91);
 
 	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(524)});
+
+/***/ },
+/* 526 */,
+/* 527 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  componentWillMount: function() {
+	    var self = this;
+	    function Q( state ){ state && this.push.apply( this, state ); }
+	    Q.prototype = Array.prototype;
+	    Q.prototype.add = function( val ){
+	      this.push( val );
+	      self.forceUpdate();
+	    }
+	    Q.prototype.del = function( val ){
+	      var index = this.indexOf( val );
+	      if( index > -1 ) this.splice( index, 1 );
+	      self.forceUpdate();
+	    }
+	    this.q = new Q();
+	  }
+	};
+
 
 /***/ }
 /******/ ]);
