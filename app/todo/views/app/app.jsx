@@ -19,7 +19,7 @@ const App = React.createClass({
   createTodo: function( form ){
     const item = Object.assign( {}, form, { isComplete: false } )
     this.q.add( item );
-    this.props.racerModel.add( "todos", item,  err => this.q.del( item ) )
+    this.props.racerModel.add( "todos", item, err => this.q.del( item ) )
   },
   markComplete: function( todoID, isComplete ){
     this.props.racerModel.set( "todos." + todoID + ".isComplete", isComplete )
@@ -37,7 +37,6 @@ const App = React.createClass({
         />
         <div className="App__header">Todos</div>
         <div className="App__content">
-          { typeof this.q }
           { todos && todos.map( ( todo, i ) => {
             return <Todo
               key={ i }

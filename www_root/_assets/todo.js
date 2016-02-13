@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "619e0ae2bd413529e80f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "cc7b4b34bcb8bc573d58"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -548,7 +548,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(512);
+	__webpack_require__(513);
 	module.exports = __webpack_require__(485);
 
 
@@ -8159,7 +8159,7 @@
 
 	var _create2 = _interopRequireDefault(_create);
 
-	var _typeof2 = __webpack_require__(139);
+	var _typeof2 = __webpack_require__(144);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -8189,7 +8189,7 @@
 
 	exports.__esModule = true;
 
-	var _typeof2 = __webpack_require__(139);
+	var _typeof2 = __webpack_require__(144);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -14315,26 +14315,6 @@
 /* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _symbol = __webpack_require__(288);
-
-	var _symbol2 = _interopRequireDefault(_symbol);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _typeof(obj) { return obj && typeof _Symbol !== "undefined" && obj.constructor === _Symbol ? "symbol" : typeof obj; }
-
-	exports.default = function (obj) {
-	  return obj && typeof _symbol2.default !== "undefined" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
-	};
-
-/***/ },
-/* 140 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict"
 
 	var serverRequire = __webpack_require__(5).serverRequire;
@@ -14356,7 +14336,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
 
 /***/ },
-/* 141 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	Object.defineProperty(exports, "__esModule", {
@@ -14387,7 +14367,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 142 */
+/* 141 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14407,7 +14387,7 @@
 	};
 
 /***/ },
-/* 143 */
+/* 142 */
 /***/ function(module, exports) {
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -14471,7 +14451,7 @@
 
 
 /***/ },
-/* 144 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var getNative = __webpack_require__(64),
@@ -14520,6 +14500,26 @@
 
 	module.exports = keys;
 
+
+/***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _symbol = __webpack_require__(288);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _typeof(obj) { return obj && typeof _Symbol !== "undefined" && obj.constructor === _Symbol ? "symbol" : typeof obj; }
+
+	exports.default = function (obj) {
+	  return obj && typeof _symbol2.default !== "undefined" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+	};
 
 /***/ },
 /* 145 */
@@ -27769,10 +27769,10 @@
 
 	exports = module.exports = __webpack_require__(309)();
 	// imports
-	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic&subset=latin,latin-ext);", ""]);
+
 
 	// module
-	exports.push([module.id, "body {\n  color: #414141;\n  margin: 0;\n  padding: 0;\n  background-color: #cfcace;\n  font-family: \"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif;\n  font-size: 14px;\n  font-variant-ligatures: common-ligatures;\n  line-height: 24px;\n  text-rendering: optimizeLegibility !important;\n  -webkit-font-smoothing: antialiased !important;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {\n  body {\n    font-weight: 100;\n    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);\n  }\n}\n.App {\n  background-color: #fff;\n}\n.App {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: box;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  -webkit-box-orient: vertical;\n  -moz-box-orient: vertical;\n  -o-box-orient: vertical;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  -webkit-box-lines: single;\n  -moz-box-lines: single;\n  -o-box-lines: single;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -o-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  -ms-flex-line-pack: center;\n  -webkit-align-content: center;\n  align-content: center;\n  -webkit-align-items: stretch;\n  -ms-flex-align: stretch;\n  -webkit-box-align: stretch;\n  -moz-box-align: stretch;\n  -o-box-align: stretch;\n  -ms-flex-align: stretch;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n  background-color: #cfcace;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n.App__header {\n  text-align: center;\n  font-weight: bold;\n  line-height: 32px;\n}\n.App__content {\n  background-color: #fff;\n  height: 100%;\n  padding: 16px;\n}\n.NotFound {\n  padding: 80px 0;\n  text-align: center;\n}\n.form {\n  padding: 8px;\n  margin: 0;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: box;\n  display: flex;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  -webkit-box-orient: horizontal;\n  -moz-box-orient: horizontal;\n  -o-box-orient: horizontal;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  flex-direction: row;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  -webkit-box-lines: single;\n  -moz-box-lines: single;\n  -o-box-lines: single;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -o-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  -ms-flex-line-pack: center;\n  -webkit-align-content: center;\n  align-content: center;\n  -webkit-align-items: stretch;\n  -ms-flex-align: stretch;\n  -webkit-box-align: stretch;\n  -moz-box-align: stretch;\n  -o-box-align: stretch;\n  -ms-flex-align: stretch;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n}\n.form textarea {\n  padding: 8px;\n  display: block;\n  width: 100%;\n}\n.form button {\n  white-space: nowrap;\n  padding: 0 16px;\n}\n.todo {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: box;\n  display: flex;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  -webkit-box-orient: horizontal;\n  -moz-box-orient: horizontal;\n  -o-box-orient: horizontal;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  flex-direction: row;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  -webkit-box-lines: single;\n  -moz-box-lines: single;\n  -o-box-lines: single;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: flex-start;\n  -ms-flex-pack: start;\n  -webkit-box-pack: start;\n  -moz-box-pack: start;\n  -o-box-pack: start;\n  -ms-flex-pack: start;\n  -webkit-justify-content: flex-start;\n  justify-content: flex-start;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  -ms-flex-line-pack: center;\n  -webkit-align-content: center;\n  align-content: center;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  -webkit-box-align: center;\n  -moz-box-align: center;\n  -o-box-align: center;\n  -ms-flex-align: center;\n  -webkit-align-items: center;\n  align-items: center;\n}\n.todo__text {\n  padding: 0 8px;\n}\n", ""]);
+	exports.push([module.id, "body {\n  color: #414141;\n  margin: 0;\n  padding: 0;\n  background-color: #cfcace;\n  font-family: \"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif;\n  font-size: 14px;\n  font-variant-ligatures: common-ligatures;\n  line-height: 24px;\n  text-rendering: optimizeLegibility !important;\n  -webkit-font-smoothing: antialiased !important;\n}\n@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {\n  body {\n    font-weight: 100;\n    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);\n  }\n}\n.App {\n  background-color: #fff;\n}\n.App {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: box;\n  display: flex;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  -webkit-box-orient: vertical;\n  -moz-box-orient: vertical;\n  -o-box-orient: vertical;\n  -webkit-flex-direction: column;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  -webkit-box-lines: single;\n  -moz-box-lines: single;\n  -o-box-lines: single;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -o-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  -ms-flex-line-pack: center;\n  -webkit-align-content: center;\n  align-content: center;\n  -webkit-align-items: stretch;\n  -ms-flex-align: stretch;\n  -webkit-box-align: stretch;\n  -moz-box-align: stretch;\n  -o-box-align: stretch;\n  -ms-flex-align: stretch;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n  background-color: #cfcace;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n.App__header {\n  text-align: center;\n  font-weight: bold;\n  line-height: 32px;\n}\n.App__content {\n  background-color: #fff;\n  height: 100%;\n  padding: 16px;\n}\n.NotFound {\n  padding: 80px 0;\n  text-align: center;\n}\n.form {\n  padding: 8px;\n  margin: 0;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: box;\n  display: flex;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  -webkit-box-orient: horizontal;\n  -moz-box-orient: horizontal;\n  -o-box-orient: horizontal;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  flex-direction: row;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  -webkit-box-lines: single;\n  -moz-box-lines: single;\n  -o-box-lines: single;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  -webkit-box-pack: center;\n  -moz-box-pack: center;\n  -o-box-pack: center;\n  -ms-flex-pack: center;\n  -webkit-justify-content: center;\n  justify-content: center;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  -ms-flex-line-pack: center;\n  -webkit-align-content: center;\n  align-content: center;\n  -webkit-align-items: stretch;\n  -ms-flex-align: stretch;\n  -webkit-box-align: stretch;\n  -moz-box-align: stretch;\n  -o-box-align: stretch;\n  -ms-flex-align: stretch;\n  -webkit-align-items: stretch;\n  align-items: stretch;\n}\n.form textarea {\n  padding: 8px;\n  display: block;\n  width: 100%;\n}\n.form button {\n  white-space: nowrap;\n  padding: 0 16px;\n}\n.preloader {\n  display: inline-block;\n  padding: 4px;\n  padding-left: 0;\n  width: 24px;\n  height: 24px;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n.preloader__spinner {\n  border: 2px solid transparent;\n  -webkit-border-radius: 50%;\n  border-radius: 50%;\n  border-top-color: rgba(65,65,65,0.4);\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 16px;\n  height: 16px;\n  -webkit-animation: preloaderClockwise 0.35s linear infinite;\n  -moz-animation: preloaderClockwise 0.35s linear infinite;\n  -o-animation: preloaderClockwise 0.35s linear infinite;\n  -ms-animation: preloaderClockwise 0.35s linear infinite;\n  animation: preloaderClockwise 0.35s linear infinite;\n}\n@-moz-keyframes preloaderClockwise {\n  to {\n    -webkit-transform: rotate(360deg) translatez(0);\n    -moz-transform: rotate(360deg) translatez(0);\n    -o-transform: rotate(360deg) translatez(0);\n    -ms-transform: rotate(360deg) translatez(0);\n    transform: rotate(360deg) translatez(0);\n  }\n}\n@-webkit-keyframes preloaderClockwise {\n  to {\n    -webkit-transform: rotate(360deg) translatez(0);\n    -moz-transform: rotate(360deg) translatez(0);\n    -o-transform: rotate(360deg) translatez(0);\n    -ms-transform: rotate(360deg) translatez(0);\n    transform: rotate(360deg) translatez(0);\n  }\n}\n@-o-keyframes preloaderClockwise {\n  to {\n    -webkit-transform: rotate(360deg) translatez(0);\n    -moz-transform: rotate(360deg) translatez(0);\n    -o-transform: rotate(360deg) translatez(0);\n    -ms-transform: rotate(360deg) translatez(0);\n    transform: rotate(360deg) translatez(0);\n  }\n}\n@keyframes preloaderClockwise {\n  to {\n    -webkit-transform: rotate(360deg) translatez(0);\n    -moz-transform: rotate(360deg) translatez(0);\n    -o-transform: rotate(360deg) translatez(0);\n    -ms-transform: rotate(360deg) translatez(0);\n    transform: rotate(360deg) translatez(0);\n  }\n}\n.todo {\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: box;\n  display: flex;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  -webkit-box-orient: horizontal;\n  -moz-box-orient: horizontal;\n  -o-box-orient: horizontal;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  flex-direction: row;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  -webkit-box-lines: single;\n  -moz-box-lines: single;\n  -o-box-lines: single;\n  -webkit-flex-wrap: nowrap;\n  -ms-flex-wrap: nowrap;\n  flex-wrap: nowrap;\n  -webkit-justify-content: flex-start;\n  -ms-flex-pack: start;\n  -webkit-box-pack: start;\n  -moz-box-pack: start;\n  -o-box-pack: start;\n  -ms-flex-pack: start;\n  -webkit-justify-content: flex-start;\n  justify-content: flex-start;\n  -webkit-align-content: center;\n  -ms-flex-line-pack: center;\n  -ms-flex-line-pack: center;\n  -webkit-align-content: center;\n  align-content: center;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  -webkit-box-align: center;\n  -moz-box-align: center;\n  -o-box-align: center;\n  -ms-flex-align: center;\n  -webkit-align-items: center;\n  align-items: center;\n}\n.todo__text {\n  padding: 0 8px;\n}\n", ""]);
 
 	// exports
 
@@ -27923,7 +27923,7 @@
 
 	var _deleteUnknownAutoBindMethods2 = _interopRequireDefault(_deleteUnknownAutoBindMethods);
 
-	var _supportsProtoAssignment = __webpack_require__(142);
+	var _supportsProtoAssignment = __webpack_require__(141);
 
 	var _supportsProtoAssignment2 = _interopRequireDefault(_supportsProtoAssignment);
 
@@ -28379,7 +28379,7 @@
 	});
 	exports.getForceUpdate = exports.createProxy = undefined;
 
-	var _supportsProtoAssignment = __webpack_require__(142);
+	var _supportsProtoAssignment = __webpack_require__(141);
 
 	var _supportsProtoAssignment2 = _interopRequireDefault(_supportsProtoAssignment);
 
@@ -28408,7 +28408,7 @@
 	    baseFlatten = __webpack_require__(262),
 	    isArrayLike = __webpack_require__(46),
 	    isObjectLike = __webpack_require__(47),
-	    restParam = __webpack_require__(143);
+	    restParam = __webpack_require__(142);
 
 	/**
 	 * Creates an array of unique `array` values not included in the other
@@ -28501,7 +28501,7 @@
 /* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(144);
+	var keys = __webpack_require__(143);
 
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -28540,7 +28540,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseCopy = __webpack_require__(260),
-	    keys = __webpack_require__(144);
+	    keys = __webpack_require__(143);
 
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -28852,7 +28852,7 @@
 
 	var bindCallback = __webpack_require__(265),
 	    isIterateeCall = __webpack_require__(272),
-	    restParam = __webpack_require__(143);
+	    restParam = __webpack_require__(142);
 
 	/**
 	 * Creates a `_.assign`, `_.defaults`, or `_.merge` function.
@@ -31136,7 +31136,7 @@
 	    propTypes:{ racerModel: React.PropTypes.object },
 	    contextTypes: { racerModel: React.PropTypes.object.isRequired },
 	    statics: {
-	      racer: Child.racer || null
+	      racer: Child.racer && Child.racer
 	    },
 
 	    // query methods
@@ -52749,11 +52749,11 @@
 
 	var _reactRouter = __webpack_require__(81);
 
-	var _app = __webpack_require__(513);
+	var _app = __webpack_require__(514);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _notFound = __webpack_require__(514);
+	var _notFound = __webpack_require__(515);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -52770,7 +52770,7 @@
 /* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(523), __esModule: true };
+	module.exports = { "default": __webpack_require__(524), __esModule: true };
 
 /***/ },
 /* 504 */,
@@ -52903,6 +52903,30 @@
 /* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "preloader" },
+	    _react2.default.createElement("div", { className: "preloader__spinner" })
+	  );
+	};
+
+/***/ },
+/* 512 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
 	var _assign = __webpack_require__(503);
@@ -52950,6 +52974,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _preloader = __webpack_require__(511);
+
+	var _preloader2 = _interopRequireDefault(_preloader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53011,16 +53039,23 @@
 	      }
 	      return _react3.default.createElement(
 	        "div",
-	        { className: "todo" },
+	        { className: "todo", style: {
+	            marginBottom: "1px"
+	          } },
 	        _react3.default.createElement(
 	          "div",
-	          { className: "todo__complete" },
-	          _react3.default.createElement("input", {
+	          { style: {
+	              width: 24,
+	              height: 24,
+	              position: "relative"
+	            } },
+	          !isPending && _react3.default.createElement("input", {
 	            type: "checkbox",
 	            checked: item.isComplete,
 	            onChange: this._change.bind(this),
 	            disabled: isPending
-	          })
+	          }),
+	          isPending && _react3.default.createElement(_preloader2.default, null)
 	        ),
 	        _react3.default.createElement(
 	          "div",
@@ -53034,6 +53069,12 @@
 	            disabled: isPending,
 	            onClick: function onClick(ev) {
 	              return _this2.props.delete(item.id);
+	            },
+	            style: {
+	              width: 24,
+	              height: 24,
+	              padding: 0,
+	              border: 0
 	            }
 	          },
 	          "x"
@@ -53054,7 +53095,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
 
 /***/ },
-/* 512 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -53073,7 +53114,7 @@
 
 	var _reactRouter = __webpack_require__(81);
 
-	var _racerReact = __webpack_require__(140);
+	var _racerReact = __webpack_require__(139);
 
 	var _racerReact2 = _interopRequireDefault(_racerReact);
 
@@ -53160,14 +53201,10 @@
 	});
 
 /***/ },
-/* 513 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
-
-	var _typeof2 = __webpack_require__(139);
-
-	var _typeof3 = _interopRequireDefault(_typeof2);
 
 	var _assign = __webpack_require__(503);
 
@@ -53193,15 +53230,15 @@
 	  value: true
 	});
 
-	var _reactHelmet = __webpack_require__(141);
+	var _reactHelmet = __webpack_require__(140);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
 	var _reactRouter = __webpack_require__(81);
 
-	var _racerReact = __webpack_require__(140);
+	var _racerReact = __webpack_require__(139);
 
-	var _reactMixinQ = __webpack_require__(527);
+	var _reactMixinQ = __webpack_require__(528);
 
 	var _reactMixinQ2 = _interopRequireDefault(_reactMixinQ);
 
@@ -53209,7 +53246,7 @@
 
 	var _form2 = _interopRequireDefault(_form);
 
-	var _todo = __webpack_require__(511);
+	var _todo = __webpack_require__(512);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
@@ -53283,7 +53320,6 @@
 	      _react3.default.createElement(
 	        "div",
 	        { className: "App__content" },
-	        (0, _typeof3.default)(this.q),
 	        todos && todos.map(function (todo, i) {
 	          return _react3.default.createElement(_todo2.default, {
 	            key: i,
@@ -53357,7 +53393,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
 
 /***/ },
-/* 514 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -53404,7 +53440,7 @@
 	   value: true
 	});
 
-	var _reactHelmet = __webpack_require__(141);
+	var _reactHelmet = __webpack_require__(140);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
@@ -53486,7 +53522,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
 
 /***/ },
-/* 515 */,
 /* 516 */,
 /* 517 */,
 /* 518 */,
@@ -53494,14 +53529,15 @@
 /* 520 */,
 /* 521 */,
 /* 522 */,
-/* 523 */
+/* 523 */,
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(525);
+	__webpack_require__(526);
 	module.exports = __webpack_require__(43).Object.assign;
 
 /***/ },
-/* 524 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.1 Object.assign(target, source, ...)
@@ -53539,17 +53575,17 @@
 	} : Object.assign;
 
 /***/ },
-/* 525 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.1 Object.assign(target, source)
 	var $export = __webpack_require__(91);
 
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(524)});
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(525)});
 
 /***/ },
-/* 526 */,
-/* 527 */
+/* 527 */,
+/* 528 */
 /***/ function(module, exports) {
 
 	module.exports = {

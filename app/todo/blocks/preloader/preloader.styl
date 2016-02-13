@@ -1,0 +1,23 @@
+@keyframes preloaderClockwise{
+  to {
+    transform: rotate(360deg) translatez(0);
+  }
+}
+
+.preloader
+  display inline-block
+  padding 4px
+  padding-left 0
+  // vertical-align top
+  width 24px
+  height 24px
+  box-sizing border-box
+
+  &__spinner
+    border 2px solid transparent
+    border-radius 50%
+    border-top-color rgba( color-text, .4 )
+    box-sizing border-box
+    width 16px
+    height 16px
+    animation: preloaderClockwise 0.35s linear infinite;
