@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "DEBUG=test:* NODE_ENV=production coffee --nodejs --harmony test/test.coffee",
-    "start": "NODE_ENV=production node --harmony lib/server.js"
+    "start": "NODE_ENV=production node --harmony lib/server.js",
+    "dev": "NODE_ENV=development node --harmony node_scripts/dev.js"
   },
   "author": "Madonna",
   "license": "MIT",
@@ -38,8 +39,6 @@
     "touch": "^1.0.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
-    "webpack-dev-middleware": "git+https://github.com/plusbpm/webpack-dev-middleware.git",
-    "webpack-hot-middleware": "^2.6.0",
     "webpack-stats-plugin": "^0.1.1"
   },
   "dependencies": {
@@ -67,7 +66,7 @@
     "koa-static": "^1.4.9",
     "racer": "^0.8.9",
     "racer-koa": "0.0.2",
-    "racer-react": "0.0.12",
+    "racer-react": "0.0.13",
     "racer-transport-koa": "0.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
@@ -77,6 +76,7 @@
     "react-mixin-q": "0.0.2",
     "react-redux": "^4.1.2",
     "react-responsive": "1.0.1",
+    "react-router": "^2.0.0",
     "react-router-redux": "^3.0.0",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.3",

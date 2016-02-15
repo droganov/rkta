@@ -52,6 +52,7 @@ class FrontPage extends Component {
   }
 
   render() {
+    // console.log( this.props );
     return (
       <div className="FrontPage">
         <Helmet title="Home" />

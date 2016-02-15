@@ -4,7 +4,11 @@ var webpack = require("webpack");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 var ExtractTextPlugin      = require("extract-text-webpack-plugin");
 
-var applications = [ "www", "todo" ];
+var applications = [];
+var configApplications = require("./config.applications");
+for (var i = 0; i < configApplications.length; i++) {
+  applications.push( configApplications[i].name );
+}
 
 module.exports = function ( isProduction ){
   var extention = ".js";
@@ -47,10 +51,11 @@ module.exports = function ( isProduction ){
 
   }
   else {
-    babelPresets.push("react-hmre");
+    // babelPresets.push("react-hmre");
 
     // hot reload in development mode
-    plugins.push(new webpack.HotModuleReplacementPlugin());
+    plugins.push( new webpack.HotModuleReplacementPlugin() );
+    plugins.push( new webpack.NoErrorsPlugin() );
 
     // write stats
     plugins.push(
