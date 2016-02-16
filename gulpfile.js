@@ -9,7 +9,7 @@ const gutil = require( "gulp-util" );
 const nodemon = require( "gulp-nodemon" );
 const webpack = require( "webpack" );
 var runSequence    = require( "run-sequence" );
-const webpackConfig = require( "./config/config.webpack" );
+const webpackConfig = require( "./config/config.webpack.server" );
 
 const paths = {
   webpack: [
@@ -24,6 +24,16 @@ const paths = {
   ],
   stats: "build/stats.json"
 }
+
+// make development bundle
+gulp.task( "build", (cb)=>{
+  webpack( webpackConfig( false ), ( err, stats ) => {
+    if( err ){
+      throw( new gutil.PluginError( "build", err ) );
+    }
+    cb();
+  });
+});
 
 // make release bundle
 gulp.task( "release", (cb)=>{

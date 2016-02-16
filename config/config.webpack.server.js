@@ -19,7 +19,16 @@ module.exports = function ( isProduction ){
       "process.env": {
         "NODE_ENV": JSON.stringify( isProduction ? "production" : "development" )
       }
-    })
+    }),
+    new ExtractTextPlugin("[name].css", {
+      allChunks: true
+    }),
+    new StatsWriterPlugin({
+      chunkModules: true,
+      filename: "../../build/stats.json",
+      fields: [ "hash", "version", "errorDetails" ]
+    }),
+    new webpack.optimize.DedupePlugin()
   ];
 
   var putAssetsTo = "www_root/_assets";
@@ -29,14 +38,6 @@ module.exports = function ( isProduction ){
   if( isProduction ){
     putAssetsTo = "www_root/assets";
     stylusLoaderString = "css-loader?minimize!stylus-loader";
-
-    // deduplicate modules
-    plugins.push( new webpack.optimize.DedupePlugin() );
-
-    // extract styles
-    plugins.push( new ExtractTextPlugin("[name].css", {
-      allChunks: true
-    }));
 
     // compress js
     plugins.push( new webpack.optimize.UglifyJsPlugin({
@@ -49,29 +50,18 @@ module.exports = function ( isProduction ){
       }
     }));
 
-  }
-  else {
-    // babelPresets.push("react-hmre");
-
+  } else {
     // hot reload in development mode
+    babelPresets.push("react-hmre");
     plugins.push( new webpack.HotModuleReplacementPlugin() );
     plugins.push( new webpack.NoErrorsPlugin() );
-
-    // write stats
-    plugins.push(
-      new StatsWriterPlugin({
-        chunkModules: true,
-        filename: "../../build/stats.json",
-        fields: [ "hash", "version", "errorDetails" ]
-      })
-    );
   }
 
   var entries = {};
   applications.forEach( function( app ){
     var entry = {};
     var entryContent = [ "./app/" + app + "/client" ];
-    if( !isProduction ) entryContent.push( "webpack-hot-middleware/client" );
+    if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
     entry[ app ] = entryContent;
     Object.assign( entries, entry );
   });
@@ -89,7 +79,7 @@ module.exports = function ( isProduction ){
       loaders: [
         {
           test: /\.styl$/,
-          loader: ( isProduction? ExtractTextPlugin.extract(stylusLoaderString): stylusLoaderString)
+          loader: ExtractTextPlugin.extract(stylusLoaderString)
         },
         {
           test: /\.svg$/,

@@ -16,7 +16,7 @@ module.exports = ({ name, hash, helmet, isProduction, markup, racerBundle }) => 
         { meta.toComponent() }
         { script.toComponent() }
         { title.toComponent() }
-        { isProduction ? <link rel="stylesheet" href={ "/assets/"+name+".css?" + hash } /> : null }
+        <link rel="stylesheet" href={ "/assets/"+name+".css?" + hash } />
       </head>
       <body>
         <div id="app" className="App" dangerouslySetInnerHTML={{ __html: markup }} />
