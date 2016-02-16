@@ -7,22 +7,11 @@ import ReactDOM from "react-dom";
 import { createHistory, useBeforeUnload } from "history";
 import { Router } from 'react-router';
 
-import { syncHistory } from 'react-router-redux';
-import { applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
-
 // components
 import * as adapter from  "../../lib/applicationAdapterClient";
 import racer from "racer-react";
 
 var history = useBeforeUnload( createHistory )();
-var reducers = require("./reducers/reducers");
-
-const reduxRouterMiddleware = syncHistory(history);
-const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStore);
-const store = createStoreWithMiddleware(reducers);
-
-reduxRouterMiddleware.listenForReplays(store);
 
 // webpack styles connect
 require("./style.styl");
@@ -63,9 +52,7 @@ adapter.onReady( (ev) => {
 			if( err ) return console.log( err );
 			const router = (
 				<racer.Provider racerModel={racerModel} >
-					<Provider store={store} >
-						<Router history={history} routes={routes} />
-					</Provider>
+					<Router history={history} routes={routes} />
 				</racer.Provider>
 			);
 			ReactDOM.render( router,  document.getElementById("app"));
@@ -99,10 +86,6 @@ adapter.onReady( (ev) => {
 
 	// hot loading
 	if (module.hot) {
-		module.hot.accept("./reducers/reducers", function () {
-	    	const nextRootReducer = require('./reducers/reducers');
-    		store.replaceReducer(nextRootReducer);
-    	});
 		module.hot.accept("./style.styl", function () {
 			adapter.attachStyle(require("./style.styl"));
 		});
