@@ -4,8 +4,8 @@ module.exports = [
     mountPoint: "/todo"
   },
   // root mounts last
-  // {
-  //   name: "www",
-  //   mountPoint: "/"
-  // },
+  {
+    name: "www",
+    mountPoint: "/"
+  },
 ]

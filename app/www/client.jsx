@@ -85,11 +85,11 @@ adapter.onReady( (ev) => {
 	renderRoutes();
 
 	// hot loading
-	if (module.hot) {
-		module.hot.accept("./style.styl", function () {
-			adapter.attachStyle(require("./style.styl"));
-		});
-		adapter.attachStyle(require("./style.styl"));
-		module.hot.accept();
-	}
+	// if (module.hot) {
+	// 	module.hot.accept("./style.styl", function () {
+	// 		adapter.attachStyle(require("./style.styl"));
+	// 	});
+	// 	adapter.attachStyle(require("./style.styl"));
+	// 	module.hot.accept();
+	// }
 });
