@@ -10,14 +10,21 @@ for (var i = 0; i < configApplications.length; i++) {
   applications.push( configApplications[i].name );
 }
 
-module.exports = function ( isProduction ){
-  var extention = ".js";
+var bundleExtention = ".js";
+var isProduction = process.env.NODE_ENV === "production";
+
+var putAssetsTo = isProduction ? "www_root/assets" : "www_root/_assets";
+var stylusLoaderString = isProduction ? "css-loader?minimize!stylus-loader" : "css-loader!stylus-loader";
+var babelPresets = [ "es2015", "stage-0", "react" ];
+
+module.exports = function(){
   var plugins = [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": JSON.stringify( isProduction ? "production" : "development" )
+        "NODE_ENV": isProduction ? "production" : "development",
+        "BABEL_ENV": isProduction ? "production" : "development/client"
       }
     }),
     new ExtractTextPlugin("[name].css", {
@@ -31,15 +38,7 @@ module.exports = function ( isProduction ){
     new webpack.optimize.DedupePlugin()
   ];
 
-  var putAssetsTo = "www_root/_assets";
-  var stylusLoaderString = "css-loader!stylus-loader";
-  var babelPresets = [ "es2015", "stage-0", "react" ];
-
   if( isProduction ){
-    putAssetsTo = "www_root/assets";
-    stylusLoaderString = "css-loader?minimize!stylus-loader";
-
-    // compress js
     plugins.push( new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
@@ -49,10 +48,9 @@ module.exports = function ( isProduction ){
         comments: function () { return false; }
       }
     }));
-
   } else {
     // hot reload in development mode
-    babelPresets.push("react-hmre");
+    // babelPresets.push("react-hmre");
     plugins.push( new webpack.HotModuleReplacementPlugin() );
     plugins.push( new webpack.NoErrorsPlugin() );
   }
@@ -60,8 +58,9 @@ module.exports = function ( isProduction ){
   var entries = {};
   applications.forEach( function( app ){
     var entry = {};
-    var entryContent = [ "./app/" + app + "/client" ];
-    if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
+    var entryContent = [];
+    // if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
+    entryContent.push( "./app/" + app + "/client" );
     entry[ app ] = entryContent;
     Object.assign( entries, entry );
   });
@@ -71,8 +70,8 @@ module.exports = function ( isProduction ){
     output: {
       path: path.join( __dirname, "/../", putAssetsTo),
       publicPath: "/",
-      filename: "[name]" + extention,
-      chunkFilename: "[name].[chunkhash]" + extention
+      filename: "[name]" + bundleExtention,
+      chunkFilename: "[name].[chunkhash]" + bundleExtention
     },
 
     module: {
@@ -99,9 +98,9 @@ module.exports = function ( isProduction ){
           test: /\.(jsx|es6)/,
           exclude: /(node_modules|www_root\/bower)/,
           loader: "babel",
-          query: {
-            presets: babelPresets
-          }
+          // query: {
+          //   presets: babelPresets
+          // }
         }
       ]
     },

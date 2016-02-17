@@ -1,22 +1,21 @@
 "use strict"
 
 // deps
-import React from "react";
-import ReactDOM from "react-dom";
-import { createHistory, useBeforeUnload } from "history";
-import { Router } from "react-router";
-import racer from "racer-react";
+import React from "react"
+import ReactDOM from "react-dom"
+// import { createHistory, useBeforeUnload } from "history"
+import { Router, browserHistory } from "react-router"
+import racer from "racer-react"
 
 // components
-import * as adapter from  "../../lib/applicationAdapterClient";
+import * as adapter from  "../../lib/applicationAdapterClient"
 
 import Routes from "./routes"
 
 // webpack styles connect
 require("./style.styl");
 
-const history = useBeforeUnload( createHistory )();
-
+// const history = useBeforeUnload( createHistory )();
 
 // render
 adapter.onReady( (ev) => {
@@ -24,7 +23,7 @@ adapter.onReady( (ev) => {
 	const racerModel = racer.connectClient();
 
 	// data prefetcing during user site navigation
-	history.listenBefore( ( location, cb ) => {
+	browserHistory.listenBefore( ( location, cb ) => {
 		if( location.action !== "PUSH" ) return cb();
 		racer.match(
 			{
@@ -35,7 +34,7 @@ adapter.onReady( (ev) => {
 	});
 
 	// fix scrollop
-	history.listen( location => {
+	browserHistory.listen( location => {
 		if( location.action === "PUSH" ) window.scrollTo( 0, 0 );
 		// console.log( location );
 	});
@@ -51,6 +50,7 @@ adapter.onReady( (ev) => {
 		}catch(e) {}
 
 		const routes = Routes();
+		console.log( "piu" );
 
 		racer.match(
 			{
@@ -64,7 +64,7 @@ adapter.onReady( (ev) => {
 					(
 						<racer.Provider racerModel={racerModel} >
 							<Router
-								history={ history }
+								history={ browserHistory }
 								routes={ routes }
 							/>
 						</racer.Provider>
