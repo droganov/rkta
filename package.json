@@ -9,7 +9,9 @@
   "scripts": {
     "test": "DEBUG=test:* NODE_ENV=production coffee --nodejs --harmony test/test.coffee",
     "start": "NODE_ENV=production node --harmony node_scripts/start.js",
-    "dev": "NODE_ENV=development node --harmony node_scripts/dev.js"
+    "dev": "NODE_ENV=development node --harmony node_scripts/dev.js",
+    "postdev": "npm run builddev",
+    "builddev": "NODE_ENV=development node --harmony node_scripts/tmp.js"
   },
   "author": "Madonna",
   "license": "MIT",

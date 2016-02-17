@@ -75,12 +75,14 @@ adapter.onReady( (ev) => {
 	// render onload
 	renderRoutes();
 
+	console.log( module.hot );
+
 	// hot loading
-	if (module.hot) {
-		module.hot.accept("./routes", renderRoutes);
-		module.hot.accept("./style.styl", function () {
-			adapter.attachStyle(require("./style.styl"));
-		});
-		adapter.attachStyle(require("./style.styl"));
-	}
+	// if (module.hot) {
+	// 	module.hot.accept("./routes", renderRoutes);
+	// 	module.hot.accept("./style.styl", function () {
+	// 		adapter.attachStyle(require("./style.styl"));
+	// 	});
+	// 	adapter.attachStyle(require("./style.styl"));
+	// }
 });
