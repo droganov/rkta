@@ -23,26 +23,24 @@ module.exports = function(){
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": isProduction ? "production" : "development",
-        "BABEL_ENV": isProduction ? "production" : "development/client"
+        "NODE_ENV": JSON.stringify( process.env.NODE_ENV || "development" ),
+        "BABEL_ENV": JSON.stringify( isProduction ? "production" : "development/client" )
       }
     }),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     }),
-    new StatsWriterPlugin({
-      chunkModules: true,
-      filename: "../../build/stats.json",
-      fields: [ "hash", "version", "errorDetails" ]
-    }),
-    new webpack.optimize.DedupePlugin()
+    // new StatsWriterPlugin({
+    //   chunkModules: true,
+    //   filename: "../../build/stats.json",
+    //   fields: [ "hash", "version", "errorDetails" ]
+    // }),
+    // new webpack.optimize.DedupePlugin()
   ];
 
   if( isProduction ){
     plugins.push( new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      },
+      compressor: { warnings: false },
       output: {
         // all comments cut
         comments: function () { return false; }
@@ -50,7 +48,7 @@ module.exports = function(){
     }));
   } else {
     // hot reload in development mode
-    // babelPresets.push("react-hmre");
+    // babelPresets.push( "react-hmre" );
     plugins.push( new webpack.HotModuleReplacementPlugin() );
     plugins.push( new webpack.NoErrorsPlugin() );
   }
@@ -59,17 +57,18 @@ module.exports = function(){
   applications.forEach( function( app ){
     var entry = {};
     var entryContent = [];
-    // if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
+    // if( !isProduction ) entryContent.push( "webpack-hot-middleware/client" );
+    if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
     entryContent.push( "./app/" + app + "/client" );
     entry[ app ] = entryContent;
     Object.assign( entries, entry );
   });
-
+  console.log( path.join( __dirname, "/../", putAssetsTo) );
   var confiObject = {
     entry: entries,
     output: {
       path: path.join( __dirname, "/../", putAssetsTo),
-      publicPath: "/",
+      publicPath: "/assets/",
       filename: "[name]" + bundleExtention,
       chunkFilename: "[name].[chunkhash]" + bundleExtention
     },
@@ -78,7 +77,7 @@ module.exports = function(){
       loaders: [
         {
           test: /\.styl$/,
-          loader: ExtractTextPlugin.extract(stylusLoaderString)
+          loader: ExtractTextPlugin.extract( stylusLoaderString )
         },
         {
           test: /\.svg$/,

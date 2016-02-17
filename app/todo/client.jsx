@@ -13,7 +13,7 @@ import * as adapter from  "../../lib/applicationAdapterClient"
 import Routes from "./routes"
 
 // webpack styles connect
-require("./style.styl");
+// var style = require("./style.styl");
 
 // const history = useBeforeUnload( createHistory )();
 
@@ -21,6 +21,8 @@ require("./style.styl");
 adapter.onReady( (ev) => {
 	let appNode = document.getElementById( "app" );
 	const racerModel = racer.connectClient();
+
+	// adapter.attachStyle( style );
 
 	// data prefetcing during user site navigation
 	browserHistory.listenBefore( ( location, cb ) => {
@@ -50,7 +52,6 @@ adapter.onReady( (ev) => {
 		}catch(e) {}
 
 		const routes = Routes();
-		console.log( "piu" );
 
 		racer.match(
 			{
@@ -75,7 +76,7 @@ adapter.onReady( (ev) => {
 	// render onload
 	renderRoutes();
 
-	console.log( module.hot );
+	// console.log( module.hot );
 
 	// hot loading
 	// if (module.hot) {
