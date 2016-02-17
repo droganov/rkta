@@ -15,7 +15,7 @@ var isProduction = process.env.NODE_ENV === "production";
 
 var putAssetsTo = isProduction ? "www_root/assets" : "www_root/_assets";
 var stylusLoaderString = isProduction ? "css-loader?minimize!stylus-loader" : "css-loader!stylus-loader";
-var babelPresets = [ "es2015", "stage-0", "react" ];
+var babelPresets = [];
 
 module.exports = function(){
   var plugins = [
@@ -23,8 +23,7 @@ module.exports = function(){
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": JSON.stringify( process.env.NODE_ENV || "development" ),
-        "BABEL_ENV": JSON.stringify( isProduction ? "production" : "development/client" )
+        "NODE_ENV": JSON.stringify( process.env.NODE_ENV || "development" )
       }
     }),
     new ExtractTextPlugin("[name].css", {
@@ -48,7 +47,7 @@ module.exports = function(){
     }));
   } else {
     // hot reload in development mode
-    // babelPresets.push( "react-hmre" );
+    babelPresets.push( "react-hmre" );
     plugins.push( new webpack.HotModuleReplacementPlugin() );
     plugins.push( new webpack.NoErrorsPlugin() );
   }
@@ -63,7 +62,7 @@ module.exports = function(){
     entry[ app ] = entryContent;
     Object.assign( entries, entry );
   });
-  console.log( path.join( __dirname, "/../", putAssetsTo) );
+
   var confiObject = {
     entry: entries,
     output: {
@@ -97,9 +96,9 @@ module.exports = function(){
           test: /\.(jsx|es6)/,
           exclude: /(node_modules|www_root\/bower)/,
           loader: "babel",
-          // query: {
-          //   presets: babelPresets
-          // }
+          query: {
+            presets: babelPresets
+          }
         }
       ]
     },

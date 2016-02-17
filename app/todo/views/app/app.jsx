@@ -29,14 +29,13 @@ const App = React.createClass({
   },
   render: function() {
     const { todos } = this.props
-    console.log( "piu" );
     return (
       <div className="App">
         <Helmet
           title="My Title"
           titleTemplate="rkta: %s"
         />
-      <div className="App__header">Todos1</div>
+      <div className="App__header">Todos</div>
         <div className="App__content">
           { todos && todos.map( ( todo, i ) => {
             return <Todo

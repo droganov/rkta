@@ -6,10 +6,5 @@
 		"transform-decorators"
 	],
 	"sourceMaps": true,
-	"only": [ "*.jsx", "*.es6" ],
-	"env": {
-    "development/client": {
-      "presets": [ "react-hmre" ]
-    }
-  }
+	"only": [ "*.jsx", "*.es6" ]
 }
