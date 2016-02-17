@@ -56,8 +56,8 @@ module.exports = function(){
   applications.forEach( function( app ){
     var entry = {};
     var entryContent = [];
-    // if( !isProduction ) entryContent.push( "webpack-hot-middleware/client" );
-    if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
+    if( !isProduction ) entryContent.push( "webpack-hot-middleware/client" );
+    // if( !isProduction ) entryContent.push( "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client" );
     entryContent.push( "./app/" + app + "/client" );
     entry[ app ] = entryContent;
     Object.assign( entries, entry );
