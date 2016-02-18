@@ -22,9 +22,12 @@ module.exports = function(){
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify( process.env.NODE_ENV || "development" )
+      ENV: {
+        BABEL_DISABLE_CACHE: 1,
       }
+      // "process.env": {
+      //   "NODE_ENV": JSON.stringify( "development:client" )
+      // }
     }),
     new ExtractTextPlugin("[name].css", {
       allChunks: true

@@ -6,5 +6,5 @@
 		"transform-decorators"
 	],
 	"sourceMaps": true,
-	"only": [ "*.jsx", "*.es6" ]
+	"only": [ "*.jsx", "*.es6" ],
 }
