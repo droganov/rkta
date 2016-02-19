@@ -7,9 +7,12 @@
     "node": "4.1.2"
   },
   "scripts": {
-    "test": "DEBUG=test:* NODE_ENV=production coffee --nodejs --harmony test/test.coffee",
-    "start": "NODE_ENV=production node --harmony node_scripts/start.js",
-    "dev": "NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony node_scripts/dev.js"
+    "start": "DEBUG=dev:* NODE_ENV=production BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
+    "lint": "",
+    "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
+    "build": "",
+    "deploy": "",
+    "production": "NODE_ENV=development node --harmony node_scripts/production.js"
   },
   "author": "Madonna",
   "license": "MIT",
@@ -44,6 +47,7 @@
     "touch": "^1.0.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
+    "webpack-hot-middleware": "^2.7.1",
     "webpack-stats-plugin": "^0.1.1"
   },
   "dependencies": {

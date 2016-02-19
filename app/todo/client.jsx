@@ -22,8 +22,6 @@ adapter.onReady( (ev) => {
 	let appNode = document.getElementById( "app" );
 	const racerModel = racer.connectClient();
 
-	// adapter.attachStyle( style );
-
 	// data prefetcing during user site navigation
 	browserHistory.listenBefore( ( location, cb ) => {
 		if( location.action !== "PUSH" ) return cb();
@@ -76,14 +74,12 @@ adapter.onReady( (ev) => {
 	// render onload
 	renderRoutes();
 
-	// console.log( module.hot );
-
 	// hot loading
-	// if (module.hot) {
-	// 	module.hot.accept("./routes", renderRoutes);
-	// 	module.hot.accept("./style.styl", function () {
-	// 		adapter.attachStyle(require("./style.styl"));
-	// 	});
-	// 	adapter.attachStyle(require("./style.styl"));
-	// }
+	if( module.hot ){
+		// module.hot.accept("./routes", renderRoutes);
+		module.hot.accept( "./style.styl", function () {
+			adapter.attachStyle( require("./style.styl") );
+		});
+		adapter.attachStyle( require("./style.styl") );
+	}
 });

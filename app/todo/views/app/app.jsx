@@ -35,7 +35,7 @@ const App = React.createClass({
           title="My Title"
           titleTemplate="rkta: %s"
         />
-      <div className="App__header">Todos 2</div>
+      <div className="App__header">Todos</div>
         <div className="App__content">
           { todos && todos.map( ( todo, i ) => {
             return <Todo
