@@ -11,7 +11,7 @@ class FrontPage extends Component {
         <h2>Check out our sample apps</h2>
         <ul>
           <li>
-            <a href="/toto">Todo app</a>
+            <a href="/todo">Todo app</a>
           </li>
         </ul>
       </div>
