@@ -1,7 +1,9 @@
-The ultimate resource for tooling future web applications.
+**The ultimate resource for tooling future web applications.**
 
-Start Dev Server:
 ```
+> git clone https://github.com/droganov/rkta.git
+> cd rkta
+> npm install
 > npm start
 ```
 
