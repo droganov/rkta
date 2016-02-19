@@ -11,7 +11,7 @@ Start Production Server: (to be done later)
 
 ## Features
 - Isomorphism
-- Racer.js support:
+- Racer.js
   - Realtime subscriptions
   - Automatic model creation
   - Conflict resolution via Operational Transformation
