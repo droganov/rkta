@@ -11,7 +11,16 @@ Start Production Server: (to be done later)
 
 ## Features
 - Isomorphism
-- Realtime updates and automatic model creation and sync with racer.js
+- Racer.js support:
+  - Realtime subscriptions
+  - Automatic model creation
+  - Conflict resolution via Operational Transformation
+  - Offline
+  - Universal interface (client/server)
+  - Persistent storage (MongoDB)
+  - ~~Access control~~
+  - ~~Schames~~
+  - ~~RPC~~
 - Multiple front-end applications via koa mount
 - Hot Module Replacement (react-hmre)
 - ~~Redux~~ for handling application state
