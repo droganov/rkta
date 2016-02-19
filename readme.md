@@ -1,5 +1,4 @@
-
-It's just a sandbox yet, not ready for production use.
+The ultimate resource for tooling future web applications.
 
 Start Dev Server:
 ```
@@ -8,13 +7,17 @@ Start Dev Server:
 
 Start Production Server: (to be done later)
 
-
-## Principles
+## Features
 - Isomorphism
-- Realtime updates
-- Multiple front-end applications can run on top of single back-end
-- Hot module replacement
+- Realtime updates and automatic model creation and sync with racer.js
+- Multiple front-end applications via koa mount
+- Hot Module Replacement (react-hmre)
+- ~~Redux~~ for handling application state
+- ~~Precompiled production bundles~~ — minimal possible start delay
+- ~~GrapQL backend~~ as a facade
+
+
+## Conventions
 - .es6 extension is used for es2015 files
 - .jsx extension is used for react templates
-- Everything the client need is bundled into a single file
 - BEM naming pattern for components
