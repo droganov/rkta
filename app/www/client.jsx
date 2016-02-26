@@ -14,7 +14,7 @@ import racer from "racer-react";
 var history = useBeforeUnload( createHistory )();
 
 // webpack styles connect
-// require("./style.styl");
+require("./style.styl");
 
 var appNode = null,
 	routes = null,
