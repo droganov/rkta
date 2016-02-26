@@ -10,7 +10,7 @@
     "start": "DEBUG=dev:* NODE_ENV=production BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
     "lint": "",
     "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
-    "build": "",
+    "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
     "deploy": "",
     "production": "NODE_ENV=development node --harmony node_scripts/production.js"
   },

@@ -17,7 +17,7 @@ Start Production Server: (to be done later)
   - Conflict resolution via Operational Transformation
   - Offline
   - Universal interface (client/server)
-  - Persistent storage (MongoDB)
+  - Persistent storage (MongoDB + abstract ShareDB interface)
   - ~~Access control~~
   - ~~Schames~~
   - ~~RPC~~
