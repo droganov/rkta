@@ -1,5 +1,6 @@
 "use strict"
-var webpack = require( "webpack" )
+var webpack              = require( "webpack" );
+var ExtractTextPlugin    = require("extract-text-webpack-plugin");
 
 var applications = []
 var entries = {}
@@ -16,12 +17,16 @@ for (var i = 0; i < configApplications.length; i++) {
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
   entry: entries,
-  plugins: [],
+  plugins: [
+    new ExtractTextPlugin("[name].css", {
+      allChunks: true
+    })
+  ],
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
         test: /\.styl$/,
-        loader: "css-loader!stylus-loader",
+        loader: ExtractTextPlugin.extract( "css-loader!stylus-loader" ),
       },
     ]),
     postLoaders: [
