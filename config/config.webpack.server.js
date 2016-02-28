@@ -1,7 +1,8 @@
 "use strict"
-var webpack              = require( "webpack" );
-var StatsWriterPlugin    = require("webpack-stats-plugin").StatsWriterPlugin;
-var ExtractTextPlugin    = require("extract-text-webpack-plugin");
+var path                 = require("path")
+var webpack              = require( "webpack" )
+var StatsWriterPlugin    = require("webpack-stats-plugin").StatsWriterPlugin
+var ExtractTextPlugin    = require("extract-text-webpack-plugin")
 
 var applications = []
 var entries = {}
@@ -15,38 +16,29 @@ for (var i = 0; i < configApplications.length; i++) {
   Object.assign( entries, entry );
 }
 
+console.log( path.join( __dirname, "/../build" ) )
+
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
   // devtool: "cheap-module-source-map",
+  output: {
+    path: path.join( __dirname, "/../build" ),
+    publicPath: "/assets/",
+    filename: "[name].js",
+    chunkFilename: "[name].[chunkhash].js",
+  },
   entry: entries,
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify( process.env.NODE_ENV )
-      }
-    }),
-    new ExtractTextPlugin("[name].css", {
-      allChunks: true
-    }),
-    new StatsWriterPlugin({
-      chunkModules: true,
-      filename: "../../build/stats.json",
-      fields: [ "hash", "version", "errorDetails" ]
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      sourceMap: false,
+      __CLIENT__: false,
+      __SERVER__: true,
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false,
     }),
   ],
   module: {
-    loaders: defaultConfig.module.loaders.concat([
-      {
-        test: /\.styl$/,
-        loader: ExtractTextPlugin.extract( "css-loader!stylus-loader" ),
-      },
-    ]),
     postLoaders: [
       {
         test: /\.(jsx|es6)/,

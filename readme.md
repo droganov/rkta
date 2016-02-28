@@ -7,8 +7,11 @@
 > npm start
 ```
 
-Start Production Server: (to be done later)
-
+Start Production Server:
+```
+> npm run build
+> npm run production
+```
 ## Features
 - Isomorphism
 - Racer.js
