@@ -12,17 +12,7 @@ var bundleExtention = ".js";
 var isProduction = process.env.NODE_ENV === "production";
 var putAssetsTo = isProduction ? "www_root/assets" : "www_root/_assets";
 
-var entries = {};
-applications.forEach( function( app ){
-  var entry = {};
-  var entryContent = [];
-  entryContent.push( "./app/" + app + "/client" );
-  entry[ app ] = entryContent;
-  Object.assign( entries, entry );
-});
-
 var config = {
-  entry: entries,
   output: {
     path: path.join( __dirname, "/../", putAssetsTo ),
     publicPath: "/assets/",

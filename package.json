@@ -7,12 +7,12 @@
     "node": "4.1.2"
   },
   "scripts": {
-    "start": "DEBUG=dev:* NODE_ENV=production BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
+    "start": "DEBUG=dev:* NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
     "lint": "",
     "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
     "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
     "deploy": "",
-    "production": "NODE_ENV=development node --harmony node_scripts/production.js"
+    "production": "NODE_ENV=production node --harmony node_scripts/production.js"
   },
   "author": "Madonna",
   "license": "MIT",
@@ -67,7 +67,7 @@
     "koa-static": "^2.0.0",
     "racer": "^0.8.9",
     "racer-koa": "0.0.2",
-    "racer-react": "0.0.14",
+    "racer-react": "0.0.18",
     "racer-transport-koa": "0.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

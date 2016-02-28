@@ -11,7 +11,7 @@ for (var i = 0; i < configApplications.length; i++) {
   var entry = {}
   entry[ appName ] = [
     "koa-webpack-hot-middleware/node_modules/webpack-hot-middleware/client",
-    "./app/" + appName + "/client"
+    "./app/" + appName //+ "/app"
   ]
   Object.assign( entries, entry );
 }

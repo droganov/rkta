@@ -49280,7 +49280,7 @@
 	var history = (0, _history.useBeforeUnload)(_history.createHistory)();
 
 	// webpack styles connect
-	// require("./style.styl");
+	__webpack_require__(498);
 
 	var appNode = null,
 	    routes = null,
@@ -49309,7 +49309,7 @@
 				_reactDom2.default.unmountComponentAtNode(appNode);
 			} catch (e) {}
 
-			routes = __webpack_require__(498)();
+			routes = __webpack_require__(499)();
 
 			match(function (err) {
 				if (err) return console.log(err);
@@ -51621,6 +51621,12 @@
 
 /***/ },
 /* 498 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51631,15 +51637,15 @@
 
 	var _reactRouter = __webpack_require__(160);
 
-	var _App = __webpack_require__(499);
+	var _App = __webpack_require__(500);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _frontPage = __webpack_require__(500);
+	var _frontPage = __webpack_require__(501);
 
 	var _frontPage2 = _interopRequireDefault(_frontPage);
 
-	var _notFound = __webpack_require__(501);
+	var _notFound = __webpack_require__(502);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -51661,7 +51667,7 @@
 	};
 
 /***/ },
-/* 499 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51700,7 +51706,7 @@
 	exports.default = App;
 
 /***/ },
-/* 500 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51786,7 +51792,7 @@
 	exports.default = FrontPage;
 
 /***/ },
-/* 501 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

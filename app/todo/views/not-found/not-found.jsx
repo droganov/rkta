@@ -4,20 +4,6 @@ import Helmet from "react-helmet";
 
 export default class NotFound extends Component {
    static propTypes = {};
-   // constructor(props) {
-   //    super(props);
-   //    this.state = {};
-   //    this.defaultProps = {};
-   //    this.statics = {};
-   // }
-   // componentWillMount(){}
-   // componentDidMount(){}
-   // componentWillReceiveProps(nextProps){}
-   // shouldComponentUpdate(nextProps, nextState){}
-   // shouldComponentUpdate(nextProps, nextState){}
-   // componentWillUpdate(nextProps, nextState){}
-   // componentDidUpdate(prevProps, prevState){}
-   // componentWillUnmount(){}
    render() {
       return (
          <div className="NotFound">
