@@ -7,8 +7,6 @@ var configClient = require( "../config/config.webpack.build" )
 // compilers
 var compilerClient = webpack( configClient )
 
-
-
 var clientPromise = new Promise( function( resolve, reject ){
   debug( "Bundling..." )
   compilerClient.run( function( err, stats ){

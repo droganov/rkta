@@ -20,7 +20,12 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   plugins: [
     new ExtractTextPlugin("[name].css", {
       allChunks: true
-    })
+    }),
+    new webpack.DefinePlugin(
+      JSON.stringify({
+        "process.env": { NODE_ENV: process.env.NODE_ENV },
+      })
+    ),
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([

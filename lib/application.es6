@@ -17,10 +17,6 @@ export default class Application {
     this.settings = { ...defautlSettings, ...settings }
     this.util = util
 
-    console.log( process.title )
-
-    console.log( util.isServer() )
-
     if( !util.isServer() ) this.startClient( Routes() )
   }
   getDomNode(){

@@ -24769,9 +24769,7 @@
 	    this.settings = (0, _extends3.default)({}, defautlSettings, settings);
 	    this.util = _util2.default;
 
-	    console.log(process.title);
-
-	    console.log(_util2.default.isServer());
+	    console.log(process);
 
 	    if (!_util2.default.isServer()) this.startClient(Routes());
 	  }
