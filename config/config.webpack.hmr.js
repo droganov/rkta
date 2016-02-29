@@ -1,8 +1,6 @@
 "use strict"
 var webpack = require( "webpack" )
 
-
-
 var applications = []
 var entries = {}
 var configApplications = require("./config.applications")

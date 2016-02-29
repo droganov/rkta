@@ -2,7 +2,7 @@ var debug = require( "debug" )( "build:build.js" )
 var webpack = require( "webpack" )
 
 // configs
-var configClient = require( "../config/config.webpack.build" )
+var configClient = require( "../config/config.webpack.client" )
 var configServer = require( "../config/config.webpack.server" )
 
 // compilers

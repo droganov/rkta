@@ -8,13 +8,14 @@
   },
   "scripts": {
     "app": "DEBUG=new:* node node_scripts/app.js",
-    "start": "DEBUG=dev:* NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
-    "lint": "",
-    "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
     "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
+    "debug": "DEBUG=* npm run staging",
     "deploy": "",
+    "lint": "",
     "production": "NODE_ENV=production node node_scripts/production.js",
-    "benchmark": "DEBUG=benchmark:* npm run production"
+    "staging": "npm run production",
+    "start": "DEBUG=dev:* NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
+    "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js"
   },
   "author": "Madonna",
   "license": "MIT",
