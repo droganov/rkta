@@ -17,13 +17,13 @@ var clientPromise = new Promise( function( resolve, reject ){
   })
 })
 
-// var serverPromise = new Promise( function( resolve, reject ){
-//   compilerServer.run( function( err, stats ){
-//     if( err ) return reject( err )
-//     debug( "Bundling server done." )
-//     resolve( stats )
-//   })
-// })
+var serverPromise = new Promise( function( resolve, reject ){
+  compilerServer.run( function( err, stats ){
+    if( err ) return reject( err )
+    debug( "Bundling server done." )
+    resolve( stats )
+  })
+})
 
 
 debug( "Bundling..." )

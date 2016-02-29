@@ -24209,7 +24209,6 @@
 	    value: function startClient(routes) {
 	      var _this = this;
 	
-	      console.log("startClient");
 	      _util2.default.domReady(function () {
 	        var racerModel = _racerReact2.default.connectClient(_this.settings.racerOptions);
 	        _this.preRender(routes, location, racerModel, function (err, redirectLocation, renderProps) {
@@ -25117,7 +25116,7 @@
 	    },
 	
 	    render: function() {
-	      return React.createElement( Child, Object.assign( { ref: "self" }, this.props, this.state, this.context ) );
+	      return React.createElement( Child, Object.assign( { ref: "self" }, this.props, this.state, { racerModel: this.scopedModel } ) );
 	    },
 	  });
 	}
@@ -45399,7 +45398,6 @@
 	        }
 	      );
 	    }
-	    console.log( jobs )
 	    async( jobs, cb );
 	  }
 	};
@@ -45605,15 +45603,15 @@
 	
 	    var item = (0, _assign2.default)({}, form, { isComplete: false });
 	    this.q.add(item);
-	    this.props.racerModel.add("todos", item, function (err) {
+	    this.props.racerModel.root.add("todos", item, function (err) {
 	      return _this.q.del(item);
 	    });
 	  },
 	  markComplete: function markComplete(todoID, isComplete) {
-	    this.props.racerModel.set("todos." + todoID + ".isComplete", isComplete);
+	    this.props.racerModel.root.set("todos." + todoID + ".isComplete", isComplete);
 	  },
 	  deleteTodo: function deleteTodo(todoID) {
-	    this.props.racerModel.del("todos." + todoID);
+	    this.props.racerModel.root.del("todos." + todoID);
 	  },
 	  render: function render() {
 	    var _this2 = this;
@@ -49553,6 +49551,7 @@
 	  var hash = _ref.hash;
 	  var helmet = _ref.helmet;
 	  var isProduction = _ref.isProduction;
+	  var markup = _ref.markup;
 	  var mountPoint = _ref.mountPoint;
 	  var name = _ref.name;
 	  var racerBundle = _ref.racerBundle;
@@ -49581,39 +49580,11 @@
 	    _react2.default.createElement(
 	      "body",
 	      null,
-	      _react2.default.createElement(
-	        "div",
-	        { id: mountPoint, className: mountPoint },
-	        children
-	      ),
+	      _react2.default.createElement("div", { id: mountPoint, className: mountPoint, dangerouslySetInnerHTML: { __html: markup } }),
 	      _react2.default.createElement("div", { id: "racerBundle", "data-json": racerBundle })
 	    )
 	  );
 	};
-	
-	// module.exports = ({ name, hash, helmet, isProduction, markup, racerBundle }) => {
-	//   const { base, link, meta, script, title } = helmet;
-	//   const scriptName = getBundleScriptName( name, isProduction, hash );
-	//   return (
-	//     <html lang="en">
-	//       <head>
-	//         <meta charSet="utf-8" />
-	//         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	//         <script src={ scriptName }></script>
-	//         { base.toComponent() }
-	//         { link.toComponent() }
-	//         { meta.toComponent() }
-	//         { script.toComponent() }
-	//         { title.toComponent() }
-	//         { /* <link rel="stylesheet" href={ "/assets/"+name+".css?" + hash } /> */ }
-	//       </head>
-	//       <body>
-	//         <div id="app" className="App" dangerouslySetInnerHTML={{ __html: markup }} />
-	//         <div id="racerBundle" data-json={ racerBundle }></div>
-	//       </body>
-	//     </html>
-	//   );
-	// };
 
 /***/ }
 /******/ ]);

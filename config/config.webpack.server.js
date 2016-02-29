@@ -1,8 +1,9 @@
 "use strict"
-var path                 = require("path")
+var path                 = require( "path" )
+var fs                   = require( "fs" )
 var webpack              = require( "webpack" )
-var StatsWriterPlugin    = require("webpack-stats-plugin").StatsWriterPlugin
-var ExtractTextPlugin    = require("extract-text-webpack-plugin")
+var StatsWriterPlugin    = require( "webpack-stats-plugin" ).StatsWriterPlugin
+var ExtractTextPlugin    = require( "extract-text-webpack-plugin" )
 
 var applications = []
 var entries = {}
@@ -16,11 +17,18 @@ for (var i = 0; i < configApplications.length; i++) {
   Object.assign( entries, entry );
 }
 
-console.log( path.join( __dirname, "/../build" ) )
+// console.log( path.join( __dirname, "/../build" ) )
+
+var nodeModules = {}
+fs
+  .readdirSync( "node_modules" )
+  .filter( function( x ){ return ['.bin'].indexOf(x) === -1 })
+  .forEach( function( mod ){ nodeModules[ mod ] = "commonjs " + mod })
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
   // devtool: "cheap-module-source-map",
+  // devtool: "sourcemap",
   output: {
     path: path.join( __dirname, "/../build" ),
     publicPath: "/assets/",
@@ -28,15 +36,16 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     chunkFilename: "[name].[chunkhash].js",
   },
   entry: entries,
+  target: "node",
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      __CLIENT__: false,
-      __SERVER__: true,
-      __DEVELOPMENT__: false,
-      __DEVTOOLS__: false,
-    }),
+    // new webpack.DefinePlugin({
+    //   __CLIENT__: false,
+    //   __SERVER__: true,
+    //   __DEVELOPMENT__: false,
+    //   __DEVTOOLS__: false,
+    // }),
   ],
   module: {
     postLoaders: [
@@ -47,6 +56,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
       }
     ]
   },
+  externals: nodeModules,
 })
 
 module.exports = exportConfig
