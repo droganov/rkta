@@ -7,6 +7,7 @@
     "node": "4.1.2"
   },
   "scripts": {
+    "app": "DEBUG=new:* node node_scripts/app.js",
     "start": "DEBUG=dev:* NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
     "lint": "",
     "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
