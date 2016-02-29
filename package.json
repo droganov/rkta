@@ -13,7 +13,8 @@
     "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
     "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
     "deploy": "",
-    "production": "NODE_ENV=production node --harmony node_scripts/production.js"
+    "production": "NODE_ENV=production node node_scripts/production.js",
+    "benchmark": "DEBUG=benchmark:* npm run production"
   },
   "author": "Madonna",
   "license": "MIT",
