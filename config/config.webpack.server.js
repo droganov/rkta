@@ -34,6 +34,8 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     publicPath: "/assets/",
     filename: "[name].js",
     chunkFilename: "[name].[chunkhash].js",
+    library: "hui",
+    libraryTarget: "commonjs2",
   },
   entry: entries,
   target: "node",

@@ -27,7 +27,7 @@ Start Production Server:
 - Multiple front-end applications via koa mount
 - Hot Module Replacement (react-hmre)
 - ~~Redux~~ for handling application state
-- ~~Precompiled production bundles~~ — minimal possible start delay
+- Precompiled production bundles — no transform in production => minimal possible start delay
 - ~~GrapQL backend~~ as a facade
 
 

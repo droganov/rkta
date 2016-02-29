@@ -78,6 +78,8 @@
 	  rkta.util.attachStyle(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./style.styl\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 	}
 	
+	// console.log( rkta )
+	
 	module.exports = rkta;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 

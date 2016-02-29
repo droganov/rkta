@@ -12,4 +12,6 @@ if( "hot" in module ){
   rkta.util.attachStyle( require( "./style.styl" ) )
 }
 
+// console.log( rkta )
+
 module.exports = rkta
