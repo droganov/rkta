@@ -39,7 +39,6 @@ export default class Application {
     racer.match( { routes, location, racerModel }, cb )
   }
   startClient( routes ){
-    console.log( "startClient" )
     util.domReady( ()=> {
       const racerModel = racer.connectClient( this.settings.racerOptions )
       this.preRender( routes, location, racerModel, ( err, redirectLocation, renderProps ) => this.renderToDOM( routes, racerModel ) )

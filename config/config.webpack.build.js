@@ -17,29 +17,9 @@ for (var i = 0; i < configApplications.length; i++) {
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
-  // devtool: "cheap-module-source-map",
+  devtool: "cheap-module-source-map",
+  // devtool: "eval",
   entry: entries,
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify( process.env.NODE_ENV )
-      }
-    }),
-    new ExtractTextPlugin("[name].css", {
-      allChunks: true
-    }),
-    new StatsWriterPlugin({
-      chunkModules: true,
-      filename: "../../build/stats.json",
-      fields: [ "hash", "version", "errorDetails" ]
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      sourceMap: false,
-    }),
-  ],
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
@@ -53,8 +33,35 @@ var exportConfig = Object.assign( {}, defaultConfig, {
         exclude: /(node_modules|www_root\/bower)/,
         loader: "babel",
       }
-    ]
+    ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify( process.env.NODE_ENV )
+      }
+    }),
+    // new webpack.DefinePlugin({
+    //   "process.env": {
+    //     "NODE_ENV": JSON.stringify( process.env.NODE_ENV )
+    //   }
+    // }),
+    // new ExtractTextPlugin("[name].css", {
+    //   allChunks: true
+    // }),
+    // new StatsWriterPlugin({
+    //   chunkModules: true,
+    //   filename: "../../build/stats.json",
+    //   fields: [ "hash", "version", "errorDetails" ]
+    // }),
+    // new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress:{
+        warnings: true
+      }
+    }),
+  ],
 })
 
 module.exports = exportConfig

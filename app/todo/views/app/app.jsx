@@ -19,13 +19,13 @@ const App = React.createClass({
   createTodo: function( form ){
     const item = Object.assign( {}, form, { isComplete: false } )
     this.q.add( item );
-    this.props.racerModel.add( "todos", item, err => this.q.del( item ) )
+    this.props.racerModel.root.add( "todos", item, err => this.q.del( item ) )
   },
   markComplete: function( todoID, isComplete ){
-    this.props.racerModel.set( "todos." + todoID + ".isComplete", isComplete )
+    this.props.racerModel.root.set( "todos." + todoID + ".isComplete", isComplete )
   },
   deleteTodo: function( todoID ){
-    this.props.racerModel.del( "todos." + todoID )
+    this.props.racerModel.root.del( "todos." + todoID )
   },
   render: function() {
     const { todos } = this.props
