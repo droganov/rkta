@@ -27,25 +27,4 @@ module.exports = {
     if( document.readyState == "complete" ) return cb()
     document.addEventListener( "DOMContentLoaded", cb, false );
   },
-  // throttle(threshhold, context, fn) {
-  //   fn || (fn = context);
-  //   var last, deferTimer;
-  //   return function (){
-  //     var context = context || this;
-  //     var now = +new Date;
-  //     var args = arguments;
-  //     if (last && now < last + threshhold) {
-  //       // hold on to it
-  //       clearTimeout(deferTimer);
-  //       deferTimer = setTimeout(function () {
-  //         last = now;
-  //         fn.apply(context, args);
-  //       }, threshhold);
-  //     }
-  //     else {
-  //       last = now;
-  //       fn.apply(context, args);
-  //     }
-  //   };
-  // }
 }
