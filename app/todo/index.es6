@@ -9,13 +9,6 @@ import styles from "./style"
 
 const rkta = new App( Routes, Layout )
 
-if( "hot" in module ){
-  // console.log( styles )
-  // console.log( styles.toString() )
-  // rkta.util.attachStyle( styles )
-  // module.hot.accept( "./style.styl", () => {
-  //   rkta.util.attachStyle( require( "./style.styl" ) )
-  // })
-}
+// if( "hot" in module ){}
 
 module.exports = rkta

@@ -2,6 +2,8 @@
 import React, { Component, PropTypes } from "react";
 import Preloader from "../preloader/preloader"
 
+import styles from "./todo.styl"
+
 export default class Todo extends Component {
   static propTypes = {
     markComplete: PropTypes.func.isRequired,
@@ -26,7 +28,7 @@ export default class Todo extends Component {
       Object.assign( textStyle, { fontWeight: "normal" });
     }
     return (
-      <div className="todo" style={{
+      <div className={ styles.todo } style={{
           marginBottom:"1px",
         }}>
         <div style={{
@@ -42,7 +44,7 @@ export default class Todo extends Component {
           />}
           { isPending && <Preloader/> }
         </div>
-        <div className="todo__text" style={ textStyle } >{ item.text }</div>
+        <div className={ styles.text } style={ textStyle } >{ item.text }</div>
           <button
             className="todo__del"
             disabled={ isPending }
