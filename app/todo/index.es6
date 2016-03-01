@@ -13,9 +13,9 @@ if( "hot" in module ){
   // console.log( styles )
   // console.log( styles.toString() )
   // rkta.util.attachStyle( styles )
-  module.hot.accept( "./style.styl", () => {
-    rkta.util.attachStyle( require( "./style.styl" ) )
-  })
+  // module.hot.accept( "./style.styl", () => {
+  //   rkta.util.attachStyle( require( "./style.styl" ) )
+  // })
 }
 
 module.exports = rkta

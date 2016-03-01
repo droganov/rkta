@@ -28,7 +28,8 @@ var exportConfig = Object.assign( {}, defaultConfig, {
         test: /\.styl$/,
         // loader: "css-loader!stylus-loader",
         loaders: [
-          "css-loader/locals?modulesimportLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
+          "style-loader",
+          "css-loader?modulesimportLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
           "stylus-loader",
         ]
         // loaders: [
