@@ -37,7 +37,7 @@ const App = React.createClass({
         />
       <div className="App__header">Todos</div>
         <div className="App__content">
-          { todos && todos.map( ( todo, i ) => {
+          { todos.map( ( todo, i ) => {
             return <Todo
               key={ i }
               item={ todo }
