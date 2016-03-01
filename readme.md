@@ -1,5 +1,5 @@
 **The ultimate resource for tooling future web applications.**
-
+Start Dev Server:
 ```
 > git clone https://github.com/droganov/rkta.git
 > cd rkta
@@ -12,17 +12,23 @@ Start Production Server:
 > npm run build
 > npm run production
 ```
+Debug:
+```
+> npm run build
+> npm run debug
+```
+
 ## Features
 - Isomorphism
 - Racer.js
   - Realtime subscriptions
   - Automatic model creation
   - Conflict resolution via Operational Transformation
-  - Offline
+  - Offline (OT)
   - Universal interface (client/server)
   - Persistent storage (MongoDB + abstract ShareDB interface)
   - ~~Access control~~
-  - ~~Schames~~
+  - ~~Schemas~~
   - ~~RPC~~
 - Multiple front-end applications via koa mount
 - Hot Module Replacement (react-hmre)
@@ -32,6 +38,7 @@ Start Production Server:
 
 
 ## Conventions
-- .es6 extension is used for es2015 files
-- .jsx extension is used for react templates
+- .es6 is for es2015 files
+- .jsx is for react templates
+- .js — when you don't need babel transform
 - BEM naming pattern for components

@@ -72,7 +72,7 @@
     "koa-static": "^2.0.0",
     "racer": "^0.8.9",
     "racer-koa": "0.0.2",
-    "racer-react": "0.0.20",
+    "racer-react": "0.0.21",
     "racer-transport-koa": "0.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
