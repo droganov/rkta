@@ -5,16 +5,17 @@ import App from "../../lib/application"
 import Routes from "./routes"
 import Layout from "./layout"
 
+import styles from "./style"
+
 const rkta = new App( Routes, Layout )
 
-
 if( "hot" in module ){
-  rkta.util.attachStyle( require( "./style.styl" ) )
+  // console.log( styles )
+  // console.log( styles.toString() )
+  // rkta.util.attachStyle( styles )
   module.hot.accept( "./style.styl", () => {
     rkta.util.attachStyle( require( "./style.styl" ) )
   })
 }
-
-// console.log( rkta )
 
 module.exports = rkta

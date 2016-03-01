@@ -33,6 +33,7 @@ Debug:
   - ~~RPC~~
 - Multiple front-end applications via koa mount
 - Hot Module Replacement (react-hmre)
+- ~~Css Modules~~
 - ~~Redux~~ for handling application state
 - Precompiled production bundles — no transform in production => minimal possible start delay
 - ~~GrapQL backend~~ as a facade
@@ -42,4 +43,3 @@ Debug:
 - .es6 is for es2015 files
 - .jsx is for react templates
 - .js — when you don't need babel transform
-- BEM naming pattern for components

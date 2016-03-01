@@ -25,7 +25,7 @@ export default ({
       { title.toComponent() }
     </head>
     <body>
-      <div id={ mountPoint } className={ mountPoint } dangerouslySetInnerHTML={{ __html: markup }} />
+      <div id={ mountPoint } dangerouslySetInnerHTML={{ __html: markup }} />
       <div id="racerBundle" data-json={ racerBundle }></div>
     </body>
   </html>

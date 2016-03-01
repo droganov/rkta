@@ -9,6 +9,10 @@ import q from "react-mixin-q"
 import Form from "../../blocks/form/form";
 import Todo from "../../blocks/todo/todo";
 
+import styles from "./app.styl"
+
+console.log( styles )
+
 const App = React.createClass({
   mixins:[ q ],
   statics: {
@@ -30,13 +34,13 @@ const App = React.createClass({
   render: function() {
     const { todos } = this.props
     return (
-      <div className="App">
+      <div className={ styles.app }>
         <Helmet
           title="My Title"
           titleTemplate="rkta: %s"
         />
-      <div className="App__header">Todos</div>
-        <div className="App__content">
+      <div className={ styles.header }>Todos</div>
+        <div className={ styles.content }>
           { todos.map( ( todo, i ) => {
             return <Todo
               key={ i }
@@ -55,7 +59,7 @@ const App = React.createClass({
             />
           })}
         </div>
-        <div className="App__footer">
+        <div>
           <Form onSubmit={ this.createTodo } />
         </div>
       </div>

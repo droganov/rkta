@@ -16,16 +16,26 @@ for (var i = 0; i < configApplications.length; i++) {
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
+  devtool: "sourcemap",
   entry: entries,
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
         test: /\.styl$/,
-        loader: "css-loader!stylus-loader",
+        // loader: "css-loader!stylus-loader",
+        loaders: [
+          "css-loader?modulesimportLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]",
+          "stylus-loader",
+        ]
+        // loaders: [
+        //   "isomorphic-style-loader",
+        //   "css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]",
+        //   "stylus-loader"
+        // ]
       },
     ]),
     postLoaders: [
