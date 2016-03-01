@@ -50,6 +50,15 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     // }),
   ],
   module: {
+    loaders: defaultConfig.module.loaders.concat([
+      {
+        test: /\.styl$/,
+        loaders: [
+          "css-loader?modulesimportLoaders=1&localIdentName=[hash:base64:5]",
+          "stylus-loader",
+        ]
+      },
+    ]),
     postLoaders: [
       {
         test: /\.(jsx|es6)/,

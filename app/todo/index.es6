@@ -5,7 +5,7 @@ import App from "../../lib/application"
 import Routes from "./routes"
 import Layout from "./layout"
 
-import styles from "./style"
+import styles from "./style.styl"
 
 const rkta = new App( Routes, Layout )
 

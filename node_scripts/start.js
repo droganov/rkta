@@ -7,8 +7,9 @@ var stylus = require( "stylus" )
 
 hook({
   extensions: [".styl"],
-  preprocessCss: function( css, filename ){
-    return stylus(css)
+  preprocessCss: function( src, filename ){
+    return stylus( src )
+      .include( require( "nib" ).path )
       .set( "filename", filename )
       .render()
   },
