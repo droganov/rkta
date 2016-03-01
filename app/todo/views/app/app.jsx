@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
 import { Link } from "react-router";
-import { Connect } from "racer-react";
+import { connectRacer } from "racer-react";
 import q from "react-mixin-q"
 
 import Form from "../../blocks/form/form";
@@ -63,4 +63,4 @@ const App = React.createClass({
   }
 });
 
-export default Connect( App );
+export default connectRacer( App );
