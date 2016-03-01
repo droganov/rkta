@@ -1264,6 +1264,7 @@ module.exports =
 	        { className: "App__content" },
 	        todos.map(function (todo, i) {
 	          return _react2.default.createElement(_todo2.default, {
+	            key: i,
 	            item: todo,
 	            markComplete: _this2.markComplete,
 	            "delete": _this2.deleteTodo
@@ -1288,7 +1289,7 @@ module.exports =
 	  }
 	});
 
-	exports.default = (0, _racerReact.Connect)(App);
+	exports.default = (0, _racerReact.connectRacer)(App);
 
 /***/ },
 /* 59 */
