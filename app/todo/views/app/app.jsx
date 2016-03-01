@@ -11,7 +11,7 @@ import Todo from "../../blocks/todo/todo";
 
 import styles from "./app.styl"
 
-console.log( styles )
+// console.log( styles )
 
 const App = React.createClass({
   mixins:[ q ],
