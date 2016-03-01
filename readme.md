@@ -1,4 +1,4 @@
-**The ultimate resource for tooling future web applications.**
+**The ultimate pipeline for tooling future web applications.**
 Start Dev Server:
 ```
 > git clone https://github.com/droganov/rkta.git
