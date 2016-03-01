@@ -9,8 +9,10 @@ const rkta = new App( Routes, Layout )
 
 
 if( "hot" in module ){
-  // const style = require( "./style.styl" )
   rkta.util.attachStyle( require( "./style.styl" ) )
+  module.hot.accept( "./style.styl", () => {
+    rkta.util.attachStyle( require( "./style.styl" ) )
+  })
 }
 
 // console.log( rkta )
