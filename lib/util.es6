@@ -1,3 +1,5 @@
+function r(f){/in/.test(document.readyState)?setTimeout(r,9,f):f()}
+
 module.exports = {
   isServer(){
     return process && process.title !== "browser";
@@ -10,8 +12,9 @@ module.exports = {
       return false;
     }
   },
-  domReady( cb ){
-    if( document.readyState !== "loading" ) return cb()
-    document.addEventListener( "DOMContentLoaded", cb, false );
-  },
+  // domReady( cb ){
+  //   if( document.readyState !== "loading" ) return cb();
+  //   document.addEventListener( "DOMContentLoaded", cb, false );
+  // },
+  domReady: r,
 }
