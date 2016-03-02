@@ -7,6 +7,7 @@ var stylus = require( "stylus" )
 
 hook({
   extensions: [".styl"],
+  generateScopedName: "[path]-[local]",
   preprocessCss: function( src, filename ){
     return stylus( src )
       .include( require( "nib" ).path )

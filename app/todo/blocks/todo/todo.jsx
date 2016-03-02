@@ -44,7 +44,7 @@ export default class Todo extends Component {
           />}
           { isPending && <Preloader/> }
         </div>
-        <div className={ styles.text } style={ textStyle } >{ item.text }</div>
+        <div className={ styles.text } style={ textStyle }>{ item.text }</div>
           <button
             className="todo__del"
             disabled={ isPending }

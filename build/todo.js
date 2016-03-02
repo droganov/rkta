@@ -874,7 +874,7 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactFormToProps = __webpack_require__(108);
+	var _reactFormToProps = __webpack_require__(109);
 
 	var _reactFormToProps2 = _interopRequireDefault(_reactFormToProps);
 
@@ -1054,7 +1054,7 @@ module.exports =
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { className: _todo2.default.text, style: textStyle },
+	          { className: _todo2.default.text, style: textStyle, contentEditable: true },
 	          item.text
 	        ),
 	        _react2.default.createElement(
@@ -1235,7 +1235,7 @@ module.exports =
 
 	var _racerReact = __webpack_require__(49);
 
-	var _reactMixinQ = __webpack_require__(109);
+	var _reactMixinQ = __webpack_require__(110);
 
 	var _reactMixinQ2 = _interopRequireDefault(_reactMixinQ);
 
@@ -1364,6 +1364,10 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
+	var _notFound = __webpack_require__(107);
+
+	var _notFound2 = _interopRequireDefault(_notFound);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var NotFound = function (_Component) {
@@ -1379,7 +1383,7 @@ module.exports =
 	      value: function render() {
 	         return _react2.default.createElement(
 	            "div",
-	            { className: "NotFound" },
+	            { className: _notFound2.default["not-found"] },
 	            _react2.default.createElement(_reactHelmet2.default, { title: "Page not found" }),
 	            _react2.default.createElement(
 	               "h1",
@@ -1426,7 +1430,7 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(107);
+	var _reactDom = __webpack_require__(108);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -2364,7 +2368,8 @@ module.exports =
 
 	module.exports = {
 		"preloader": "_9oRsW",
-		"spinner": "_2k_g-"
+		"spinner": "_2k_g-",
+		"preloaderClockwise": "_1L_Mb"
 	};
 
 /***/ },
@@ -2392,16 +2397,24 @@ module.exports =
 /* 107 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-dom");
+	module.exports = {
+		"not-found": "_2B3ha"
+	};
 
 /***/ },
 /* 108 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-form-to-props");
+	module.exports = require("react-dom");
 
 /***/ },
 /* 109 */
+/***/ function(module, exports) {
+
+	module.exports = require("react-form-to-props");
+
+/***/ },
+/* 110 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-mixin-q");
