@@ -11,7 +11,7 @@ module.exports = {
     }
   },
   domReady( cb ){
-    if( document.readyState == "complete" ) return cb()
+    if( document.readyState !== "loading" ) return cb()
     document.addEventListener( "DOMContentLoaded", cb, false );
   },
 }
