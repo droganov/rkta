@@ -34,7 +34,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     publicPath: "/assets/",
     filename: "[name].js",
     chunkFilename: "[name].[chunkhash].js",
-    library: "hui",
+    library: "rkta",
     libraryTarget: "commonjs2",
   },
   entry: entries,
@@ -42,19 +42,13 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    // new webpack.DefinePlugin({
-    //   __CLIENT__: false,
-    //   __SERVER__: true,
-    //   __DEVELOPMENT__: false,
-    //   __DEVTOOLS__: false,
-    // }),
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
         test: /\.styl$/,
         loaders: [
-          "css-loader?modulesimportLoaders=1&localIdentName=[hash:base64:5]",
+          "css-loader/locals?modulesimportLoaders=1&localIdentName=[hash:base64:5]",
           "stylus-loader",
         ]
       },
