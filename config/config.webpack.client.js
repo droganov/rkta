@@ -26,7 +26,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     loaders: defaultConfig.module.loaders.concat([
       {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract( "css-loader?modulesimportLoaders=1&localIdentName=[hash:base64:5]!stylus-loader" ),
+        loader: ExtractTextPlugin.extract( "css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]!stylus-loader" ),
       },
     ]),
     postLoaders: [

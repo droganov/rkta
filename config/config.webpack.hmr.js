@@ -29,7 +29,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
         // loader: "css-loader!stylus-loader",
         loaders: [
           "style-loader",
-          "css-loader?modulesimportLoaders=1&localIdentName=[path]-[local]",
+          "css-loader?modules&importLoaders=1&localIdentName=[path]-[local]",
           "stylus-loader",
         ]
         // loaders: [
