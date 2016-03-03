@@ -53,7 +53,7 @@ var config = {
         }
       }
     ],
-    import: [ "~nib/lib/nib/index.styl" ],
+    import: [ "~nib/lib/nib/index.styl", __dirname+"/config.globals.styl" ],
     define: configStyle,
   },
 };
