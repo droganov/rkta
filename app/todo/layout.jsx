@@ -1,5 +1,6 @@
 "use strict"
 import React from "react";
+import config from "../../config/config.style"
 
 export default ({
   children,
