@@ -36,7 +36,7 @@ Debug:
 - Css Modules
 - Styles config is shared between stylus and react
 - Redux + react-router-redux => application state handling
-- Precompiled production bundles — no transform in production => minimal possible start delay
+- Precompiled production bundles => no transform in production => instant start
 - ~~GrapQL backend~~ as a facade
 
 
