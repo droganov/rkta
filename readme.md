@@ -33,8 +33,9 @@ Debug:
   - ~~RPC~~
 - Multiple front-end applications via koa mount
 - Hot Module Replacement (react-hmre)
-- ~~Css Modules~~
-- ~~Redux~~ for handling application state
+- Css Modules
+- Styles config is shared between stylus and react
+- Redux + react-router-redux => application state handling
 - Precompiled production bundles — no transform in production => minimal possible start delay
 - ~~GrapQL backend~~ as a facade
 

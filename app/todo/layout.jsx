@@ -1,6 +1,5 @@
 "use strict"
-import React from "react";
-import config from "../../config/config.style"
+import React from "react"
 
 export default ({
   children,
@@ -11,6 +10,7 @@ export default ({
   mountPoint,
   name,
   racerBundle,
+  reduxStore,
 }) => {
   const { base, link, meta, script, title } = helmet
   return <html lang="en">
@@ -27,7 +27,7 @@ export default ({
     </head>
     <body>
       <div id={ mountPoint } dangerouslySetInnerHTML={{ __html: markup }} />
-      <div id="racerBundle" data-json={ racerBundle }></div>
+      <div id="bundle" data-racer-bundle={ racerBundle } data-redux-store={ reduxStore }></div>
     </body>
   </html>
 }

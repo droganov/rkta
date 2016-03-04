@@ -46,7 +46,7 @@ var config = {
     ],
     import: [
       "~nib/lib/nib/index.styl",
-      __dirname + "/config.globals.styl",
+      __dirname + "/config.stylus.styl",
     ],
   },
 };
