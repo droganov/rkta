@@ -2,8 +2,6 @@
 var path = require("path");
 var webpack = require("webpack");
 
-var configStyle = require("./config.style");
-
 var applications = [];
 var configApplications = require("./config.applications");
 for (var i = 0; i < configApplications.length; i++) {
@@ -14,7 +12,6 @@ var bundleExtention = ".js";
 var isProduction = process.env.NODE_ENV === "production";
 var putAssetsTo = isProduction ? "www_root/assets" : "www_root/_assets";
 
-var stylus = require( "stylus" );
 
 var config = {
   output: {
@@ -46,15 +43,11 @@ var config = {
   stylus: {
     use: [
       require("nib")(),
-      function( style ){
-        for (var key in configStyle) {
-          var val = configStyle[key];
-          style.define( key, new stylus.nodes.Literal(val) )
-        }
-      }
     ],
-    import: [ "~nib/lib/nib/index.styl", __dirname+"/config.globals.styl" ],
-    define: configStyle,
+    import: [
+      "~nib/lib/nib/index.styl",
+      __dirname + "/config.stylus.styl",
+    ],
   },
 };
 

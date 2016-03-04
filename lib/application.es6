@@ -1,6 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
 import { Router, browserHistory } from "react-router"
+import { syncHistoryWithStore } from "react-router-redux"
 import racer from "racer-react"
 
 
@@ -11,9 +13,10 @@ const defautlSettings = {
 }
 
 export default class Application {
-  constructor( Routes, Layout, settings ){
+  constructor( Routes, Layout, redux, settings ){
     this.Routes = Routes
     this.Layout = Layout
+    this.redux = redux
     this.settings = { ...defautlSettings, ...settings }
     this.util = util
 
@@ -22,15 +25,27 @@ export default class Application {
   getDomNode(){
     return document.getElementById( this.settings.mountPoint )
   }
-  renderToDOM( routes, racerModel ){
+  getBundleData(){
+    const bundleData = document.getElementById( "bundle" )
+    const racerBundle = JSON.parse( bundleData.dataset.racerBundle )
+    const reduxStore = JSON.parse( bundleData.dataset.reduxStore )
+    return { racerBundle, reduxStore, }
+  }
+  renderToDOM( routes, racerModel, reduxStore ){
+    const store = this.redux( reduxStore )
+    const history = syncHistoryWithStore( browserHistory, store )
     ReactDOM.render(
       React.createElement(
-      	racer.Provider,
-      	{ racerModel },
-      	React.createElement( Router, {
-      		history: browserHistory,
-      		routes,
-      	})
+      	Provider,
+      	{ store },
+        React.createElement(
+        	racer.Provider,
+        	{ racerModel },
+        	React.createElement( Router, {
+        		history,
+        		routes,
+        	})
+        )
       ),
       this.getDomNode()
     )
@@ -40,8 +55,9 @@ export default class Application {
   }
   startClient( routes ){
     util.domReady( ()=> {
-      const racerModel = racer.connectClient( this.settings.racerOptions )
-      this.preRender( routes, location, racerModel, ( err, redirectLocation, renderProps ) => this.renderToDOM( routes, racerModel ) )
+      const { racerBundle, reduxStore } = this.getBundleData()
+      const racerModel = racer.connectClient( racerBundle, this.settings.racerOptions )
+      this.preRender( routes, location, racerModel, ( err, redirectLocation, renderProps ) => this.renderToDOM( routes, racerModel, reduxStore ) )
     })
     return this
   }
