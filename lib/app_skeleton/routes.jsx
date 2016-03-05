@@ -7,7 +7,7 @@ import App from "./views/app/app";
 import NotFound from "./views/not-found/not-found";
 
 module.exports = () => (
-  <Route path="/">
+  <Route path="__path__">
     <IndexRoute component={ App } />
     <Route path="*" status={ 404 } component={ NotFound } />
   </Route>

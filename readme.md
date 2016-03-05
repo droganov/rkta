@@ -13,9 +13,14 @@ Start Production Server:
 > npm run build
 > npm run production
 ```
+
+Create new application:
+```
+> npm run create --app=name
+```
+
 Debug:
 ```
-> npm run build
 > npm run debug
 ```
 

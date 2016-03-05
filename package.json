@@ -7,7 +7,7 @@
     "node": "4.1.2"
   },
   "scripts": {
-    "app": "DEBUG=new:* node node_scripts/app.js",
+    "create": "DEBUG=create:* node node_scripts/create.js",
     "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
     "deploy": "",
     "lint": "",
