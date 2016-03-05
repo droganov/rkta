@@ -10,7 +10,7 @@ export default ({
   mountPoint,
   name,
   racerBundle,
-  reduxStore,
+  reduxState,
 }) => {
   const { base, link, meta, script, title } = helmet
   return <html lang="en">
@@ -27,7 +27,7 @@ export default ({
     </head>
     <body>
       <div id={ mountPoint } dangerouslySetInnerHTML={{ __html: markup }} />
-      <div id="bundle" data-racer-bundle={ racerBundle } data-redux-store={ reduxStore }></div>
+      <div id="bundle" data-racer-bundle={ racerBundle } data-redux-state={ reduxState }></div>
     </body>
   </html>
 }
