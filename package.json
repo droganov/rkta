@@ -78,7 +78,7 @@
     "react-form-to-props": "0.0.5",
     "react-helmet": "^2.2.0",
     "react-intl": "^1.2.2",
-    "react-mixin-q": "0.0.2",
+    "react-mixin-q": "0.0.3",
     "react-redux": "^4.4.0",
     "react-responsive": "1.1.1",
     "react-router": "^2.0.0",
