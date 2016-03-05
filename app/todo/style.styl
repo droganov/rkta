@@ -1,15 +1,3 @@
-// colors
-color-white         = #FFFFFF
-color-text          = #414141
-color-menu          = #868686
-color-menu--hover   = color-text
-color-rule          = rgba(#000, .06)
-color-body          = #cfcace
-
-// fonts
-font-sans = "San Francisco", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif
-font-playfair = "Playfair Display", serif
-
 // depth
 z-overlays = 10
 z-dropdowns = 20
@@ -19,14 +7,14 @@ easeOutQuint = cubic-bezier(0.230, 1.000, 0.320, 1.000)
 easeOutExpo = cubic-bezier(0.190, 1.000, 0.220, 1.000)
 
 body
-  color color-text
+  color COLOR_TEXT
   margin 0
   padding 0
-  background-color color-body
-  font-family font-sans
-  font-size 14px
+  background-color COLOR_BODY
+  font-family FONT_SANS
+  font-size FONT_SIZE_DEFAULT
   font-variant-ligatures: common-ligatures
-  line-height 24px
+  line-height FONT_LINE_HEIGHT_DEFAULT
 
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
@@ -39,7 +27,6 @@ body
 // Imports
 // @import "views/**/*"
 // @import "blocks/**/*"
-
 
 // Linking fonts
 // @import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic&subset=latin,latin-ext")
