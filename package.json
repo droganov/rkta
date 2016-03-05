@@ -9,7 +9,6 @@
   "scripts": {
     "app": "DEBUG=new:* node node_scripts/app.js",
     "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
-    "debug": "DEBUG=* npm run staging",
     "deploy": "",
     "lint": "",
     "production": "NODE_ENV=production node node_scripts/production.js",
