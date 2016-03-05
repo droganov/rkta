@@ -1,5 +1,5 @@
 ## Usage
-Start Dev Server:
+Start Dev Server (ensure mongodb is running):
 ```
 > git clone https://github.com/droganov/rkta.git
 > cd rkta
