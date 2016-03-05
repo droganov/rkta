@@ -1,1 +1,1 @@
-module.exports = ( ctx, data ) => cb => cb( null, data )
+module.exports = ( koaContext, data ) => cb => cb( null, data )
