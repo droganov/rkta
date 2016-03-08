@@ -32,7 +32,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-runtime": "^6.3.19",
     "css-loader": "^0.23.1",
-    "css-modules-require-hook": "^3.0.0",
+    "css-modules-require-hook": "^4.0.0",
     "debug": "^2.2.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
@@ -57,7 +57,7 @@
   "dependencies": {
     "classnames": "^2.2.0",
     "file-loader": "^0.8.5",
-    "kerberos": "0.0.18",
+    "kerberos": "0.0.19",
     "koa": "^1.1.2",
     "koa-body": "^1.4.0",
     "koa-connect": "^1.0.0",
@@ -69,8 +69,9 @@
     "koa-session-store": "^1.1.1",
     "koa-static": "^2.0.0",
     "racer": "^0.8.9",
-    "racer-koa": "0.0.2",
+    "racer-koa": "0.0.3",
     "racer-react": "0.0.22",
+    "racer-schema": "git+https://github.com/derbyparty/racer-schema.git",
     "racer-transport-koa": "0.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
@@ -82,10 +83,10 @@
     "react-responsive": "1.1.1",
     "react-router": "^2.0.0",
     "redux": "^3.3.1",
-    "redux-thunk": "^1.0.3",
+    "redux-thunk": "^2.0.1",
     "rx": "^4.0.7",
     "sharedb-mongo": "^0.8.6",
-    "stylus": "^0.53.0"
+    "stylus": "^0.54.0"
   },
   "directories": {
     "test": "test"
