@@ -24,24 +24,24 @@ Debug:
 ```
 
 ## Features
-- Isomorphism
-- Racer.js
-  - Realtime subscriptions
-  - Automatic model creation
-  - Conflict resolution via Operational Transformation
-  - Offline (OT)
-  - Universal interface (client/server)
-  - Persistent storage (MongoDB + abstract ShareDB interface)
-  - ~~Access control~~
-  - ~~Schemas~~
-  - ~~RPC~~
-- Multiple front-end applications via koa mount
-- Hot Module Replacement (react-hmre)
-- Css Modules
-- Styles config is shared between stylus and react
-- Redux + react-router-redux => application state handling
-- Precompiled production bundles => no transform in production => instant start
-- ~~GrapQL backend~~ as a facade
+* [x] Isomorphism
+* [ ] Racer.js integration
+  - [x] Realtime subscriptions
+  - [x] Automatic model creation
+  - [x] Conflict resolution via Operational Transformation
+  - [x] Offline (OT)
+  - [x] Universal interface (client/server)
+  - [x] Persistent storage (MongoDB + abstract ShareDB interface)
+  - [ ] Access control
+  - [ ] Schemas
+  - [ ] RPC
+- [x] Multiple front-end applications via koa mount
+- [x] Hot Module Replacement (react-hmre)
+- [x] Css Modules
+- [x] Styles config is shared between stylus and react
+- [x] Redux + react-router-redux => application state handling
+- [x] Precompiled production bundles => no transform in production => instant start
+- [ ] GrapQL backend as a facade
 
 
 ## Conventions
