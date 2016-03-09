@@ -11,8 +11,11 @@ module.exports = {
         isComplete: {
           type: "boolean"
         },
+        isTest: {
+          type: "boolean"
+        },
       },
-      required: [ "todo, isComplete" ]
+      required: [ "todo, isComplete", "isTest" ]
     },
   },
   // JSON-Schema formats can be added here. They should be sync

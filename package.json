@@ -69,7 +69,7 @@
     "koa-session-store": "^1.1.1",
     "koa-static": "^2.0.0",
     "racer": "^0.8.9",
-    "racer-koa": "0.0.3",
+    "racer-koa": "0.0.6",
     "racer-react": "0.0.22",
     "racer-schema": "git+https://github.com/derbyparty/racer-schema.git",
     "racer-transport-koa": "0.0.1",
