@@ -16,7 +16,7 @@ for (var i = 0; i < configApplications.length; i++) {
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
-  // devtool: "sourcemap",
+  devtool: "eval",
   entry: entries,
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

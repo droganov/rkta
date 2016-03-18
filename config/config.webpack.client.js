@@ -17,9 +17,6 @@ for (var i = 0; i < configApplications.length; i++) {
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
-  // devtool: "cheap-module-source-map",
-  // devtool: "eval",
-  // devtool: "sourcemap",
   entry: entries,
   target: "web",
   module: {

@@ -27,8 +27,6 @@ fs
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
-  // devtool: "cheap-module-source-map",
-  // devtool: "sourcemap",
   output: {
     path: path.join( __dirname, "/../build" ),
     publicPath: "/assets/",
