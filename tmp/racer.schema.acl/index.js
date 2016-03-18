@@ -2,9 +2,11 @@
 
 module.exports = function( backend, schema, acl ){
 
-  backend.use( ["query", "submit"], function( req, next ){
+  backend.use( [ "query", "apply" ], function( req, next ){
     var operationType = getOperationType( req );
     var collectionName = req.collection;
+
+    // TODO: access control
 
     // deny access if no collection in schema
     if( !(collectionName in schema.schemas) ) return deny( next, "unknown collection " + collectionName, 403 );
@@ -17,10 +19,9 @@ module.exports = function( backend, schema, acl ){
   });
 
   backend.use( "commit", function( req, next ){
-    // apply schema validation
-    // console.log( "apply schema validation" );
+    // TODO: schema validation
+    console.log( req.snapshot );
     next();
-    // reject( next, "hui" );
   });
 }
 
