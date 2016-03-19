@@ -35,11 +35,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify( process.env.NODE_ENV )
-      }
-    }),
+    new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     }),
@@ -52,7 +48,9 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
-        warnings: true
+        dead_code: true,
+        drop_console: true,
+        warnings: true,
       }
     }),
   ],

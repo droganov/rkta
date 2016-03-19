@@ -38,7 +38,7 @@ var config = {
   },
   resolve: {
     extensions: [ "", ".jsx", ".js", ".es6", ".styl", ".css", ".svg" ],
-    // modulesDirectories: ["src", "src/blocks", "web_modules", "bower_components", "node_modules"],
+    modulesDirectories: [ "node_modules" ],
   },
   stylus: {
     use: [
