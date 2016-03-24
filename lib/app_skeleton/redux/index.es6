@@ -3,11 +3,10 @@ import { routerReducer } from "react-router-redux"
 
 import stylus from "./stylus/reducer.stylus"
 
-import { serverRequire } from "racer/lib/util"
-
+const getInitialState = process.title === "node" ? require( "./get-initial-state" ) : null
 
 module.exports = {
-  getInitialState: serverRequire( module, "./get-initial-state" ),
+  getInitialState,
   createStore: function( initialState ){
     return createStore(
       combineReducers({

@@ -1872,11 +1872,11 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactFormToProps = __webpack_require__(129);
+	var _reactFormToProps = __webpack_require__(128);
 
 	var _reactFormToProps2 = _interopRequireDefault(_reactFormToProps);
 
-	var _form = __webpack_require__(116);
+	var _form = __webpack_require__(118);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -1938,7 +1938,7 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _preloader = __webpack_require__(117);
+	var _preloader = __webpack_require__(119);
 
 	var _preloader2 = _interopRequireDefault(_preloader);
 
@@ -1994,7 +1994,7 @@ module.exports =
 
 	var _preloader2 = _interopRequireDefault(_preloader);
 
-	var _todo = __webpack_require__(118);
+	var _todo = __webpack_require__(120);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
@@ -2100,11 +2100,11 @@ module.exports =
 
 	var _application2 = _interopRequireDefault(_application);
 
-	var _redux = __webpack_require__(103);
+	var _redux = __webpack_require__(104);
 
 	var _redux2 = _interopRequireDefault(_redux);
 
-	var _routes = __webpack_require__(105);
+	var _routes = __webpack_require__(106);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -2112,7 +2112,7 @@ module.exports =
 
 	var _layout2 = _interopRequireDefault(_layout);
 
-	var _style = __webpack_require__(119);
+	var _style = __webpack_require__(121);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -2164,7 +2164,7 @@ module.exports =
 	      null,
 	      _react2.default.createElement("meta", { charSet: "utf-8" }),
 	      _react2.default.createElement("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" }),
-	      isProduction && _react2.default.createElement("script", { src: "/assets/shared.js?" + hash, async: isProduction }),
+	      isProduction && _react2.default.createElement("script", { src: "/assets/shared.js?" + hash }),
 	      _react2.default.createElement("script", { src: "/assets/" + name + ".js?" + hash, async: isProduction }),
 	      isProduction && _react2.default.createElement("link", { rel: "stylesheet", href: "/assets/" + name + ".css?" + hash }),
 	      base.toComponent(),
@@ -2184,6 +2184,18 @@ module.exports =
 
 /***/ },
 /* 103 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = function (koaContext, data) {
+	  return function (cb) {
+	    return cb(null, data);
+	  };
+	};
+
+/***/ },
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2192,23 +2204,16 @@ module.exports =
 
 	var _reactRouterRedux = __webpack_require__(51);
 
-	var _reducer = __webpack_require__(104);
+	var _reducer = __webpack_require__(105);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// const racer = require( "racer/lib/util" )
-
-	// можно зайти через окружение: https://www.youtube.com/watch?v=ZLrzAhhbt6s&index=9&list=PLDyvV36pndZHfBThhg4Z0822EEG9VGenn
-	// uglify должен будет вырезать неиспользуемое
-
-	// import { serverRequire } from "racer/lib/util"
+	var getInitialState = process.title === "node" ? __webpack_require__(103) : null;
 
 	module.exports = {
-	  getInitialState: function getInitialState() {
-	    return {};
-	  },
+	  getInitialState: getInitialState,
 	  createStore: function createStore(initialState) {
 	    return (0, _redux.createStore)((0, _redux.combineReducers)({
 	      stylus: _reducer2.default,
@@ -2218,7 +2223,7 @@ module.exports =
 	};
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2234,7 +2239,7 @@ module.exports =
 	};
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2245,11 +2250,11 @@ module.exports =
 
 	var _reactRouter = __webpack_require__(20);
 
-	var _app = __webpack_require__(106);
+	var _app = __webpack_require__(107);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _notFound = __webpack_require__(107);
+	var _notFound = __webpack_require__(108);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -2265,7 +2270,7 @@ module.exports =
 	};
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2290,7 +2295,7 @@ module.exports =
 
 	var _racerReact = __webpack_require__(49);
 
-	var _reactMixinQ = __webpack_require__(130);
+	var _reactMixinQ = __webpack_require__(129);
 
 	var _reactMixinQ2 = _interopRequireDefault(_reactMixinQ);
 
@@ -2302,7 +2307,7 @@ module.exports =
 
 	var _todo2 = _interopRequireDefault(_todo);
 
-	var _app = __webpack_require__(120);
+	var _app = __webpack_require__(122);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -2382,7 +2387,7 @@ module.exports =
 	exports.default = (0, _racerReact.connectRacer)(App);
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2419,7 +2424,7 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-	var _notFound = __webpack_require__(121);
+	var _notFound = __webpack_require__(123);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -2460,7 +2465,6 @@ module.exports =
 	exports.default = NotFound;
 
 /***/ },
-/* 108 */,
 /* 109 */,
 /* 110 */,
 /* 111 */,
@@ -2468,7 +2472,9 @@ module.exports =
 /* 113 */,
 /* 114 */,
 /* 115 */,
-/* 116 */
+/* 116 */,
+/* 117 */,
+/* 118 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2478,7 +2484,7 @@ module.exports =
 	};
 
 /***/ },
-/* 117 */
+/* 119 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2488,7 +2494,7 @@ module.exports =
 	};
 
 /***/ },
-/* 118 */
+/* 120 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2497,9 +2503,9 @@ module.exports =
 	};
 
 /***/ },
-/* 119 */
+/* 121 */
 91,
-/* 120 */
+/* 122 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2509,7 +2515,7 @@ module.exports =
 	};
 
 /***/ },
-/* 121 */
+/* 123 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2517,20 +2523,17 @@ module.exports =
 	};
 
 /***/ },
-/* 122 */,
-/* 123 */,
 /* 124 */,
 /* 125 */,
 /* 126 */,
 /* 127 */,
-/* 128 */,
-/* 129 */
+/* 128 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-form-to-props");
 
 /***/ },
-/* 130 */
+/* 129 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-mixin-q");
