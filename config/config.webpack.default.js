@@ -10,15 +10,17 @@ for (var i = 0; i < configApplications.length; i++) {
 
 var bundleExtention = ".js";
 var isProduction = process.env.NODE_ENV === "production";
-var putAssetsTo = isProduction ? "www_root/assets" : "www_root/_assets";
 
+console.log( path.join( __dirname, "/../", "app" ) )
 
 var config = {
+  context: path.join( __dirname, "/../", "app" ),
   output: {
-    path: path.join( __dirname, "/../", putAssetsTo ),
-    publicPath: "/assets/",
+    chunkFilename: "[name].[chunkhash]" + bundleExtention,
     filename: "[name]" + bundleExtention,
-    chunkFilename: "[name].[chunkhash]" + bundleExtention
+    library: "[name]",
+    path: path.join( __dirname, "/../", "www_root/assets" ),
+    publicPath: "/assets/",
   },
   module: {
     loaders: [

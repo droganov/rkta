@@ -68,7 +68,7 @@ module.exports =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(101);
+	module.exports = __webpack_require__(109);
 
 
 /***/ },
@@ -1839,7 +1839,17 @@ module.exports =
 	module.exports = require("redux");
 
 /***/ },
-/* 98 */
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1872,143 +1882,21 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactFormToProps = __webpack_require__(129);
+	var _hello = __webpack_require__(122);
 
-	var _reactFormToProps2 = _interopRequireDefault(_reactFormToProps);
-
-	var _form = __webpack_require__(116);
-
-	var _form2 = _interopRequireDefault(_form);
+	var _hello2 = _interopRequireDefault(_hello);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Form = function (_Component) {
-	  (0, _inherits3.default)(Form, _Component);
+	var Hello = function (_Component) {
+	  (0, _inherits3.default)(Hello, _Component);
 
-	  function Form() {
-	    (0, _classCallCheck3.default)(this, Form);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Form).apply(this, arguments));
+	  function Hello() {
+	    (0, _classCallCheck3.default)(this, Hello);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Hello).apply(this, arguments));
 	  }
 
-	  (0, _createClass3.default)(Form, [{
-	    key: "_submit",
-	    value: function _submit(ev) {
-	      ev.preventDefault();
-	      this.props.onSubmit(this.props.form);
-	      this.props.resetForm();
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var text = this.props.form && this.props.form.text;
-	      return _react2.default.createElement(
-	        "form",
-	        { ref: "form", className: _form2.default.form, onSubmit: this._submit.bind(this) },
-	        _react2.default.createElement("textarea", { className: _form2.default.field, valueLink: this.props.bindAs("text") }),
-	        _react2.default.createElement(
-	          "button",
-	          {
-	            className: _form2.default.control,
-	            disabled: !text
-	          },
-	          "Add todo"
-	        )
-	      );
-	    }
-	  }]);
-	  return Form;
-	}(_react.Component);
-
-	Form.propTypes = {
-	  onSubmit: _react2.default.PropTypes.func.isRequired
-	};
-	exports.default = (0, _reactFormToProps2.default)(Form);
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _preloader = __webpack_require__(117);
-
-	var _preloader2 = _interopRequireDefault(_preloader);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: _preloader2.default.preloader },
-	    _react2.default.createElement("div", { className: _preloader2.default.spinner })
-	  );
-	};
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _assign = __webpack_require__(35);
-
-	var _assign2 = _interopRequireDefault(_assign);
-
-	var _getPrototypeOf = __webpack_require__(21);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(14);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(15);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(23);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(22);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _preloader = __webpack_require__(99);
-
-	var _preloader2 = _interopRequireDefault(_preloader);
-
-	var _todo = __webpack_require__(118);
-
-	var _todo2 = _interopRequireDefault(_todo);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Todo = function (_Component) {
-	  (0, _inherits3.default)(Todo, _Component);
-
-	  function Todo() {
-	    (0, _classCallCheck3.default)(this, Todo);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Todo).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(Todo, [{
+	  (0, _createClass3.default)(Hello, [{
 	    key: "_change",
 	    value: function _change(ev) {
 	      this.props.markComplete(this.props.item.id, ev.target.checked);
@@ -2016,80 +1904,20 @@ module.exports =
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _this2 = this;
-
-	      var _props = this.props;
-	      var item = _props.item;
-	      var isPending = _props.isPending;
-
-	      var textStyle = {
-	        width: "100%"
-	      };
-	      if (item.isComplete) {
-	        (0, _assign2.default)(textStyle, { textDecoration: "line-through" });
-	      } else {
-	        (0, _assign2.default)(textStyle, { fontWeight: "normal" });
-	      }
 	      return _react2.default.createElement(
 	        "div",
-	        { className: _todo2.default.todo, style: {
-	            marginBottom: "1px"
-	          } },
-	        _react2.default.createElement(
-	          "div",
-	          { style: {
-	              width: 24,
-	              height: 24,
-	              position: "relative"
-	            } },
-	          !isPending && _react2.default.createElement("input", {
-	            type: "checkbox",
-	            checked: item.isComplete,
-	            onChange: this._change.bind(this),
-	            disabled: isPending
-	          }),
-	          isPending && _react2.default.createElement(_preloader2.default, null)
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: _todo2.default.text, style: textStyle },
-	          item.text
-	        ),
-	        _react2.default.createElement(
-	          "button",
-	          {
-	            className: "todo__del",
-	            disabled: isPending,
-	            onClick: function onClick(ev) {
-	              return _this2.props.delete(item.id);
-	            },
-	            style: {
-	              width: 24,
-	              height: 24,
-	              padding: 0,
-	              border: 0
-	            }
-	          },
-	          "x"
-	        )
+	        { className: _hello2.default.hello },
+	        "Hello"
 	      );
 	    }
 	  }]);
-	  return Todo;
+	  return Hello;
 	}(_react.Component);
 
-	Todo.propTypes = {
-	  markComplete: _react.PropTypes.func.isRequired,
-	  delete: _react.PropTypes.func.isRequired,
-	  isPending: _react.PropTypes.bool
-	};
-	Todo.defaultProps = {
-	  isPending: false
-	};
-	exports.default = Todo;
+	exports.default = Hello;
 
 /***/ },
-/* 101 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2100,19 +1928,19 @@ module.exports =
 
 	var _application2 = _interopRequireDefault(_application);
 
-	var _redux = __webpack_require__(103);
+	var _redux = __webpack_require__(111);
 
 	var _redux2 = _interopRequireDefault(_redux);
 
-	var _routes = __webpack_require__(105);
+	var _routes = __webpack_require__(113);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _layout = __webpack_require__(102);
+	var _layout = __webpack_require__(110);
 
 	var _layout2 = _interopRequireDefault(_layout);
 
-	var _style = __webpack_require__(119);
+	var _style = __webpack_require__(123);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -2125,7 +1953,7 @@ module.exports =
 	module.exports = rkta;
 
 /***/ },
-/* 102 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2183,32 +2011,25 @@ module.exports =
 	};
 
 /***/ },
-/* 103 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(module) {"use strict";
 
 	var _redux = __webpack_require__(97);
 
 	var _reactRouterRedux = __webpack_require__(51);
 
-	var _reducer = __webpack_require__(104);
+	var _reducer = __webpack_require__(112);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
+	var _util = __webpack_require__(126);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// const racer = require( "racer/lib/util" )
-
-	// можно зайти через окружение: https://www.youtube.com/watch?v=ZLrzAhhbt6s&index=9&list=PLDyvV36pndZHfBThhg4Z0822EEG9VGenn
-	// uglify должен будет вырезать неиспользуемое
-
-	// import { serverRequire } from "racer/lib/util"
-
 	module.exports = {
-	  getInitialState: function getInitialState() {
-	    return {};
-	  },
+	  getInitialState: (0, _util.serverRequire)(module, "./get-initial-state"),
 	  createStore: function createStore(initialState) {
 	    return (0, _redux.createStore)((0, _redux.combineReducers)({
 	      stylus: _reducer2.default,
@@ -2216,9 +2037,10 @@ module.exports =
 	    }), initialState);
 	  }
 	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(128)(module)))
 
 /***/ },
-/* 104 */
+/* 112 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2234,7 +2056,7 @@ module.exports =
 	};
 
 /***/ },
-/* 105 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2245,11 +2067,11 @@ module.exports =
 
 	var _reactRouter = __webpack_require__(20);
 
-	var _app = __webpack_require__(106);
+	var _app = __webpack_require__(114);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _notFound = __webpack_require__(107);
+	var _notFound = __webpack_require__(115);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -2258,14 +2080,14 @@ module.exports =
 	module.exports = function () {
 	  return _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: "/todo" },
+	    { path: "/" },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _app2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: "*", status: 404, component: _notFound2.default })
 	  );
 	};
 
 /***/ },
-/* 106 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2274,9 +2096,25 @@ module.exports =
 	  value: true
 	});
 
-	var _assign = __webpack_require__(35);
+	var _getPrototypeOf = __webpack_require__(21);
 
-	var _assign2 = _interopRequireDefault(_assign);
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(14);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(15);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(23);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(22);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(7);
 
@@ -2286,103 +2124,60 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-	var _reactRouter = __webpack_require__(20);
-
 	var _racerReact = __webpack_require__(49);
 
-	var _reactMixinQ = __webpack_require__(130);
+	var _hello = __webpack_require__(108);
 
-	var _reactMixinQ2 = _interopRequireDefault(_reactMixinQ);
+	var _hello2 = _interopRequireDefault(_hello);
 
-	var _form = __webpack_require__(98);
-
-	var _form2 = _interopRequireDefault(_form);
-
-	var _todo = __webpack_require__(100);
-
-	var _todo2 = _interopRequireDefault(_todo);
-
-	var _app = __webpack_require__(120);
+	var _app = __webpack_require__(124);
 
 	var _app2 = _interopRequireDefault(_app);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var App = _react2.default.createClass({
-	  displayName: "App",
+	var App = function (_Component) {
+	  (0, _inherits3.default)(App, _Component);
 
-	  mixins: [_reactMixinQ2.default],
-	  statics: {
-	    racer: function racer(query) {
-	      query("todos", {}).pipeAs("todos");
-	    }
-	  },
-	  createTodo: function createTodo(form) {
-	    var _this = this;
-
-	    var item = (0, _assign2.default)({}, form, { isComplete: false });
-	    this.q.add(item);
-	    this.props.racerModel.root.add("todos", item, function (err) {
-	      return _this.q.del(item);
-	    });
-	  },
-	  markComplete: function markComplete(todoID, isComplete) {
-	    this.props.racerModel.root.set("todos." + todoID + ".isComplete", isComplete);
-	  },
-	  deleteTodo: function deleteTodo(todoID) {
-	    this.props.racerModel.root.del("todos." + todoID);
-	  },
-	  render: function render() {
-	    var _this2 = this;
-
-	    var todos = this.props.todos;
-
-	    return _react2.default.createElement(
-	      "div",
-	      { className: _app2.default.app },
-	      _react2.default.createElement(_reactHelmet2.default, {
-	        title: "My Title",
-	        titleTemplate: "rkta: %s"
-	      }),
-	      _react2.default.createElement(
-	        "div",
-	        { className: _app2.default.header },
-	        "Todos"
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: _app2.default.content },
-	        todos.map(function (todo, i) {
-	          return _react2.default.createElement(_todo2.default, {
-	            key: i,
-	            item: todo,
-	            markComplete: _this2.markComplete,
-	            "delete": _this2.deleteTodo
-	          });
-	        }),
-	        this.q.map(function (todo, i) {
-	          return _react2.default.createElement(_todo2.default, {
-	            key: i,
-	            item: todo,
-	            markComplete: _this2.markComplete,
-	            "delete": _this2.deleteTodo,
-	            isPending: true
-	          });
-	        })
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(_form2.default, { onSubmit: this.createTodo })
-	      )
-	    );
+	  function App() {
+	    (0, _classCallCheck3.default)(this, App);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(App).apply(this, arguments));
 	  }
-	});
 
+	  (0, _createClass3.default)(App, [{
+	    key: "render",
+
+	    // static statics = {
+	    //   racer: function( query ){
+	    //     query( "todos", {} ).pipeAs( "todos" );
+	    //   }
+	    // };
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: _app2.default.app },
+	        _react2.default.createElement(_reactHelmet2.default, {
+	          title: "My Title",
+	          titleTemplate: "rkta: %s"
+	        }),
+	        _react2.default.createElement(_hello2.default, null),
+	        "We've got the examples: ",
+	        _react2.default.createElement(
+	          "a",
+	          { href: "/todo" },
+	          "Todo app"
+	        )
+	      );
+	    }
+	  }]);
+	  return App;
+	}(_react.Component);
+
+	exports.default = App;
 	exports.default = (0, _racerReact.connectRacer)(App);
 
 /***/ },
-/* 107 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2419,7 +2214,7 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-	var _notFound = __webpack_require__(121);
+	var _notFound = __webpack_require__(125);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -2460,56 +2255,31 @@ module.exports =
 	exports.default = NotFound;
 
 /***/ },
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */
 /***/ function(module, exports) {
 
 	module.exports = {
-		"form": "undefined",
-		"field": "undefined",
-		"control": "undefined"
+		"hello": "undefined"
 	};
 
 /***/ },
-/* 117 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"preloader": "undefined",
-		"spinner": "undefined",
-		"preloaderClockwise": "undefined"
-	};
-
-/***/ },
-/* 118 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"todo": "undefined",
-		"text": "undefined"
-	};
-
-/***/ },
-/* 119 */
+/* 123 */
 91,
-/* 120 */
+/* 124 */
 /***/ function(module, exports) {
 
 	module.exports = {
-		"app": "undefined",
-		"header": "undefined",
-		"content": "undefined"
+		"app": "undefined"
 	};
 
 /***/ },
-/* 121 */
+/* 125 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2517,23 +2287,314 @@ module.exports =
 	};
 
 /***/ },
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */
-/***/ function(module, exports) {
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = require("react-form-to-props");
+	var deepIs = __webpack_require__(127);
+
+	var isServer = process.title !== 'browser';
+	exports.isServer = isServer;
+
+	exports.asyncGroup = asyncGroup;
+	exports.castSegments = castSegments;
+	exports.contains = contains;
+	exports.copy = copy;
+	exports.copyObject = copyObject;
+	exports.deepCopy = deepCopy;
+	exports.deepEqual = deepIs;
+	exports.equal = equal;
+	exports.equalsNaN = equalsNaN;
+	exports.isArrayIndex = isArrayIndex;
+	exports.lookup = lookup;
+	exports.mergeInto = mergeInto;
+	exports.mayImpact = mayImpact;
+	exports.mayImpactAny = mayImpactAny;
+	exports.serverRequire = serverRequire;
+	exports.serverUse = serverUse;
+	exports.use = use;
+
+	function asyncGroup(cb) {
+	  var group = new AsyncGroup(cb);
+	  return function asyncGroupAdd() {
+	    return group.add();
+	  };
+	}
+
+	/**
+	 * @constructor
+	 * @param {Function} cb(err)
+	 */
+	function AsyncGroup(cb) {
+	  this.cb = cb;
+	  this.isDone = false;
+	  this.count = 0;
+	}
+	AsyncGroup.prototype.add = function() {
+	  this.count++;
+	  var self = this;
+	  return function(err) {
+	    self.count--;
+	    if (self.isDone) return;
+	    if (err) {
+	      self.isDone = true;
+	      self.cb(err);
+	      return;
+	    }
+	    if (self.count > 0) return;
+	    self.isDone = true;
+	    self.cb();
+	  };
+	};
+
+	function castSegments(segments) {
+	  // Cast number path segments from strings to numbers
+	  for (var i = segments.length; i--;) {
+	    var segment = segments[i];
+	    if (typeof segment === 'string' && isArrayIndex(segment)) {
+	      segments[i] = +segment;
+	    }
+	  }
+	  return segments;
+	}
+
+	function contains(segments, testSegments) {
+	  for (var i = 0; i < segments.length; i++) {
+	    if (segments[i] !== testSegments[i]) return false;
+	  }
+	  return true;
+	}
+
+	function copy(value) {
+	  if (value instanceof Date) return new Date(value);
+	  if (typeof value === 'object') {
+	    if (value === null) return null;
+	    if (Array.isArray(value)) return value.slice();
+	    return copyObject(value);
+	  }
+	  return value;
+	}
+
+	function copyObject(object) {
+	  var out = new object.constructor();
+	  for (var key in object) {
+	    if (object.hasOwnProperty(key)) {
+	      out[key] = object[key];
+	    }
+	  }
+	  return out;
+	}
+
+	function deepCopy(value) {
+	  if (value instanceof Date) return new Date(value);
+	  if (typeof value === 'object') {
+	    if (value === null) return null;
+	    if (Array.isArray(value)) {
+	      var array = [];
+	      for (var i = value.length; i--;) {
+	        array[i] = deepCopy(value[i]);
+	      }
+	      return array;
+	    }
+	    var object = new value.constructor();
+	    for (var key in value) {
+	      if (value.hasOwnProperty(key)) {
+	        object[key] = deepCopy(value[key]);
+	      }
+	    }
+	    return object;
+	  }
+	  return value;
+	}
+
+	function equal(a, b) {
+	  return (a === b) || (equalsNaN(a) && equalsNaN(b));
+	}
+
+	function equalsNaN(x) {
+	  return x !== x;
+	}
+
+	function isArrayIndex(segment) {
+	  return (/^[0-9]+$/).test(segment);
+	}
+
+	function lookup(segments, value) {
+	  if (!segments) return value;
+
+	  for (var i = 0, len = segments.length; i < len; i++) {
+	    if (value == null) return value;
+	    value = value[segments[i]];
+	  }
+	  return value;
+	}
+
+	function mayImpactAny(segmentsList, testSegments) {
+	  for (var i = 0, len = segmentsList.length; i < len; i++) {
+	    if (mayImpact(segmentsList[i], testSegments)) return true;
+	  }
+	  return false;
+	}
+
+	function mayImpact(segments, testSegments) {
+	  var len = Math.min(segments.length, testSegments.length);
+	  for (var i = 0; i < len; i++) {
+	    if (segments[i] !== testSegments[i]) return false;
+	  }
+	  return true;
+	}
+
+	function mergeInto(to, from) {
+	  for (var key in from) {
+	    to[key] = from[key];
+	  }
+	  return to;
+	}
+
+	function serverRequire(module, id) {
+	  if (!isServer) return;
+	  return module.require(id);
+	}
+
+	function serverUse(module, id, options) {
+	  if (!isServer) return this;
+	  var plugin = module.require(id);
+	  return this.use(plugin, options);
+	}
+
+	function use(plugin, options) {
+	  // Don't include a plugin more than once
+	  var plugins = this._plugins || (this._plugins = []);
+	  if (plugins.indexOf(plugin) === -1) {
+	    plugins.push(plugin);
+	    plugin(this, options);
+	  }
+	  return this;
+	}
+
 
 /***/ },
-/* 130 */
+/* 127 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-mixin-q");
+	var pSlice = Array.prototype.slice;
+	var Object_keys = typeof Object.keys === 'function'
+	    ? Object.keys
+	    : function (obj) {
+	        var keys = [];
+	        for (var key in obj) keys.push(key);
+	        return keys;
+	    }
+	;
+
+	var deepEqual = module.exports = function (actual, expected) {
+	  // enforce Object.is +0 !== -0
+	  if (actual === 0 && expected === 0) {
+	    return areZerosEqual(actual, expected);
+
+	  // 7.1. All identical values are equivalent, as determined by ===.
+	  } else if (actual === expected) {
+	    return true;
+
+	  } else if (actual instanceof Date && expected instanceof Date) {
+	    return actual.getTime() === expected.getTime();
+
+	  } else if (isNumberNaN(actual)) {
+	    return isNumberNaN(expected);
+
+	  // 7.3. Other pairs that do not both pass typeof value == 'object',
+	  // equivalence is determined by ==.
+	  } else if (typeof actual != 'object' && typeof expected != 'object') {
+	    return actual == expected;
+
+	  // 7.4. For all other Object pairs, including Array objects, equivalence is
+	  // determined by having the same number of owned properties (as verified
+	  // with Object.prototype.hasOwnProperty.call), the same set of keys
+	  // (although not necessarily the same order), equivalent values for every
+	  // corresponding key, and an identical 'prototype' property. Note: this
+	  // accounts for both named and indexed properties on Arrays.
+	  } else {
+	    return objEquiv(actual, expected);
+	  }
+	};
+
+	function isUndefinedOrNull(value) {
+	  return value === null || value === undefined;
+	}
+
+	function isArguments(object) {
+	  return Object.prototype.toString.call(object) == '[object Arguments]';
+	}
+
+	function isNumberNaN(value) {
+	  // NaN === NaN -> false
+	  return typeof value == 'number' && value !== value;
+	}
+
+	function areZerosEqual(zeroA, zeroB) {
+	  // (1 / +0|0) -> Infinity, but (1 / -0) -> -Infinity and (Infinity !== -Infinity)
+	  return (1 / zeroA) === (1 / zeroB);
+	}
+
+	function objEquiv(a, b) {
+	  if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
+	    return false;
+
+	  // an identical 'prototype' property.
+	  if (a.prototype !== b.prototype) return false;
+	  //~~~I've managed to break Object.keys through screwy arguments passing.
+	  //   Converting to array solves the problem.
+	  if (isArguments(a)) {
+	    if (!isArguments(b)) {
+	      return false;
+	    }
+	    a = pSlice.call(a);
+	    b = pSlice.call(b);
+	    return deepEqual(a, b);
+	  }
+	  try {
+	    var ka = Object_keys(a),
+	        kb = Object_keys(b),
+	        key, i;
+	  } catch (e) {//happens when one is a string literal and the other isn't
+	    return false;
+	  }
+	  // having the same number of owned properties (keys incorporates
+	  // hasOwnProperty)
+	  if (ka.length != kb.length)
+	    return false;
+	  //the same set of keys (although not necessarily the same order),
+	  ka.sort();
+	  kb.sort();
+	  //~~~cheap key test
+	  for (i = ka.length - 1; i >= 0; i--) {
+	    if (ka[i] != kb[i])
+	      return false;
+	  }
+	  //equivalent values for every corresponding key, and
+	  //~~~possibly expensive deep test
+	  for (i = ka.length - 1; i >= 0; i--) {
+	    key = ka[i];
+	    if (!deepEqual(a[key], b[key])) return false;
+	  }
+	  return true;
+	}
+
+
+/***/ },
+/* 128 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
 
 /***/ }
 /******/ ])));

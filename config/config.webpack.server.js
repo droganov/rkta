@@ -11,10 +11,8 @@ var configApplications = require("./config.applications")
 for (var i = 0; i < configApplications.length; i++) {
   var appName = configApplications[i].name
   var entry = {}
-  entry[ appName ] = [
-    "./app/" + appName // + "/app"
-  ]
-  Object.assign( entries, entry );
+  entry[ appName ] = [ "./" + appName ]
+  Object.assign( entries, entry )
 }
 
 // console.log( path.join( __dirname, "/../build" ) )
@@ -38,6 +36,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   entry: entries,
   target: "node",
   plugins: [
+    new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
