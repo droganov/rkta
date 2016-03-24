@@ -46,11 +46,11 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      chunks: chunks,
-      minChunks: 2,
-      name: "shared",
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   chunks: chunks,
+    //   minChunks: 2,
+    //   name: "shared",
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
         dead_code: true,

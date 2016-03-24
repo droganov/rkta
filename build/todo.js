@@ -2164,7 +2164,6 @@ module.exports =
 	      null,
 	      _react2.default.createElement("meta", { charSet: "utf-8" }),
 	      _react2.default.createElement("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" }),
-	      isProduction && _react2.default.createElement("script", { src: "/assets/shared.js?" + hash, async: isProduction }),
 	      _react2.default.createElement("script", { src: "/assets/" + name + ".js?" + hash, async: isProduction }),
 	      isProduction && _react2.default.createElement("link", { rel: "stylesheet", href: "/assets/" + name + ".css?" + hash }),
 	      base.toComponent(),
