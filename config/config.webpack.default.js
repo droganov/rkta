@@ -11,8 +11,6 @@ for (var i = 0; i < configApplications.length; i++) {
 var bundleExtention = ".js";
 var isProduction = process.env.NODE_ENV === "production";
 
-console.log( path.join( __dirname, "/../", "app" ) )
-
 var config = {
   context: path.join( __dirname, "/../", "app" ),
   output: {
