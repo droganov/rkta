@@ -1,7 +1,6 @@
 "use strict"
 var webpack = require( "webpack" )
 
-var applications = []
 var entries = {}
 var configApplications = require("./config.applications")
 for (var i = 0; i < configApplications.length; i++) {
@@ -9,18 +8,21 @@ for (var i = 0; i < configApplications.length; i++) {
   var entry = {}
   entry[ appName ] = [
     "webpack-hot-middleware/client",
-    "./app/" + appName //+ "/app"
+    "./" + appName
   ]
-  Object.assign( entries, entry );
+  Object.assign( entries, entry )
 }
+
+
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
-  // devtool: "sourcemap",
+  devtool: "eval",
   entry: entries,
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([

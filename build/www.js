@@ -68,7 +68,7 @@ module.exports =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(101);
+	module.exports = __webpack_require__(110);
 
 
 /***/ },
@@ -1839,7 +1839,18 @@ module.exports =
 	module.exports = require("redux");
 
 /***/ },
-/* 98 */
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1872,143 +1883,21 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactFormToProps = __webpack_require__(128);
+	var _hello = __webpack_require__(124);
 
-	var _reactFormToProps2 = _interopRequireDefault(_reactFormToProps);
-
-	var _form = __webpack_require__(118);
-
-	var _form2 = _interopRequireDefault(_form);
+	var _hello2 = _interopRequireDefault(_hello);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Form = function (_Component) {
-	  (0, _inherits3.default)(Form, _Component);
+	var Hello = function (_Component) {
+	  (0, _inherits3.default)(Hello, _Component);
 
-	  function Form() {
-	    (0, _classCallCheck3.default)(this, Form);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Form).apply(this, arguments));
+	  function Hello() {
+	    (0, _classCallCheck3.default)(this, Hello);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Hello).apply(this, arguments));
 	  }
 
-	  (0, _createClass3.default)(Form, [{
-	    key: "_submit",
-	    value: function _submit(ev) {
-	      ev.preventDefault();
-	      this.props.onSubmit(this.props.form);
-	      this.props.resetForm();
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var text = this.props.form && this.props.form.text;
-	      return _react2.default.createElement(
-	        "form",
-	        { ref: "form", className: _form2.default.form, onSubmit: this._submit.bind(this) },
-	        _react2.default.createElement("textarea", { className: _form2.default.field, valueLink: this.props.bindAs("text") }),
-	        _react2.default.createElement(
-	          "button",
-	          {
-	            className: _form2.default.control,
-	            disabled: !text
-	          },
-	          "Add todo"
-	        )
-	      );
-	    }
-	  }]);
-	  return Form;
-	}(_react.Component);
-
-	Form.propTypes = {
-	  onSubmit: _react2.default.PropTypes.func.isRequired
-	};
-	exports.default = (0, _reactFormToProps2.default)(Form);
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _preloader = __webpack_require__(119);
-
-	var _preloader2 = _interopRequireDefault(_preloader);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: _preloader2.default.preloader },
-	    _react2.default.createElement("div", { className: _preloader2.default.spinner })
-	  );
-	};
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _assign = __webpack_require__(35);
-
-	var _assign2 = _interopRequireDefault(_assign);
-
-	var _getPrototypeOf = __webpack_require__(21);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(14);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(15);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(23);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(22);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _react = __webpack_require__(7);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _preloader = __webpack_require__(99);
-
-	var _preloader2 = _interopRequireDefault(_preloader);
-
-	var _todo = __webpack_require__(120);
-
-	var _todo2 = _interopRequireDefault(_todo);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Todo = function (_Component) {
-	  (0, _inherits3.default)(Todo, _Component);
-
-	  function Todo() {
-	    (0, _classCallCheck3.default)(this, Todo);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Todo).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(Todo, [{
+	  (0, _createClass3.default)(Hello, [{
 	    key: "_change",
 	    value: function _change(ev) {
 	      this.props.markComplete(this.props.item.id, ev.target.checked);
@@ -2016,80 +1905,20 @@ module.exports =
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _this2 = this;
-
-	      var _props = this.props;
-	      var item = _props.item;
-	      var isPending = _props.isPending;
-
-	      var textStyle = {
-	        width: "100%"
-	      };
-	      if (item.isComplete) {
-	        (0, _assign2.default)(textStyle, { textDecoration: "line-through" });
-	      } else {
-	        (0, _assign2.default)(textStyle, { fontWeight: "normal" });
-	      }
 	      return _react2.default.createElement(
 	        "div",
-	        { className: _todo2.default.todo, style: {
-	            marginBottom: "1px"
-	          } },
-	        _react2.default.createElement(
-	          "div",
-	          { style: {
-	              width: 24,
-	              height: 24,
-	              position: "relative"
-	            } },
-	          !isPending && _react2.default.createElement("input", {
-	            type: "checkbox",
-	            checked: item.isComplete,
-	            onChange: this._change.bind(this),
-	            disabled: isPending
-	          }),
-	          isPending && _react2.default.createElement(_preloader2.default, null)
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: _todo2.default.text, style: textStyle },
-	          item.text
-	        ),
-	        _react2.default.createElement(
-	          "button",
-	          {
-	            className: "todo__del",
-	            disabled: isPending,
-	            onClick: function onClick(ev) {
-	              return _this2.props.delete(item.id);
-	            },
-	            style: {
-	              width: 24,
-	              height: 24,
-	              padding: 0,
-	              border: 0
-	            }
-	          },
-	          "x"
-	        )
+	        { className: _hello2.default.hello },
+	        "Hello"
 	      );
 	    }
 	  }]);
-	  return Todo;
+	  return Hello;
 	}(_react.Component);
 
-	Todo.propTypes = {
-	  markComplete: _react.PropTypes.func.isRequired,
-	  delete: _react.PropTypes.func.isRequired,
-	  isPending: _react.PropTypes.bool
-	};
-	Todo.defaultProps = {
-	  isPending: false
-	};
-	exports.default = Todo;
+	exports.default = Hello;
 
 /***/ },
-/* 101 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2100,19 +1929,19 @@ module.exports =
 
 	var _application2 = _interopRequireDefault(_application);
 
-	var _redux = __webpack_require__(104);
+	var _redux = __webpack_require__(113);
 
 	var _redux2 = _interopRequireDefault(_redux);
 
-	var _routes = __webpack_require__(106);
+	var _routes = __webpack_require__(115);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _layout = __webpack_require__(102);
+	var _layout = __webpack_require__(111);
 
 	var _layout2 = _interopRequireDefault(_layout);
 
-	var _style = __webpack_require__(121);
+	var _style = __webpack_require__(125);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -2125,7 +1954,7 @@ module.exports =
 	module.exports = rkta;
 
 /***/ },
-/* 102 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2183,7 +2012,7 @@ module.exports =
 	};
 
 /***/ },
-/* 103 */
+/* 112 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2195,7 +2024,7 @@ module.exports =
 	};
 
 /***/ },
-/* 104 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2204,13 +2033,13 @@ module.exports =
 
 	var _reactRouterRedux = __webpack_require__(51);
 
-	var _reducer = __webpack_require__(105);
+	var _reducer = __webpack_require__(114);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var getInitialState = process.title === "node" ? __webpack_require__(103) : null;
+	var getInitialState = process.title === "node" ? __webpack_require__(112) : null;
 
 	module.exports = {
 	  getInitialState: getInitialState,
@@ -2223,7 +2052,7 @@ module.exports =
 	};
 
 /***/ },
-/* 105 */
+/* 114 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2239,7 +2068,7 @@ module.exports =
 	};
 
 /***/ },
-/* 106 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2250,11 +2079,11 @@ module.exports =
 
 	var _reactRouter = __webpack_require__(20);
 
-	var _app = __webpack_require__(107);
+	var _app = __webpack_require__(116);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _notFound = __webpack_require__(108);
+	var _notFound = __webpack_require__(117);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -2263,14 +2092,14 @@ module.exports =
 	module.exports = function () {
 	  return _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: "/todo" },
+	    { path: "/" },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _app2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: "*", status: 404, component: _notFound2.default })
 	  );
 	};
 
 /***/ },
-/* 107 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2279,9 +2108,25 @@ module.exports =
 	  value: true
 	});
 
-	var _assign = __webpack_require__(35);
+	var _getPrototypeOf = __webpack_require__(21);
 
-	var _assign2 = _interopRequireDefault(_assign);
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(14);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(15);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(23);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(22);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(7);
 
@@ -2291,103 +2136,60 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-	var _reactRouter = __webpack_require__(20);
-
 	var _racerReact = __webpack_require__(49);
 
-	var _reactMixinQ = __webpack_require__(129);
+	var _hello = __webpack_require__(109);
 
-	var _reactMixinQ2 = _interopRequireDefault(_reactMixinQ);
+	var _hello2 = _interopRequireDefault(_hello);
 
-	var _form = __webpack_require__(98);
-
-	var _form2 = _interopRequireDefault(_form);
-
-	var _todo = __webpack_require__(100);
-
-	var _todo2 = _interopRequireDefault(_todo);
-
-	var _app = __webpack_require__(122);
+	var _app = __webpack_require__(126);
 
 	var _app2 = _interopRequireDefault(_app);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var App = _react2.default.createClass({
-	  displayName: "App",
+	var App = function (_Component) {
+	  (0, _inherits3.default)(App, _Component);
 
-	  mixins: [_reactMixinQ2.default],
-	  statics: {
-	    racer: function racer(query) {
-	      query("todos", {}).pipeAs("todos");
-	    }
-	  },
-	  createTodo: function createTodo(form) {
-	    var _this = this;
-
-	    var item = (0, _assign2.default)({}, form, { isComplete: false });
-	    this.q.add(item);
-	    this.props.racerModel.root.add("todos", item, function (err) {
-	      return _this.q.del(item);
-	    });
-	  },
-	  markComplete: function markComplete(todoID, isComplete) {
-	    this.props.racerModel.root.set("todos." + todoID + ".isComplete", isComplete);
-	  },
-	  deleteTodo: function deleteTodo(todoID) {
-	    this.props.racerModel.root.del("todos." + todoID);
-	  },
-	  render: function render() {
-	    var _this2 = this;
-
-	    var todos = this.props.todos;
-
-	    return _react2.default.createElement(
-	      "div",
-	      { className: _app2.default.app },
-	      _react2.default.createElement(_reactHelmet2.default, {
-	        title: "My Title",
-	        titleTemplate: "rkta: %s"
-	      }),
-	      _react2.default.createElement(
-	        "div",
-	        { className: _app2.default.header },
-	        "Todos"
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: _app2.default.content },
-	        todos.map(function (todo, i) {
-	          return _react2.default.createElement(_todo2.default, {
-	            key: i,
-	            item: todo,
-	            markComplete: _this2.markComplete,
-	            "delete": _this2.deleteTodo
-	          });
-	        }),
-	        this.q.map(function (todo, i) {
-	          return _react2.default.createElement(_todo2.default, {
-	            key: i,
-	            item: todo,
-	            markComplete: _this2.markComplete,
-	            "delete": _this2.deleteTodo,
-	            isPending: true
-	          });
-	        })
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(_form2.default, { onSubmit: this.createTodo })
-	      )
-	    );
+	  function App() {
+	    (0, _classCallCheck3.default)(this, App);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(App).apply(this, arguments));
 	  }
-	});
 
+	  (0, _createClass3.default)(App, [{
+	    key: "render",
+
+	    // static statics = {
+	    //   racer: function( query ){
+	    //     query( "todos", {} ).pipeAs( "todos" );
+	    //   }
+	    // };
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: _app2.default.app },
+	        _react2.default.createElement(_reactHelmet2.default, {
+	          title: "My Title",
+	          titleTemplate: "rkta: %s"
+	        }),
+	        _react2.default.createElement(_hello2.default, null),
+	        "We've got the examples: ",
+	        _react2.default.createElement(
+	          "a",
+	          { href: "/todo" },
+	          "Todo app"
+	        )
+	      );
+	    }
+	  }]);
+	  return App;
+	}(_react.Component);
+
+	exports.default = App;
 	exports.default = (0, _racerReact.connectRacer)(App);
 
 /***/ },
-/* 108 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2424,7 +2226,7 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-	var _notFound = __webpack_require__(123);
+	var _notFound = __webpack_require__(127);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -2465,78 +2267,36 @@ module.exports =
 	exports.default = NotFound;
 
 /***/ },
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */,
-/* 117 */,
-/* 118 */
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */
 /***/ function(module, exports) {
 
 	module.exports = {
-		"form": "_2D2BD",
-		"field": "YB4zM",
-		"control": "elC4O"
+		"hello": "_1Pjto"
 	};
 
 /***/ },
-/* 119 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"preloader": "_3aHgr",
-		"spinner": "OgD5S",
-		"preloaderClockwise": "dHYFj"
-	};
-
-/***/ },
-/* 120 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"todo": "_100qe",
-		"text": "_2Xlaa"
-	};
-
-/***/ },
-/* 121 */
+/* 125 */
 91,
-/* 122 */
+/* 126 */
 /***/ function(module, exports) {
 
 	module.exports = {
-		"app": "_1eQDB",
-		"header": "_1vVEL",
-		"content": "_1F_kp"
+		"app": "_2DJgn"
 	};
 
 /***/ },
-/* 123 */
+/* 127 */
 /***/ function(module, exports) {
 
 	module.exports = {
-		"not-found": "_20Lgo"
+		"not-found": "_2Op-X"
 	};
-
-/***/ },
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */
-/***/ function(module, exports) {
-
-	module.exports = require("react-form-to-props");
-
-/***/ },
-/* 129 */
-/***/ function(module, exports) {
-
-	module.exports = require("react-mixin-q");
 
 /***/ }
 /******/ ])));

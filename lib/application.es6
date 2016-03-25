@@ -28,11 +28,11 @@ export default class Application {
   getBundleData(){
     const bundleData = document.getElementById( "bundle" )
     const racerBundle = JSON.parse( bundleData.dataset.racerBundle )
-    const reduxStore = JSON.parse( bundleData.dataset.reduxStore )
+    const reduxStore = JSON.parse( bundleData.dataset.reduxState )
     return { racerBundle, reduxStore, }
   }
-  renderToDOM( routes, racerModel, reduxStore ){
-    const store = this.redux( reduxStore )
+  renderToDOM( routes, racerModel, reduxState ){
+    const store = this.redux.createStore( reduxState )
     const history = syncHistoryWithStore( browserHistory, store )
     ReactDOM.render(
       React.createElement(

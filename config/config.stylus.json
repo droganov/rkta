@@ -1,4 +1,13 @@
 {
-	"var1": "#ccc",
-	"var2": "value2"
+	"COLOR_BODY": "#CFCACE",
+	"COLOR_TEXT": "#414141",
+	"COLOR_WHITE": "#FFFFFF",
+	"COLOR_RULE": "rgba(#000, .06)",
+
+	"FONT_SANS": "\"San Francisco\", \"Helvetica Neue\", \"Roboto\", \"Segoe UI\", sans-serif",
+	"FONT_SERIF": "\"Playfair Display\", serif",
+
+	"FONT_SIZE_DEFAULT": "14px",
+
+	"FONT_LINE_HEIGHT_DEFAULT": "24px"
 }

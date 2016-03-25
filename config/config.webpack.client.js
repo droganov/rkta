@@ -3,23 +3,19 @@ var webpack              = require( "webpack" );
 var StatsWriterPlugin    = require("webpack-stats-plugin").StatsWriterPlugin;
 var ExtractTextPlugin    = require("extract-text-webpack-plugin");
 
-var applications = []
+var chunks = []
 var entries = {}
 var configApplications = require("./config.applications")
 for (var i = 0; i < configApplications.length; i++) {
   var appName = configApplications[i].name
   var entry = {}
-  entry[ appName ] = [
-    "./app/" + appName // + "/app"
-  ]
-  Object.assign( entries, entry );
+  entry[ appName ] = [ "./" + appName ]
+  chunks.push( appName )
+  Object.assign( entries, entry )
 }
 
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
-  // devtool: "cheap-module-source-map",
-  // devtool: "eval",
-  // devtool: "sourcemap",
   entry: entries,
   target: "web",
   module: {
@@ -38,11 +34,8 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify( process.env.NODE_ENV )
-      }
-    }),
+    new webpack.NoErrorsPlugin(),
+    new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
     }),
@@ -53,9 +46,18 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: true,
+      children: true,
+      chunks: chunks,
+      minChunks: 2,
+      name: "shared",
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
-        warnings: true
+        dead_code: true,
+        drop_console: true,
+        warnings: true,
       }
     }),
   ],
