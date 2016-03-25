@@ -72,7 +72,7 @@
     "racer-koa": "0.0.7",
     "racer-react": "0.0.22",
     "racer-schema": "git+https://github.com/derbyparty/racer-schema.git",
-    "racer-transport-koa": "0.0.3",
+    "racer-transport-koa": "0.0.4",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-form-to-props": "0.0.5",
