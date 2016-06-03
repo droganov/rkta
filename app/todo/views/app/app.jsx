@@ -15,7 +15,7 @@ const App = React.createClass({
   mixins:[ q ],
   statics: {
     racer: function( query ){
-      query( "todos", {} ).pipeAs( "todos" );
+      query( "todos", "{ List{_id, text, isComplete} }" ).pipeAs( "todos" );
     }
   },
   createTodo: function( form ){

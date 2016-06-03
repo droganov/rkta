@@ -12,11 +12,11 @@ var bundleExtention = ".js";
 var isProduction = process.env.NODE_ENV === "production";
 
 var config = {
-  context: path.join( __dirname, "/../", "app" ),
+  // context: path.join( __dirname, "/../", "app" ),
   output: {
     chunkFilename: "[name].[chunkhash]" + bundleExtention,
     filename: "[name]" + bundleExtention,
-    library: "[name]",
+    // library: "[name]",
     path: path.join( __dirname, "/../", "www_root/assets" ),
     publicPath: "/assets/",
   },
@@ -46,7 +46,7 @@ var config = {
     ],
     import: [
       "~nib/lib/nib/index.styl",
-      __dirname + "/config.stylus.styl",
+      path.join( __dirname, "/config.stylus.styl" ),
     ],
   },
 };

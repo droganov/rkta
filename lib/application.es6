@@ -27,8 +27,8 @@ export default class Application {
   }
   getBundleData(){
     const bundleData = document.getElementById( "bundle" )
-    const racerBundle = JSON.parse( bundleData.dataset.racerBundle )
-    const reduxStore = JSON.parse( bundleData.dataset.reduxState )
+    const racerBundle = JSON.parse( bundleData.getAttribute("data-racer-bundle") )
+    const reduxStore = JSON.parse( bundleData.getAttribute("data-redux-state") )
     return { racerBundle, reduxStore, }
   }
   renderToDOM( routes, racerModel, reduxState ){

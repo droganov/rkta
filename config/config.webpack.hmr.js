@@ -7,8 +7,9 @@ for (var i = 0; i < configApplications.length; i++) {
   var appName = configApplications[i].name
   var entry = {}
   entry[ appName ] = [
+  	"babel-polyfill",
     "webpack-hot-middleware/client",
-    "./" + appName
+    "./app/" + appName
   ]
   Object.assign( entries, entry )
 }

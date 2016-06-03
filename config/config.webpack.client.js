@@ -9,7 +9,7 @@ var configApplications = require("./config.applications")
 for (var i = 0; i < configApplications.length; i++) {
   var appName = configApplications[i].name
   var entry = {}
-  entry[ appName ] = [ "./" + appName ]
+  entry[ appName ] = [ "babel-polyfill", "./app/" + appName ]
   chunks.push( appName )
   Object.assign( entries, entry )
 }
@@ -34,7 +34,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     ],
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    // new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new ExtractTextPlugin("[name].css", {
       allChunks: true
@@ -55,8 +55,8 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
-        dead_code: true,
-        drop_console: true,
+        // dead_code: true,
+        // drop_console: true,
         warnings: true,
       }
     }),

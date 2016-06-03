@@ -4,22 +4,22 @@ module.exports = {
     todos: {
       properties: {
         todo: {
-          type: "string",
+          type: 'string',
           minLength: 1,
-          maxLength: 10
+          maxLength: 10,
         },
         isComplete: {
-          type: "boolean"
+          type: 'boolean',
         },
         isTest: {
-          type: "boolean"
+          type: 'boolean',
         },
       },
-      required: [ "todo, isComplete", "isTest" ]
+      required: ['todo', 'isComplete', 'isTest'],
     },
   },
   // JSON-Schema formats can be added here. They should be sync
   formats: {},
   // Custom validators
-  validators: {}
-}
+  validators: {},
+};
