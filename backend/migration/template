@@ -1,0 +1,7 @@
+/* eslint-disable no-underscore-dangle */
+
+module.exports = {
+  id: '${id}',
+  up: (db, cb) => cb(),
+  down: (db, cb) => cb(),
+};
