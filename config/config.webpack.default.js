@@ -35,10 +35,11 @@ var config = {
         loader: "json"
       }
     ],
+    // noParse: [/node_modules\/(async|classnames|mobile-detect)/gi]
   },
   resolve: {
     extensions: [ "", ".jsx", ".js", ".es6", ".styl", ".css", ".svg" ],
-    modulesDirectories: [ "node_modules" ],
+    modulesDirectories: [ "node_modules" ]
   },
   stylus: {
     use: [
