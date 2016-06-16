@@ -28,18 +28,12 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
-        test: /\.styl$/,
-        // loader: "css-loader!stylus-loader",
+        test: /\.css$/,
         loaders: [
           "style-loader",
           "css-loader?modules&importLoaders=1&localIdentName=[path]-[local]",
-          "stylus-loader",
+          "postcss-loader",
         ]
-        // loaders: [
-        //   "isomorphic-style-loader",
-        //   "css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]",
-        //   "stylus-loader"
-        // ]
       },
     ]),
     postLoaders: [

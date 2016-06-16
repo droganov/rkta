@@ -2053,6 +2053,10 @@ module.exports =
 	  );
 	};
 
+	if (false) {
+	  module.hot.accept();
+	}
+
 /***/ },
 /* 116 */
 /***/ function(module, exports) {
@@ -2319,7 +2323,7 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"hello": "_3IMyj"
+		"hello": "_3Ovk8"
 	};
 
 /***/ },
@@ -2329,7 +2333,7 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"app": "_1jE1T"
+		"app": "_3Wt2a"
 	};
 
 /***/ },
@@ -2337,7 +2341,7 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"not-found": "_2DXkS"
+		"not-found": "_2tsv_"
 	};
 
 /***/ }

@@ -21,8 +21,8 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
-        test: /\.styl$/,
-        loader: ExtractTextPlugin.extract( "css-loader?modules&importLoaders=1&localIdentName=" + process.env.LOCAL_IDENT_NAME + "!stylus-loader" ),
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract( "css-loader?modules&importLoaders=1&localIdentName=" + process.env.LOCAL_IDENT_NAME + "!postcss-loader" ),
       },
     ]),
     postLoaders: [
@@ -58,6 +58,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
         // dead_code: true,
         // drop_console: true,
         warnings: true,
+        sourceMap: false,
       }
     }),
   ],

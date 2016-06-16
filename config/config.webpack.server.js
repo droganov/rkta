@@ -43,10 +43,10 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
-        test: /\.styl$/,
+        test: /\.css$/,
         loaders: [
           "css-loader/locals?modules&importLoaders=1&localIdentName=" + process.env.LOCAL_IDENT_NAME,
-          "stylus-loader",
+          "postcss-loader",
         ]
       },
     ]),

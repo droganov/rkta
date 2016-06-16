@@ -1,4 +1,7 @@
+var fs = require("fs");
+var path = require("path");
 var debug = require("debug")("dev:start.js")
+
 var migration = require("./migration");
 
 debug( "Check for new migration files" );
@@ -14,18 +17,13 @@ migration.check(function (err, unmergedFiles) {
   debug( "Starting live dev server" )
 
   require( "babel-core/register" )
-  var hook = require( "css-modules-require-hook" )
-  var stylus = require( "stylus" )
+  var hook = require( "css-modules-require-hook" );
+  var postcssPlugins = require("../config/config.postcss.js");
 
   hook({
-    extensions: [".styl"],
-    generateScopedName: "[path]-[local]",
-    preprocessCss: function( src, filename ){
-      return stylus( src )
-        .include( require( "nib" ).path )
-        .set( "filename", filename )
-        .render()
-    },
+    prepend: postcssPlugins(),
+    extensions: [".css"],
+    generateScopedName: "[path]-[local]"
   });
 
   var c2k = require( "koa-connect" )

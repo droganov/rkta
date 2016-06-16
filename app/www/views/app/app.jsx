@@ -1,32 +1,25 @@
-"use strict"
+import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 
-import React, { Component, PropTypes } from "react";
-import Helmet from "react-helmet";
+import { connectRacer } from 'racer-react';
 
-import { connectRacer } from "racer-react";
+import Hello from '../../blocks/hello/hello';
 
-import Hello from "../../blocks/hello/hello";
+import styles from './app.css';
 
-import styles from "./app.styl"
-
-export default class App extends Component {
-  // static statics = {
-  //   racer: function( query ){
-  //     query( "todos", {} ).pipeAs( "todos" );
-  //   }
-  // };
+class App extends Component {
   render() {
     return (
-      <div className={ styles.app }>
+      <div className={styles.app}>
         <Helmet
           title="My Title"
           titleTemplate="rkta: %s"
         />
-      <Hello />
-      We've got the examples: <a href="/todo">Todo app</a>
+        <Hello />
+        We've got the examples: <a href="/todo">Todo app</a>
       </div>
     );
   }
 }
 
-export default connectRacer( App );
+export default connectRacer(App);
