@@ -33,6 +33,7 @@ function check(cb) {
   var chain = Promise.resolve();
   var trackCollection = null;
   var unmergedFiles = [];
+  var cbCalled = false;
 
   var localListAllFiles = getListAllFiles();
 
@@ -50,8 +51,15 @@ function check(cb) {
   });
   chain.then(function () {
     trackCollection.s.db.close();
-    cb(null, unmergedFiles);
-  }).catch(cb);
+    if(!cbCalled) cb(null, unmergedFiles);
+    cbCalled = true;
+  }).catch(function (err) {
+    if(cbCalled) {
+      console.log(err);
+      return;
+    }
+    cb(err);
+  });
 }
 
 // для вызова через require обработка комманд не нужна
