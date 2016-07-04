@@ -1,3 +1,5 @@
+require( "babel-core/register" );
+
 var debug = require("debug")("dev:start.js")
 var migration = require("./migration");
 
@@ -13,7 +15,7 @@ migration.check(function (err, unmergedFiles) {
 
   debug( "Starting live dev server" )
 
-  require( "babel-core/register" )
+
   var hook = require( "css-modules-require-hook" )
   var stylus = require( "stylus" )
 
