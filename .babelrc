@@ -1,7 +1,10 @@
 {
 	"presets": [ "stage-0", "es2015", "react" ],
 	"plugins": [
-		"transform-runtime",
+		["transform-runtime", {
+			"polyfill": false,
+			"regenerator": true
+		}],
 		"transform-class-properties",
 		"transform-decorators"
 	],

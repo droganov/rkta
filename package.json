@@ -4,7 +4,7 @@
   "description": "react boilerplate",
   "main": "server.js",
   "engines": {
-    "node": "4.1.2"
+    "node": "6.1.0"
   },
   "scripts": {
     "create": "DEBUG=create:* node node_scripts/create.js",
@@ -13,10 +13,10 @@
     "lint": "eslint --ext .jsx,.es6,.js app/** backend/**",
     "lintapp": "eslint --ext .jsx,.es6,.js app/**",
     "lint+fix": "eslint --fix --ext .jsx,.es6,.js app/** backend/**",
-    "production": "NODE_ENV=production node node_scripts/production.js",
+    "production": "NODE_ENV=production node --harmony --harmony_modules node_scripts/production.js",
     "staging": "npm run production",
-    "start": "DEBUG=dev:* NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony node_scripts/start.js",
-    "test": "DEBUG=test:* NODE_ENV=production node --harmony node_scripts/test.js",
+    "start": "DEBUG=dev:* NODE_ENV=development BABEL_DISABLE_CACHE=1 node --harmony --harmony_modules node_scripts/start.js",
+    "test": "DEBUG=test:* NODE_ENV=production node --harmony --harmony_modules node_scripts/test.js",
     "migration": "DEBUG=dev:* node --harmony --use_strict node_scripts/migration.js"
   },
   "author": "Madonna",
