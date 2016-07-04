@@ -2,6 +2,8 @@
 var path = require("path");
 var webpack = require("webpack");
 
+var postcssPlugins = require("./config.postcss.js");
+
 var applications = [];
 var configApplications = require("./config.applications");
 for (var i = 0; i < configApplications.length; i++) {
@@ -16,7 +18,6 @@ var config = {
   output: {
     chunkFilename: "[name].[chunkhash]" + bundleExtention,
     filename: "[name]" + bundleExtention,
-    // library: "[name]",
     path: path.join( __dirname, "/../", "www_root/assets" ),
     publicPath: "/assets/",
   },
@@ -40,15 +41,7 @@ var config = {
     extensions: [ "", ".jsx", ".js", ".es6", ".styl", ".css", ".svg" ],
     modulesDirectories: [ "node_modules" ],
   },
-  stylus: {
-    use: [
-      require("nib")(),
-    ],
-    import: [
-      "~nib/lib/nib/index.styl",
-      path.join( __dirname, "/config.stylus.styl" ),
-    ],
-  },
+  postcss: postcssPlugins
 };
 
 module.exports = config

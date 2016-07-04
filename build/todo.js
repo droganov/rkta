@@ -2224,6 +2224,10 @@ module.exports =
 	  );
 	};
 
+	if (false) {
+	  module.hot.accept();
+	}
+
 /***/ },
 /* 107 */
 /***/ function(module, exports) {
@@ -2361,7 +2365,7 @@ module.exports =
 	  mixins: [_reactMixinQ2.default],
 	  statics: {
 	    racer: function racer(query) {
-	      query("todos", "{ List{_id, text, isComplete} }").pipeAs("todos");
+	      query("todos", {}).pipeAs("todos");
 	    }
 	  },
 	  createTodo: function createTodo(form) {
@@ -2520,9 +2524,9 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"form": "_2q_kr",
-		"field": "_30xoS",
-		"control": "_2orj0"
+		"form": "_1GZO7",
+		"field": "_2QqMX",
+		"control": "q3mX-"
 	};
 
 /***/ },
@@ -2530,9 +2534,9 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"preloader": "_9oRsW",
-		"spinner": "_2k_g-",
-		"preloaderClockwise": "_1L_Mb"
+		"preloader": "_2vQ3t",
+		"spinner": "xSjHY",
+		"preloaderClockwise": "_3KbGh"
 	};
 
 /***/ },
@@ -2540,8 +2544,8 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"todo": "_2Dw1I",
-		"text": "J9nwt"
+		"todo": "pQJHC",
+		"text": "_2WXKZ"
 	};
 
 /***/ },
@@ -2551,9 +2555,9 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"app": "_1Ev-f",
-		"header": "_298JW",
-		"content": "_4Q8J2"
+		"app": "_3mp5P",
+		"header": "_2vcxa",
+		"content": "_-JV6r"
 	};
 
 /***/ },
@@ -2561,7 +2565,7 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = {
-		"not-found": "_2B3ha"
+		"not-found": "_3HovV"
 	};
 
 /***/ },

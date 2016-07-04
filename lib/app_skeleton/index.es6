@@ -1,15 +1,11 @@
-import { browserHistory } from "react-router"
+import App from '../../lib/application.es6';
+import redux from './redux/index.es6';
 
-import App from "../../lib/application"
-import redux from "./redux"
+import Routes from './routes';
+import Layout from './layout';
 
-import Routes from "./routes"
-import Layout from "./layout"
+require('./style.css');
 
-import styles from "./style.styl"
+const rkta = new App(Routes, Layout, redux);
 
-const rkta = new App( Routes, Layout, redux )
-
-// if( "hot" in module ){}
-
-module.exports = rkta
+module.exports = rkta;

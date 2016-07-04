@@ -1,11 +1,14 @@
-:local
-  .app
+:local {
+  .form {
+    padding: 8px;
+    margin: 0;
+
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -18,16 +21,16 @@
     -webkit-align-items: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
+  }
 
-    background-color color-body
-    fixed top 0 left 0 right 0 bottom 0
+  .field {
+    padding: 8px;
+    display: block;
+    width: 100%;
+  }
 
-  .header
-    text-align center
-    font-weight bold
-    line-height 32px
-
-  .content
-    background-color #fff
-    height 100%
-    padding 16px
+  .control {
+    white-space: nowrap;
+    padding: 0 16px;
+  }
+}

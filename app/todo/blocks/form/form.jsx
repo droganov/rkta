@@ -1,26 +1,31 @@
-import React, { Component } from "react"
-import connectForm from "react-form-to-props"
+import React, { Component } from 'react';
+import connectForm from 'react-form-to-props';
 
-import styles from "./form.styl"
+import styles from './form.css';
 
 class Form extends Component {
   static propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
   };
-  _submit( ev ){
-    ev.preventDefault()
-    this.props.onSubmit( this.props.form )
-    this.props.resetForm()
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
   }
-  render(){
+
+  submit(ev) {
+    ev.preventDefault();
+    this.props.onSubmit(this.props.form);
+    this.props.resetForm();
+  }
+  render() {
     const text = this.props.form && this.props.form.text;
-    return <form ref="form" className={ styles.form } onSubmit={ this._submit.bind( this ) }>
-      <textarea className={ styles.field } valueLink={ this.props.bindAs( "text" ) }></textarea>
+    return (<form ref="form" className={styles.form} onSubmit={this.submit}>
+      <textarea className={styles.field} valueLink={this.props.bindAs('text')}></textarea>
       <button
-        className={ styles.control }
-        disabled={ !text }
+        className={styles.control}
+        disabled={!text}
       >Add todo</button>
-    </form>;
+    </form>);
   }
 }
-export default connectForm( Form );
+export default connectForm(Form);

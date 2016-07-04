@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"COLOR_BODY": "#CFCACE",
 	"COLOR_TEXT": "#414141",
 	"COLOR_WHITE": "#FFFFFF",

@@ -1,14 +1,11 @@
-:local
-  .form
-    padding 8px
-    margin 0
-
+:local {
+  .app {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -22,11 +19,23 @@
     -ms-flex-align: stretch;
     align-items: stretch;
 
-  .field
-    padding 8px
-    display block
-    width 100%
+    background-color: color-body;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 
-  .control
-    white-space nowrap
-    padding 0 16px
+  .header {
+    text-align: center;
+    font-weight: bold;
+    line-height: 32px;
+  }
+
+  .content {
+    background-color: #fff;
+    height: 100%;
+    padding: 16px;
+  }
+}

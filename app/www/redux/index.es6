@@ -1,19 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from "redux"
-import { routerReducer } from "react-router-redux"
+import { createStore, combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
-import stylus from "./stylus/reducer.stylus"
+import stylus from './stylus/reducer.stylus.es6';
 
-const getInitialState = process.title === "node" ? require( "./get-initial-state" ) : null
+const getInitialState = process.title === 'node' ? require('./get-initial-state.es6') : null;
 
 module.exports = {
   getInitialState,
-  createStore: function( initialState ){
-    return createStore(
-      combineReducers({
-        stylus,
-        routing: routerReducer,
-      }),
-      initialState
-    )
-  },
-}
+  createStore: (initialState) => createStore(
+    combineReducers({
+      stylus,
+      routing: routerReducer,
+    }),
+    initialState
+  ),
+};
