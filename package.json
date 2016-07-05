@@ -9,6 +9,7 @@
   "scripts": {
     "create": "DEBUG=create:* node node_scripts/create.js",
     "build": "DEBUG=build:* NODE_ENV=production node --harmony node_scripts/build.js",
+    "builddll": "DEBUG=dev:* NODE_ENV=production node --harmony node_scripts/builddll.js",
     "deploy": "",
     "lint": "eslint --ext .jsx,.es6,.js app/** backend/**",
     "lintapp": "eslint --ext .jsx,.es6,.js app/**",
