@@ -101,7 +101,7 @@
     "react-router": "^2.0.1",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.3.1",
-    "redux-thunk": "^2.0.1",
+    "redux-thunk": "^2.1.0",
     "rx": "^4.0.7",
     "sharedb": "^0.11.6",
     "sharedb-mongo": "^0.8.6",
