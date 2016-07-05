@@ -1,5 +1,6 @@
 "use strict"
-var webpack = require( "webpack" )
+var webpack = require( "webpack" );
+var path = require( "path" );
 
 var entries = {}
 var configApplications = require("./config.applications")
@@ -7,7 +8,6 @@ for (var i = 0; i < configApplications.length; i++) {
   var appName = configApplications[i].name
   var entry = {}
   entry[ appName ] = [
-  	"babel-polyfill",
     "webpack-hot-middleware/client",
     "./app/" + appName
   ]
@@ -24,22 +24,20 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new webpack.HotModuleReplacementPlugin(),
+      new webpack.DllReferencePlugin({
+      context: path.join(__dirname, ".."),
+      manifest: require("../build/dll/hmr-manifest.json")
+    })
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([
       {
         test: /\.styl$/,
-        // loader: "css-loader!stylus-loader",
         loaders: [
           "style-loader",
           "css-loader?modules&importLoaders=1&localIdentName=[path]-[local]",
           "stylus-loader",
         ]
-        // loaders: [
-        //   "isomorphic-style-loader",
-        //   "css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]",
-        //   "stylus-loader"
-        // ]
       },
     ]),
     postLoaders: [

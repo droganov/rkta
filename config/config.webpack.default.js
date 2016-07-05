@@ -16,7 +16,6 @@ var config = {
   output: {
     chunkFilename: "[name].[chunkhash]" + bundleExtention,
     filename: "[name]" + bundleExtention,
-    // library: "[name]",
     path: path.join( __dirname, "/../", "www_root/assets" ),
     publicPath: "/assets/",
   },
@@ -35,8 +34,12 @@ var config = {
         loader: "json"
       }
     ],
+    noParse: [/node_modules\/(async|classnames|mobile-detect)/gi]
   },
   resolve: {
+    root: [
+      path.resolve(__dirname+"/../")
+    ],
     extensions: [ "", ".jsx", ".js", ".es6", ".styl", ".css", ".svg" ],
     modulesDirectories: [ "node_modules" ],
   },

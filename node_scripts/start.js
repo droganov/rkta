@@ -1,9 +1,13 @@
 require( "babel-core/register" );
 
-var debug = require("debug")("dev:start.js")
-var migration = require("./migration");
+var fs = require("fs");
+var path = require("path");
+var debug = require("debug")("dev:start.js");
 
-debug( "Check for new migration files" );
+var migration = require("./migration");
+var packageHash = require("./packageHash");
+
+debug( "Check for new migration files ..." );
 
 migration.check(function (err, unmergedFiles) {
   if(err) {
@@ -13,11 +17,11 @@ migration.check(function (err, unmergedFiles) {
     return debug("Have new migrations, you need to apply them. Type 'npm run migration apply'");
   }
 
-  debug( "Starting live dev server" )
+  debug( "clean." );
+  debug( "Applying server side hooks ..." );
 
-
-  var hook = require( "css-modules-require-hook" )
-  var stylus = require( "stylus" )
+  var hook = require( "css-modules-require-hook" );
+  var stylus = require( "stylus" );
 
   hook({
     extensions: [".styl"],
@@ -29,6 +33,26 @@ migration.check(function (err, unmergedFiles) {
         .render()
     },
   });
+
+  debug("done.");
+  debug( "Check package version ..." );
+  try {
+    fs.statSync(path.join(__dirname,"../www_root/assets/hmr.dll.js"));
+    var dll_stats = require("../build/dll/stats.json");
+    var hash = packageHash.compute();
+    if(hash !== dll_stats.packageHash) {
+      throw("mismatch ...");
+    }
+    debug( "clean." );
+  } catch(e) {
+    debug(e.message || e);
+    return require("../node_scripts/builddll").then(startDue);
+  }
+  startDue();
+});
+
+function startDue() {
+  debug( "Starting live dev server" );
 
   var c2k = require( "koa-connect" )
   var koa = require( "koa" )
@@ -42,7 +66,6 @@ migration.check(function (err, unmergedFiles) {
 
   var startServer = require( "../lib/server" )
 
-
   var app = koa()
   app
     .use( webpackDevMiddleware(
@@ -55,5 +78,4 @@ migration.check(function (err, unmergedFiles) {
     .use( webpackHotMiddleware( compiler, { heartbeat: 1000 }) )
 
   startServer( app )
-
-});
+}

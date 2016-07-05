@@ -58,6 +58,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
         // dead_code: true,
         // drop_console: true,
         warnings: true,
+        sourceMap: false
       }
     }),
   ],
