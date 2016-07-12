@@ -15,8 +15,6 @@ for (var i = 0; i < configApplications.length; i++) {
   Object.assign( entries, entry )
 }
 
-// console.log( path.join( __dirname, "/../build" ) )
-
 var nodeModules = {}
 fs
   .readdirSync( "node_modules" )

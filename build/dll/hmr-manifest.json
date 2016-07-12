@@ -520,7 +520,7 @@
     "./node_modules/racer-react/lib/query-types.js": 518,
     "./node_modules/racer-react/lib/util/isTouchDevice.js": 519,
     "./node_modules/racer-react/lib/connect-client.js": 520,
-    "./node_modules/racer-transport-koa/lib/client.js": 521,
+    "./node_modules/racer-react/node_modules/racer-transport-koa/lib/client.js": 521,
     "./node_modules/browserchannel/dist/bcsocket-uncompressed.js": 522,
     "./node_modules/racer-react/lib/defaults.js": 523,
     "./node_modules/racer-react/lib/match.js": 524,

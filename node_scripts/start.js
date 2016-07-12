@@ -37,7 +37,7 @@ migration.check(function (err, unmergedFiles) {
   debug("done.");
   debug( "Check package version ..." );
   try {
-    fs.statSync(path.join(__dirname,"../www_root/assets/hmr.dll.js"));
+    fs.statSync(path.join(__dirname,"../www_root/build/hmr.dll.js"));
     var dll_stats = require("../build/dll/stats.json");
     var hash = packageHash.compute();
     if(hash !== dll_stats.packageHash) {
