@@ -5,8 +5,6 @@ var path = require( "path" );
 
 var defaultConfig = require( "./config.webpack.default" )
 
-var targetPath = path.join(__dirname, "../build/dll");
-
 var exportConfig = Object.assign( {}, defaultConfig, {
   entry: {
     hmr: [
@@ -28,7 +26,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     ]
   },
   output: {
-      path: path.join(__dirname, "../www_root/assets"),
+      path: path.join(__dirname, "../www_root/build"),
       filename: "[name].dll.js",
       library: "[name]_[hash]"
   },

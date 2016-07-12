@@ -18,9 +18,13 @@ export default ({
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
       />
-    {isProduction && <script src={`/assets/shared.js?${hash}`} async={isProduction} />}
-      <script src={`/assets/${name}.js?${hash}`} async={isProduction} />
-    {isProduction && <link rel="stylesheet" href={`/assets/${name}.css?${hash}`} />}
+      {isProduction ?
+        <script src={`/build/shared.js?${hash}`} async={isProduction} />
+      :
+        <script src={`/build/hmr.dll.js?${hash}`} async={isProduction} />
+      }
+      <script src={`/build/${name}.js?${hash}`} async={isProduction} />
+      {isProduction && <link rel="stylesheet" href={`/build/${name}.css?${hash}`} />}
       {base.toComponent()}
       {link.toComponent()}
       {meta.toComponent()}

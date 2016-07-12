@@ -16,8 +16,8 @@ var config = {
   output: {
     chunkFilename: "[name].[chunkhash]" + bundleExtention,
     filename: "[name]" + bundleExtention,
-    path: path.join( __dirname, "/../", "www_root/assets" ),
-    publicPath: "/assets/",
+    path: path.join( __dirname, "/../", "www_root/build" ),
+    publicPath: "/build/",
   },
   module: {
     loaders: [
