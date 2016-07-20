@@ -59,5 +59,5 @@ export default connectRacer(
     deleteTodo: (todoID) => {
       racerModel.root.del(`todos.${todoID}`);
     },
-  }),
+  })
 )(App);

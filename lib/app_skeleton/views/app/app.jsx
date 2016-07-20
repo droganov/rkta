@@ -22,4 +22,4 @@ class App extends Component {
   }
 }
 
-export default connectRacer(App);
+export default connectRacer()(App);

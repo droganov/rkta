@@ -87,7 +87,7 @@
     "mongodb": "2.1.21",
     "racer": "^0.8.9",
     "racer-koa": "0.0.9",
-    "racer-react": "0.0.26",
+    "racer-react": "0.0.27",
     "racer-schema": "git+https://github.com/derbyparty/racer-schema.git",
     "racer-transport-koa": "0.0.4",
     "react": "^15.0.1",
