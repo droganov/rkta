@@ -9239,8 +9239,8 @@ module.exports =
 	    }
 	  }, {
 	    key: "preRender",
-	    value: function preRender(routes, location, racerModel, cb) {
-	      _racerReact2.default.match({ routes: routes, location: location, racerModel: racerModel }, cb);
+	    value: function preRender(routes, location, racerModel, reduxStore, cb) {
+	      _racerReact2.default.match({ routes: routes, location: location, racerModel: racerModel, reduxStore: reduxStore }, cb);
 	    }
 	  }, {
 	    key: "startClient",
@@ -9254,7 +9254,7 @@ module.exports =
 	        var reduxStore = _getBundleData.reduxStore;
 
 	        var racerModel = _racerReact2.default.connectClient(racerBundle, _this.settings.racerOptions);
-	        _this.preRender(routes, location, racerModel, function (err, redirectLocation, renderProps) {
+	        _this.preRender(routes, location, racerModel, reduxStore, function (err, redirectLocation, renderProps) {
 	          return _this.renderToDOM(routes, racerModel, reduxStore);
 	        });
 	      });

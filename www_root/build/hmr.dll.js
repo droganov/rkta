@@ -1,4 +1,4 @@
-var hmr_3eec71d3cb4f4c4c20ff =
+var hmr_5f8ac98212c73f2b2251 =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -49591,9 +49591,14 @@ var hmr_3eec71d3cb4f4c4c20ff =
 	      propTypes:{ racerModel: React.PropTypes.object },
 	      contextTypes: { racerModel: React.PropTypes.object.isRequired },
 	      statics: {
-	          // racer для пререндера, queryHandler - объект сборщика query в контексте QueryAggregator, renderProps - данные от react-router
-	          racer: function(queryHandler, renderProps) {
-	            mapRacerToProps && mapRacerToProps(queryHandler)
+	          /*
+	            racer для пререндера
+	            queryHandler - объект сборщика query в контексте QueryAggregator
+	            renderProps - данные от react-router
+	            reduxStore - хранилище от ридакса
+	          */
+	          racer: function(queryHandler, renderProps, reduxStore) {
+	            mapRacerToProps && mapRacerToProps(queryHandler, renderProps, reduxStore);
 	        },
 	      },
 
@@ -49727,7 +49732,7 @@ var hmr_3eec71d3cb4f4c4c20ff =
 	      },
 
 	      render: function() {
-	        var mapRacerActionsToPropsResult = mapRacerActionsToProps && mapRacerActionsToProps(this.scopedModel);
+	        var mapRacerActionsToPropsResult = mapRacerActionsToProps && mapRacerActionsToProps(this.scopedModel, this.state.racerQuery);
 	        return React.createElement( Child, Object.assign( { ref: "self" }, this.props, this.state, { racerModel: this.scopedModel }, mapRacerActionsToPropsResult ) );
 	      },
 	    });
@@ -52810,6 +52815,7 @@ var hmr_3eec71d3cb4f4c4c20ff =
 
 	module.exports = function ( options, cb ){
 	  var racerModel = options.racerModel;
+	  var reduxStore = options.reduxStore;
 	  if( !isServer ){
 	    var silentModel = racerModel.silent();
 	    silentModel.destroy && silentModel.destroy( "_page" );
@@ -52824,7 +52830,7 @@ var hmr_3eec71d3cb4f4c4c20ff =
 	      //  errors and redirects
 	      if( err || redirectLocation || !renderProps ) return cb( err, redirectLocation );
 
-	      var queryAggregator = new QueryAggregator( racerModel, renderProps );
+	      var queryAggregator = new QueryAggregator( racerModel, renderProps, reduxStore );
 	      for (var i = 0; i < renderProps.components.length; i++) {
 	        var component = renderProps.components[ i ];
 	        if( component && ( typeof component.racer === "function" ) ) queryAggregator.use( component );
@@ -58291,7 +58297,7 @@ var hmr_3eec71d3cb4f4c4c20ff =
 	var QueryHandler = __webpack_require__( 518 );
 	var type = __webpack_require__( 519 );
 
-	function QueryAggregator( racerModel, renderProps ) {
+	function QueryAggregator( racerModel, renderProps, reduxStore ) {
 	  var queryStack = [];
 
 	  this.use = function( component ){
@@ -58300,7 +58306,7 @@ var hmr_3eec71d3cb4f4c4c20ff =
 	      queryStack.push( queryObj );
 	      component.racerQueries.push( queryObj );
 	    });
-	    component.racer( queryHandler, renderProps );
+	    component.racer( queryHandler, renderProps, reduxStore );
 	  }
 	  this.run = function( cb ){
 	    var jobs = [];

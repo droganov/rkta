@@ -50,14 +50,14 @@ export default class Application {
       this.getDomNode()
     )
   }
-  preRender( routes, location, racerModel, cb ){
-    racer.match( { routes, location, racerModel }, cb )
+  preRender( routes, location, racerModel, reduxStore, cb ){
+    racer.match( { routes, location, racerModel, reduxStore }, cb )
   }
   startClient( routes ){
     util.domReady( ()=> {
       const { racerBundle, reduxStore } = this.getBundleData()
       const racerModel = racer.connectClient( racerBundle, this.settings.racerOptions )
-      this.preRender( routes, location, racerModel, ( err, redirectLocation, renderProps ) => this.renderToDOM( routes, racerModel, reduxStore ) )
+      this.preRender( routes, location, racerModel, reduxStore, ( err, redirectLocation, renderProps ) => this.renderToDOM( routes, racerModel, reduxStore ) )
     })
     return this
   }
