@@ -32,7 +32,7 @@ export default class Application {
     return { racerBundle, reduxStore, }
   }
   renderToDOM( routes, racerModel, reduxState ){
-    const store = this.redux.createStore( reduxState )
+    const store = this.redux.configureStore( reduxState )
     const history = syncHistoryWithStore( browserHistory, store )
     ReactDOM.render(
       React.createElement(
