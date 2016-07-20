@@ -11,7 +11,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
       "classnames", "mobile-detect",
       "css-loader/lib/css-base",
       "racer", "racer-react", "react", "material-ui", "react-fluid-svg", "react-responsive", "react-helmet",
-      "redux", "react-router-redux", "react-redux", "redux-thunk",
+      "redux", "react-router-redux", "react-redux", "redux-thunk", "redux-logger",
       "babel-runtime/core-js/object/assign",
       "babel-runtime/core-js/object/keys",
       "babel-runtime/core-js/object/get-prototype-of",

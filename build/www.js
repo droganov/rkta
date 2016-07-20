@@ -68,7 +68,7 @@ module.exports =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(270);
+	module.exports = __webpack_require__(271);
 
 
 /***/ },
@@ -9230,7 +9230,7 @@ module.exports =
 	  }, {
 	    key: "renderToDOM",
 	    value: function renderToDOM(routes, racerModel, reduxState) {
-	      var store = this.redux.createStore(reduxState);
+	      var store = this.redux.configureStore(reduxState);
 	      var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
 	      _reactDom2.default.render(_react2.default.createElement(_reactRedux.Provider, { store: store }, _react2.default.createElement(_racerReact2.default.Provider, { racerModel: racerModel }, _react2.default.createElement(_reactRouter.Router, {
 	        history: history,
@@ -21263,10 +21263,15 @@ module.exports =
 /* 257 */
 /***/ function(module, exports) {
 
+	module.exports = require("redux-logger");
+
+/***/ },
+/* 258 */
+/***/ function(module, exports) {
+
 	module.exports = require("redux-thunk");
 
 /***/ },
-/* 258 */,
 /* 259 */,
 /* 260 */,
 /* 261 */,
@@ -21277,7 +21282,8 @@ module.exports =
 /* 266 */,
 /* 267 */,
 /* 268 */,
-/* 269 */
+/* 269 */,
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21306,7 +21312,7 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _hello = __webpack_require__(284);
+	var _hello = __webpack_require__(285);
 
 	var _hello2 = _interopRequireDefault(_hello);
 
@@ -21341,7 +21347,7 @@ module.exports =
 	exports.default = Hello;
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21350,28 +21356,28 @@ module.exports =
 
 	var _application2 = _interopRequireDefault(_application);
 
-	var _index = __webpack_require__(273);
+	var _index = __webpack_require__(274);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _routes = __webpack_require__(275);
+	var _routes = __webpack_require__(276);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _layout = __webpack_require__(271);
+	var _layout = __webpack_require__(272);
 
 	var _layout2 = _interopRequireDefault(_layout);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(285);
+	__webpack_require__(286);
 
 	var rkta = new _application2.default(_routes2.default, _layout2.default, _index2.default);
 
 	module.exports = rkta;
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21467,7 +21473,7 @@ module.exports =
 	};
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21479,7 +21485,7 @@ module.exports =
 	};
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21488,32 +21494,41 @@ module.exports =
 
 	var _reactRouterRedux = __webpack_require__(128);
 
-	var _reduxThunk = __webpack_require__(257);
+	var _reduxThunk = __webpack_require__(258);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducerStylus = __webpack_require__(274);
+	var _reduxLogger = __webpack_require__(257);
+
+	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+
+	var _reducerStylus = __webpack_require__(275);
 
 	var _reducerStylus2 = _interopRequireDefault(_reducerStylus);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var getInitialState = process.title === 'node' ? __webpack_require__(272) : null;
+	var getInitialState = process.title === 'node' ? __webpack_require__(273) : null;
 
-	function createStore(initialState) {
+	var middleware = [_reduxThunk2.default];
+	if (console.group && process.env.NODE_ENV !== 'production') {
+	  middleware.push((0, _reduxLogger2.default)());
+	}
+
+	function configureStore(initialState) {
 	  return (0, _redux.createStore)((0, _redux.combineReducers)({
 	    stylus: _reducerStylus2.default,
 	    routing: _reactRouterRedux.routerReducer
-	  }), initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+	  }), initialState, _redux.applyMiddleware.apply(undefined, middleware));
 	}
 
 	module.exports = {
-	  createStore: createStore,
+	  configureStore: configureStore,
 	  getInitialState: getInitialState
 	};
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21528,7 +21543,7 @@ module.exports =
 	};
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21539,11 +21554,11 @@ module.exports =
 
 	var _reactRouter = __webpack_require__(85);
 
-	var _app = __webpack_require__(276);
+	var _app = __webpack_require__(277);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _notFound = __webpack_require__(277);
+	var _notFound = __webpack_require__(278);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -21559,7 +21574,7 @@ module.exports =
 	};
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21594,11 +21609,11 @@ module.exports =
 
 	var _racerReact = __webpack_require__(83);
 
-	var _hello = __webpack_require__(269);
+	var _hello = __webpack_require__(270);
 
 	var _hello2 = _interopRequireDefault(_hello);
 
-	var _app = __webpack_require__(286);
+	var _app = __webpack_require__(287);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -21643,7 +21658,7 @@ module.exports =
 	exports.default = (0, _racerReact.connectRacer)()(App);
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21676,7 +21691,7 @@ module.exports =
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-	var _notFound = __webpack_require__(287);
+	var _notFound = __webpack_require__(288);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
@@ -21717,13 +21732,13 @@ module.exports =
 	exports.default = NotFound;
 
 /***/ },
-/* 278 */,
 /* 279 */,
 /* 280 */,
 /* 281 */,
 /* 282 */,
 /* 283 */,
-/* 284 */
+/* 284 */,
+/* 285 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -21731,9 +21746,9 @@ module.exports =
 	};
 
 /***/ },
-/* 285 */
-167,
 /* 286 */
+167,
+/* 287 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -21741,7 +21756,7 @@ module.exports =
 	};
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports) {
 
 	module.exports = {
