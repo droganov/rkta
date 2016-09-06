@@ -1,6 +1,7 @@
 "use strict"
 var webpack = require( "webpack" );
 var path = require( "path" );
+var DashboardPlugin = require( "webpack-dashboard/plugin" );
 
 var entries = {}
 var configApplications = require("./config.applications")
@@ -22,6 +23,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin(),
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([
