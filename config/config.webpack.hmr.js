@@ -14,8 +14,6 @@ for (var i = 0; i < configApplications.length; i++) {
   Object.assign( entries, entry )
 }
 
-
-
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
   devtool: "eval",
@@ -24,10 +22,6 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new webpack.HotModuleReplacementPlugin(),
-      new webpack.DllReferencePlugin({
-      context: path.join(__dirname, ".."),
-      manifest: require("../build/dll/hmr-manifest.json")
-    })
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([

@@ -5,7 +5,6 @@ var path = require("path");
 var debug = require("debug")("dev:start.js");
 
 var migration = require("./migration");
-var packageHash = require("./packageHash");
 
 debug( "Check for new migration files ..." );
 
@@ -35,19 +34,7 @@ migration.check(function (err, unmergedFiles) {
   });
 
   debug("done.");
-  debug( "Check package version ..." );
-  try {
-    fs.statSync(path.join(__dirname,"../www_root/build/hmr.dll.js"));
-    var dll_stats = require("../build/dll/stats.json");
-    var hash = packageHash.compute();
-    if(hash !== dll_stats.packageHash) {
-      throw("mismatch ...");
-    }
-    debug( "clean." );
-  } catch(e) {
-    debug(e.message || e);
-    return require("../node_scripts/builddll").then(startDue);
-  }
+
   startDue();
 });
 
