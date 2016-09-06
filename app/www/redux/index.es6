@@ -8,6 +8,7 @@ import stylus from './stylus/reducer.stylus.es6';
 const getInitialState = process.title === 'node' ? require('./get-initial-state.es6') : null;
 
 const middleware = [thunk];
+// eslint-disable-next-line no-console
 if (console.group && (process.env.NODE_ENV !== 'production')) {
   middleware.push(reduxLogger());
 }

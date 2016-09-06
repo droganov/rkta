@@ -17,7 +17,7 @@ function markup(props) {
 }
 
 function render(props) {
-  const { hash, isProduction, markup, mountPoint, name, racerBundle, reduxState } = props;
+  const { hash, isProduction, html, mountPoint, name, racerBundle, reduxState } = props;
   const { base, link, meta, script, title } = Helmet.rewind();
 
   return renderToStaticMarkup(
@@ -28,11 +28,7 @@ function render(props) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        {isProduction ?
-          <script src={`/build/shared.js?${hash}`} async={isProduction} />
-        :
-          <script src={`/build/hmr.dll.js?${hash}`} async={isProduction} />
-        }
+        {isProduction && <script src={`/build/shared.js?${hash}`} async={isProduction} />}
         <script src={`/build/${name}.js?${hash}`} async={isProduction} />
         {isProduction && <link rel="stylesheet" href={`/build/${name}.css?${hash}`} />}
         {base.toComponent()}
@@ -42,12 +38,12 @@ function render(props) {
         {title.toComponent()}
       </head>
       <body>
-        <div id={mountPoint} dangerouslySetInnerHTML={{ __html: markup }} />
+        <div id={mountPoint} dangerouslySetInnerHTML={{ __html: html }} />
         <div id="bundle" data-racer-bundle={racerBundle} data-redux-state={reduxState}></div>
       </body>
     </html>
   );
-};
+}
 
 if (module.hot) {
   module.hot.accept();
@@ -56,4 +52,4 @@ if (module.hot) {
 module.exports = {
   markup,
   render,
-}
+};
