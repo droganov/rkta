@@ -2,5 +2,4 @@
   root: true
   extends: "airbnb"
   rules:
-    react/prop-types: off
-    react/prefer-stateless-function: off
+    no-unused-expressions: ["error", {"allowShortCircuit": true}]
