@@ -17,7 +17,7 @@ function markup(props) {
 }
 
 function render(props) {
-  const { hash, isProduction, html, mountPoint, name, racerBundle, reduxState } = props;
+  const { hash, isProduction, markup: html, mountPoint, name, racerBundle, reduxState } = props;
   const { base, link, meta, script, title } = Helmet.rewind();
 
   return renderToStaticMarkup(
