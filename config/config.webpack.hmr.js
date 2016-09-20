@@ -1,7 +1,7 @@
 "use strict"
 var webpack = require( "webpack" );
 var path = require( "path" );
-var DashboardPlugin = require( "webpack-dashboard/plugin" );
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 var entries = {}
 var configApplications = require("./config.applications")
@@ -10,7 +10,7 @@ for (var i = 0; i < configApplications.length; i++) {
   var entry = {}
   entry[ appName ] = [
     "webpack-hot-middleware/client",
-    "./app/" + appName
+    "./front-end/applications/" + appName
   ]
   Object.assign( entries, entry )
 }
@@ -20,10 +20,10 @@ var exportConfig = Object.assign( {}, defaultConfig, {
   devtool: "eval",
   entry: entries,
   plugins: [
+    new LodashModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin( [ "NODE_ENV" ] ),
     new webpack.HotModuleReplacementPlugin(),
-    new DashboardPlugin(),
   ],
   module: {
     loaders: defaultConfig.module.loaders.concat([

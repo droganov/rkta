@@ -34,6 +34,20 @@ export default class Application {
   renderToDOM( routes, racerModel, reduxState ){
     const store = this.redux.configureStore( reduxState )
     const history = syncHistoryWithStore( browserHistory, store )
+
+    history.listenBefore(
+      (location, callback) => {
+    		if( location.action !== "PUSH" && location.action !== "POP" ) return callback();
+        this.preRender(
+          routes,
+          location,
+          racerModel,
+          store.getState(),
+          callback
+        );
+    	}
+    );
+
     ReactDOM.render(
       React.createElement(
       	Provider,

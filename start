@@ -1,0 +1,11 @@
+#!/bin/bash
+
+MDP=${MONGO_DATA_PATH:=/tmp/rkta-mongo-data}
+
+mkdir -pv $MDP
+
+export MONGO_DATA_PATH;
+
+cd `dirname "${BASH_SOURCE[0]}"`
+
+convox start -f ./convox/docker-compose.yml

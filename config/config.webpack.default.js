@@ -10,13 +10,14 @@ for (var i = 0; i < configApplications.length; i++) {
 
 var bundleExtention = ".js";
 var isProduction = process.env.NODE_ENV === "production";
+var rootPaths = require('./config.paths.js');
 
 var config = {
   // context: path.join( __dirname, "/../", "app" ),
   output: {
     chunkFilename: "[name].[chunkhash]" + bundleExtention,
     filename: "[name]" + bundleExtention,
-    path: path.join( __dirname, "/../", "www_root/build" ),
+    path: path.join( __dirname, "../www_root/build" ),
     publicPath: "/build/",
   },
   module: {
@@ -37,9 +38,7 @@ var config = {
     noParse: [/node_modules\/(async|classnames|mobile-detect)/gi]
   },
   resolve: {
-    root: [
-      path.resolve(__dirname+"/../")
-    ],
+    root: rootPaths,
     extensions: [ "", ".jsx", ".js", ".es6", ".styl", ".css", ".svg" ],
     modulesDirectories: [ "node_modules" ],
   },
@@ -52,6 +51,7 @@ var config = {
       path.join( __dirname, "/config.stylus.styl" ),
     ],
   },
+  externals: [ /\/back-end\/.+/ ],
 };
 
 module.exports = config

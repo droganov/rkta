@@ -1,0 +1,20 @@
+version: '2'
+services:
+  mongo:
+    build:
+      context: ./convox
+      dockerfile: Dockerfile.mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ${MONGO_DATA_PATH}:/data/db
+
+  node-3000:
+    build: .
+    environment:
+      - RACK_ENV=development
+      - NODE_ENV=development
+    ports:
+      - 3000:3000
+    links:
+      - mongo
