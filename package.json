@@ -107,6 +107,7 @@
     "rx": "^4.0.7",
     "sharedb": "^0.11.6",
     "sharedb-mongo": "^0.8.6",
+    "sharedb-redis-pubsub": "^1.0.0-beta",
     "stylus": "^0.54.0",
     "ws": "^1.1.0"
   },
