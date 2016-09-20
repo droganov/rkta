@@ -1,22 +1,67 @@
-require( "babel-core/register" );
-
 var fs = require("fs");
 var path = require("path");
+
+var rootPaths = require('../config/config.paths.js');
+var appModule = require('app-module-path');
+rootPaths.forEach(appModule.addPath);
+
+require( "babel-core/register" );
+
 var debug = require("debug")("dev:start.js");
+var mongodb = require("mongodb");
 
 var migration = require("./migration");
+var connectAttempts = 0;
+var maxConnectAttempts = 150;
+var connectTimer = null;
 
-debug( "Check for new migration files ..." );
+function start() {
+  connectToDb(function (err) {
+    if (err) {
+      if (connectAttempts < maxConnectAttempts) {
+        connectAttempts++;
+        clearTimeout(connectTimer);
+        connectTimer = setTimeout(start, 2000);
+      } else {
+        debug("connect to mongo error: " + err, err.stack);
+      }
+      return;
+    }
+    debug("Connected to mongo successfully.");
+    migrationsCheck(function(err) {
+      if (err) return;
+      applyHooks(startDue);
+    });
+  });
+}
 
-migration.check(function (err, unmergedFiles) {
-  if(err) {
-    return debug("migration check error: " + err);
-  }
-  if(unmergedFiles.length) {
-    return debug("Have new migrations, you need to apply them. Type 'npm run migration apply'");
-  }
+function connectToDb(cb) {
+  mongodb
+    .connect(process.env.MONGO_URL)
+    .then(function(db){
+      cb();
+    })
+    .catch(cb);
+}
 
-  debug( "clean." );
+function migrationsCheck(cb) {
+  debug( "Check for new migration files ..." );
+  migration.check(function (err, unmergedFiles) {
+    if (err) {
+      debug("Migration check error: " + err, err.stack);
+      return cb(err);
+    }
+    if (unmergedFiles.length) {
+      debug("Have new migrations, applying ...");
+      return migration.apply(cb);
+    } else {
+      debug("clean.");
+      cb();
+    }
+  });
+}
+
+function applyHooks(cb) {
   debug( "Applying server side hooks ..." );
 
   var hook = require( "css-modules-require-hook" );
@@ -34,9 +79,8 @@ migration.check(function (err, unmergedFiles) {
   });
 
   debug("done.");
-
-  startDue();
-});
+  cb();
+}
 
 function startDue() {
   debug( "Starting live dev server" );
@@ -66,3 +110,5 @@ function startDue() {
 
   startServer( app )
 }
+
+start();

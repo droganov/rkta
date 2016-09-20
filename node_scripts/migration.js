@@ -8,7 +8,8 @@ var config = require("../config/config.migrations");
 var isProduction = process.env.NODE_ENV == "production";
 
 module.exports = {
-  check: check
+  check: check,
+  apply: apply
 }
 
 function newId(name) {
@@ -62,17 +63,25 @@ function check(cb) {
   });
 }
 
+function apply(cb) {
+  var migrator = new Migration(config);
+  var listAllFiles = getListAllFiles();
+
+  // добавление миграций в список
+  migrator.add(listAllFiles.map(function (fileName) {
+    return path.join(config.directory, fileName);
+  }));
+  // запуск зарегистрированных миграций
+  migrator.migrate(cb);
+}
+
 // для вызова через require обработка комманд не нужна
 if(module.parent) return;
 
 // обработка комманд из npm run migration commandName [migrationName]
-var migrator = new Migration(config);
-
 var args = process.argv.slice(2);
 var commandName = args[0];
 var migrationName = args[1];
-
-var listAllFiles = getListAllFiles();
 
 switch (commandName) {
   case "create":
@@ -94,12 +103,7 @@ switch (commandName) {
     if(isProduction && migrationName !== config.productionPass) {
       return debug("В режиме production нужно указать пароль для применения миграций.");
     };
-    // добавление миграций в список
-    migrator.add(listAllFiles.map(function (fileName) {
-      return path.join(config.directory, fileName);
-    }));
-    // запуск зарегистрированных миграций
-    migrator.migrate(function (err, result) {
+    apply(function (err, result) {
       if(err) {
         return debug(err);
       }

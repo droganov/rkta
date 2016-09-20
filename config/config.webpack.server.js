@@ -11,7 +11,7 @@ var configApplications = require("./config.applications")
 for (var i = 0; i < configApplications.length; i++) {
   var appName = configApplications[i].name
   var entry = {}
-  entry[ appName ] = [ "./app/" + appName ]
+  entry[ appName ] = [ "./front-end/applications/" + appName ]
   Object.assign( entries, entry )
 }
 

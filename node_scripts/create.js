@@ -12,10 +12,10 @@ if( !name ) return debug( 'Please pass the application name! Example: "npm run c
 var ncpOptions = { stopOnErr: true, clobber: false }
 ncp.limit = 16
 
-var pathToNewApp = "./app/" + name
+var pathToNewApp = "./front-end/applications/" + name
 var pathToNewRoutes = path.join( pathToNewApp, "routes.jsx" )
 
-ncp( "./lib/app_skeleton", pathToNewApp, ncpOptions, function ( err ){
+ncp( "./front-end/_skeleton", pathToNewApp, ncpOptions, function ( err ){
   if( err ) return debug( err )
 
   var appConfigRec = [{
