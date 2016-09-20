@@ -1,5 +1,14 @@
 version: '2'
 services:
+  redis:
+    build:
+      context: ./convox
+      dockerfile: Dockerfile.redis
+    ports:
+      - 6379
+    volumes:
+      - ${REDIS_DATA_PATH}:/data/db
+
   mongo:
     build:
       context: ./convox
@@ -17,4 +26,5 @@ services:
     ports:
       - 3000:3000
     links:
+      - redis
       - mongo

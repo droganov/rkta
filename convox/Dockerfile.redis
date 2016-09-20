@@ -1,0 +1,4 @@
+FROM redis:alpine
+
+ENV LINK_SCHEME redis
+ENV LINK_PATH /0
