@@ -24,7 +24,7 @@ fs
 var defaultConfig = require( "./config.webpack.default" )
 var exportConfig = Object.assign( {}, defaultConfig, {
   output: {
-    path: path.join( __dirname, "/../build" ),
+    path: path.join( __dirname, "../back-end/build" ),
     publicPath: "/assets/",
     filename: "[name].js",
     chunkFilename: "[name].[chunkhash].js",
