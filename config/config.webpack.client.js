@@ -43,7 +43,7 @@ var exportConfig = Object.assign( {}, defaultConfig, {
     }),
     new StatsWriterPlugin({
       chunkModules: true,
-      filename: "../../build/stats.json",
+      filename: "../../back-end/build/stats.json",
       fields: [ "hash", "version", "errorDetails" ]
     }),
     new webpack.optimize.DedupePlugin(),
