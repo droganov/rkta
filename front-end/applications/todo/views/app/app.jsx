@@ -25,11 +25,14 @@ class App extends Component {
   state = {};
   render() {
     const {
+      oneTodo,
+      otherTodos,
       todos,
       createTodo,
       markComplete,
       deleteTodo,
     } = this.props;
+    // console.log(oneTodo, otherTodos);
     return (
       <div className={styles.app}>
         <Helmet
@@ -55,14 +58,24 @@ class App extends Component {
   }
 }
 
-export default connectRacer(
-  dispatch => {
-    dispatch(todoSubscribe);
+export default connectRacer({
+  mapRemoteToProps: (query, doc, props) => {
+    query('todos', {}).fetchAs('todos');
+    doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').subscribeAs('oneTodo');
+    doc('todos',['32c54aeb-c408-4c8a-a228-4a6e90d88aee','32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('otherTodos');
+
+    return {};
   },
-  dispatch => ({
-    todos: dispatch(todoSelectList),
-    createTodo: (form) => dispatch(todoCreate(form)),
-    markComplete: (todoID, isComplete) => dispatch(todoMarkComplete(todoID, isComplete)),
-    deleteTodo: (todoID) => dispatch(todoDelete(todoID)),
-  })
-)(App);
+  mapSelectToProps: (select, props) => {
+    return {
+      // todos: select(todoSelectList),
+    };
+  },
+  mapDispatchToProps: (dispatch, props) => {
+    return {
+      createTodo: form => dispatch(todoCreate(form)),
+      markComplete: (todoID, isComplete) => dispatch(todoMarkComplete(todoID, isComplete)),
+      deleteTodo: (todoID) => dispatch(todoDelete(todoID)),
+    };
+  }
+})(App);

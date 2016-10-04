@@ -1,1 +1,1 @@
-export const todoSelectList = racerModel => racerModel.get('todos');
+export const todoSelectList = selecThunk => selecThunk('todos');
