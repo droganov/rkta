@@ -59,13 +59,13 @@ class App extends Component {
 }
 
 export default connectRacer({
-  mapRemoteToProps: (query, doc, props) => {
-    query('todos', {}).fetchAs('todos');
-    doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').subscribeAs('oneTodo');
-    doc('todos',['32c54aeb-c408-4c8a-a228-4a6e90d88aee','32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('otherTodos');
-
-    return {};
-  },
+  mapRemoteToProps: (query, doc, props) => Promise.all([
+      query('todos', {}).fetchAs('todos'),
+      doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').subscribeAs('oneTodo'),
+      doc('todos',['32c54aeb-c408-4c8a-a228-4a6e90d88aee','32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('otherTodos')
+    ]).then(
+      () => ({})
+    ),
   mapSelectToProps: (select, props) => {
     return {
       // todos: select(todoSelectList),
