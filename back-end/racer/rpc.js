@@ -25,15 +25,24 @@ function init(backend) {
     var queryPromises = selections.map(function(subQuery) {
       return new Promise(function(resolve, reject) {
         if (!subQuery.alias) return reject("Unknown alias for a query " + subQuery.name.value);
-        var racerQuery = model.query(subQuery.alias.value, '{'+graphql.print(subQuery)+'}');
-        racerQuery.fetch(function(error) {
+
+
+        backend.db.query(subQuery.alias.value, '{'+graphql.print(subQuery)+'}', null, null, function(error, snapshots, extra) {
           if (error) return reject(error) ;
-
-          // выдает snapshot`ы, а нужны сырые данные
-          resolve(racerQuery.getExtra() || racerQuery.get());
-
+          resolve(
+            extra || snapshots.map(
+              function(snap) {
+                return {
+                  id: snap.id,
+                  v: snap.v,
+                  data: snap.data
+                };
+              })
+          );
         });
+
       });
+
     });
 
     Promise.all(queryPromises).then(function(results) {

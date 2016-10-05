@@ -56,8 +56,8 @@ class App extends Component {
 }
 
 export default connectRacer({
-  mapRemoteToProps: ({graphQL}, props) => Promise.all([
-      graphQL('{ todos: fetchAllTodos { text } }').resolve()
+  mapRemoteToProps: ({graph}, props) => Promise.all([
+      graph('{ todos: fetchAllTodos { text, isComplete } }').resolve()
     ]).then(
       () => ({})
     ),
