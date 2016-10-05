@@ -1,6 +1,5 @@
 var racerRPC = require('racer-rpc');
 var graphql = require('graphql');
-var invariant = require('invariant');
 
 module.exports = {
   rpc: racerRPC,
@@ -29,7 +28,10 @@ function init(backend) {
         var racerQuery = model.query(subQuery.alias.value, '{'+graphql.print(subQuery)+'}');
         racerQuery.fetch(function(error) {
           if (error) return reject(error) ;
+
+          // выдает snapshot`ы, а нужны сырые данные
           resolve(racerQuery.getExtra() || racerQuery.get());
+
         });
       });
     });

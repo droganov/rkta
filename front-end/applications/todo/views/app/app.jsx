@@ -25,14 +25,11 @@ class App extends Component {
   state = {};
   render() {
     const {
-      // oneTodo,
-      // otherTodos,
       todos,
       createTodo,
       markComplete,
       deleteTodo,
     } = this.props;
-    // console.log('todos', todos);
     return (
       <div className={styles.app}>
         <Helmet
@@ -41,14 +38,14 @@ class App extends Component {
         />
         <div className={styles.header}>Todos</div>
         <div className={styles.content}>
-          {/* {todos && todos.map((todo, i) =>
+          {todos && todos.map((todo, i) =>
             (todo && <Todo
               key={i}
               item={todo}
               markComplete={markComplete}
               delete={deleteTodo}
             />)
-          )} */}
+          )}
         </div>
         <div>
           <Form onCreate={createTodo} />
@@ -60,9 +57,6 @@ class App extends Component {
 
 export default connectRacer({
   mapRemoteToProps: ({graphQL}, props) => Promise.all([
-      // query('todos', {}).fetchAs('todos'),
-      // doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').subscribeAs('oneTodo'),
-      // doc('todos',['32c54aeb-c408-4c8a-a228-4a6e90d88aee','32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('otherTodos')
       graphQL('{ todos: fetchAllTodos { text } }').resolve()
     ]).then(
       () => ({})
