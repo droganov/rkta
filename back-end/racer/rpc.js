@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function init(backend) {
-  backend.rpc.on('graphQlQuery', function (query, cb) {
+  backend.rpc.on('graph', function (query, cb) {
     var parsedQuery = graphql.parse(query);
   	// выявляем определения запросов (query), все остальное отбрасываем
   	var queries = parsedQuery.definitions.filter(function (d) { return d.operation == "query" });
