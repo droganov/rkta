@@ -23,6 +23,9 @@ class App extends Component {
     deleteTodo: PropTypes.func,
   };
   state = {};
+  handleButtonClick = () => {
+    this.props.fetchTodosDynamicly();
+  }
   render() {
     const {
       todos,
@@ -48,6 +51,9 @@ class App extends Component {
           )}
         </div>
         <div>
+          <button onClick={this.handleButtonClick}>Клик ми</button>
+        </div>
+        <div>
           <Form onCreate={createTodo} />
         </div>
       </div>
@@ -59,7 +65,9 @@ export default connectRacer({
   mapRemoteToProps: ({graph}, props) => Promise.all([
       graph('{ todos: fetchAllTodos { text, isComplete } }').resolve()
     ]).then(
-      () => ({})
+      () => ({
+        fetchTodosDynamicly: () => graph('{ todos: fetchAllTodos { text, isComplete } }').resolve()
+      })
     ),
   mapSelectToProps: (select, props) => {
     return {
