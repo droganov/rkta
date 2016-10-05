@@ -27,13 +27,12 @@ class App extends Component {
     const {
       // oneTodo,
       // otherTodos,
-      fetchAllTodos,
       todos,
       createTodo,
       markComplete,
       deleteTodo,
     } = this.props;
-    console.log('fetchAllTodos', fetchAllTodos);
+    // console.log('todos', todos);
     return (
       <div className={styles.app}>
         <Helmet
@@ -64,7 +63,7 @@ export default connectRacer({
       // query('todos', {}).fetchAs('todos'),
       // doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').subscribeAs('oneTodo'),
       // doc('todos',['32c54aeb-c408-4c8a-a228-4a6e90d88aee','32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('otherTodos')
-      graphQL('{ fetchAllTodos { text } }').fetchAs('fetchAllTodos')
+      graphQL('{ todos: fetchAllTodos { text } }').resolve()
     ]).then(
       () => ({})
     ),

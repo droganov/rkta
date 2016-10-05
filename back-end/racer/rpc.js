@@ -1,5 +1,6 @@
 var racerRPC = require('racer-rpc');
 var graphql = require('graphql');
+var invariant = require('invariant');
 
 module.exports = {
   rpc: racerRPC,
@@ -24,7 +25,8 @@ function init(backend) {
 
     var queryPromises = selections.map(function(subQuery) {
       return new Promise(function(resolve, reject) {
-        var racerQuery = model.query('todos', '{'+graphql.print(subQuery)+'}');
+        if (!subQuery.alias) return reject("Unknown alias for a query " + subQuery.name.value);
+        var racerQuery = model.query(subQuery.alias.value, '{'+graphql.print(subQuery)+'}');
         racerQuery.fetch(function(error) {
           if (error) return reject(error) ;
           resolve(racerQuery.getExtra() || racerQuery.get());
@@ -34,10 +36,9 @@ function init(backend) {
 
     Promise.all(queryPromises).then(function(results) {
       var itog = selections.reduce(function(rr, subQuery, index) {
-        // console.log(subQuery);
-        rr[subQuery.name.value] = results[index];
+        rr[subQuery.alias.value] = results[index];
         return rr;
-      }, {})
+      }, {});
       cb(null, itog);
     }).catch(function(error) {
       cb(error, []);

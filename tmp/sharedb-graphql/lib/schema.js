@@ -207,13 +207,14 @@ Schema.prototype.getSnapshotQueryTemplate = function(typeName, fields) {
 Schema.prototype.updateQueryString = function(typeName, queryString, fields) {
 	try{
 		var parsedQuery = parseQuery(queryString);
+		var selection = parsedQuery.selection;
 
 		// обновление имени запроса
-		parsedQuery.selection.name.value = this.getCombinedQueryName(typeName, parsedQuery.selection.name.value);
+		selection.name.value = this.getCombinedQueryName(typeName, selection.name.value);
 
 		// детект основной запрос (список типа typeName) или экстра данные
 		var isMain = false;
-		var registeredQuery = this.queries[parsedQuery.selection.name.value];
+		var registeredQuery = this.queries[selection.name.value];
 		if (registeredQuery && registeredQuery.type) {
 
 			var nullableType = graphql.getNullableType(registeredQuery.type);
@@ -227,12 +228,15 @@ Schema.prototype.updateQueryString = function(typeName, queryString, fields) {
 		}
 
 		// расширение пользовательского запроса служебными полями
-		if(isMain) fillSelection(this, parsedQuery.selection);
-		filterSelection(this, parsedQuery.selection, fields);
+		if(isMain) fillSelection(this, selection);
+		filterSelection(this, selection, fields);
+
+		// если указан альяс то данные из результата забираются по нему
+		var nameAlias = selection.alias && selection.alias.value;
 
 		return {
 			isExtra: !isMain,
-			name: parsedQuery.selection.name.value,
+			name: nameAlias || selection.name.value,
 			string: graphql.print(parsedQuery.query)
 		};
 	}catch(e) {
