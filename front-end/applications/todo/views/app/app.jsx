@@ -26,13 +26,10 @@ class App extends Component {
   render() {
     const {
       todos,
-      oneTodo,
-      twoTodos,
       createTodo,
       markComplete,
       deleteTodo,
     } = this.props;
-    console.log(oneTodo, twoTodos);
     return (
       <div className={styles.app}>
         <Helmet
@@ -61,12 +58,8 @@ class App extends Component {
 export default connectRacer({
   mapRemoteToProps: ({graph, doc}, props) => Promise.all([
       graph('{ todos: fetchAllTodos { text, isComplete } }').resolve(),
-      doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').observerAs('oneTodo'),
-      doc('todos', ['32c54aeb-c408-4c8a-a228-4a6e90d88aee', '32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('twoTodos')
     ]).then(
-      () => ({
-        fetchTodosDynamicly: () => graph('{ todos: fetchAllTodos { text, isComplete } }').resolve()
-      })
+      () => ({})
     ),
   mapSelectToProps: (select, props) => {
     return {

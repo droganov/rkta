@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import { connectRacer } from 'racer-react';
 
 import Hello from '../../blocks/hello/hello';
 
@@ -18,13 +19,18 @@ class App extends Component {
         />
         <Hello />
         We've got the examples: <a href="/todo">Todo app</a>
-        {/* <OnScreen />
-        <OnScreen />
-        <OnScreen />
-        <OnScreen /> */}
+
+        <div style={{height: '1500px', backgroundColor: '#ccc'}}></div>
+        <OnScreen {...this.props} docid='32c54aeb-c408-4c8a-a228-4a6e90d88aee'/>
+        <div style={{height: '1500px', backgroundColor: '#ccc'}}></div>
+        
       </div>
     );
   }
 }
 
-export default App;
+export default connectRacer({
+  mapRemoteToProps: ({doc}, props) => Promise.resolve({
+    observeDoc: docid => doc('todos.'+docid).observerAs('oDoc')
+  }),
+})(App);

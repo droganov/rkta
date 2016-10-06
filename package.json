@@ -90,7 +90,7 @@
     "mongodb": "2.1.21",
     "racer": "^0.8.9",
     "racer-koa": "0.0.9",
-    "racer-react": "git+https://github.com/droganov/racer-react.git#c18bfcea5e350ad914dc79a8e4ae3b432e051d56",
+    "racer-react": "git+https://github.com/droganov/racer-react.git#7bc1b85cd2351c0e8d3ab27e6f9d9bec08d30a4f",
     "racer-rpc": "^0.1.1",
     "racer-schema": "git+https://github.com/derbyparty/racer-schema.git",
     "racer-transport-koa": "0.0.4",
