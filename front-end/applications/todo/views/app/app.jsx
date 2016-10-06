@@ -23,16 +23,16 @@ class App extends Component {
     deleteTodo: PropTypes.func,
   };
   state = {};
-  handleButtonClick = () => {
-    this.props.fetchTodosDynamicly();
-  }
   render() {
     const {
       todos,
+      oneTodo,
+      twoTodos,
       createTodo,
       markComplete,
       deleteTodo,
     } = this.props;
+    console.log(oneTodo, twoTodos);
     return (
       <div className={styles.app}>
         <Helmet
@@ -51,9 +51,6 @@ class App extends Component {
           )}
         </div>
         <div>
-          <button onClick={this.handleButtonClick}>Клик ми</button>
-        </div>
-        <div>
           <Form onCreate={createTodo} />
         </div>
       </div>
@@ -62,8 +59,10 @@ class App extends Component {
 }
 
 export default connectRacer({
-  mapRemoteToProps: ({graph}, props) => Promise.all([
-      graph('{ todos: fetchAllTodos { text, isComplete } }').resolve()
+  mapRemoteToProps: ({graph, doc}, props) => Promise.all([
+      graph('{ todos: fetchAllTodos { text, isComplete } }').resolve(),
+      doc('todos.32c54aeb-c408-4c8a-a228-4a6e90d88aed').observerAs('oneTodo'),
+      doc('todos', ['32c54aeb-c408-4c8a-a228-4a6e90d88aee', '32c54aeb-c408-4c8a-a228-4a6e90d88aef']).subscribeAs('twoTodos')
     ]).then(
       () => ({
         fetchTodosDynamicly: () => graph('{ todos: fetchAllTodos { text, isComplete } }').resolve()

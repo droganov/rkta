@@ -3,12 +3,12 @@ import { connectRacer } from 'racer-react';
 
 class OnScreen extends Component {
   state = {};
-  render() {
+  render = () => {
     const { onScreen } = this.props;
     return (
       <div style={{
         border:'1px solid #eee',
-        height: '100px',
+        height: '400px',
         backgroundColor: onScreen ? '#ffeeee' : 'transparent'
       }} ref="elem">
         <h1>onscreen test</h1>

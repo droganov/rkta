@@ -18,7 +18,10 @@ class App extends Component {
         />
         <Hello />
         We've got the examples: <a href="/todo">Todo app</a>
-      { Array.apply(null, Array(20)).map((v, key)=> <OnScreen key={'onscreen_'+key}/>) }
+        {/* <OnScreen />
+        <OnScreen />
+        <OnScreen />
+        <OnScreen /> */}
       </div>
     );
   }
