@@ -18,6 +18,21 @@ module.exports = {
   }),
   // реализация запросов
   queries: (Type) => ({
+    fetchOneTodo: {
+      type: Type,
+      args: {
+        id: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLString)
+        },
+      },
+      resolve: (obj, { id }) => {
+        if (!global.mongoConnection) return [];
+        const collection = global.mongoConnection.collection(Name);
+        const q = { _id: id, _type: { $ne: null } };
+        return collection.findOne(q);
+      },
+    },
+
     fetchAllTodos: {
       type: new graphql.GraphQLList(Type),
       args: {},
