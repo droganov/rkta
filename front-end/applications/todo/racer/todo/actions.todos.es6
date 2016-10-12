@@ -1,18 +1,9 @@
-import { todoSubscribeQuery } from './queries.todos.es6';
-
-export const todoSubscribe = (racerModel, queryHandler) => {
-  queryHandler('todos', todoSubscribeQuery()).pipeAs('todos');
-};
-
-export const todoCreate = form => racerModel => {
+export const todoCreate = form => dispatch => {
   const item = Object.assign({}, form, { isComplete: false });
-  racerModel.root.add('todos', item);
+  dispatch.add('todos', item);
 };
 
-export const todoMarkComplete = (todoID, isComplete) => racerModel => {
-  racerModel.root.set(`todos.${todoID}.isComplete`, isComplete);
-};
+export const todoMarkComplete = (todoID, isComplete) => dispatch =>
+  dispatch.set(`todos.${todoID}.isComplete`, isComplete);
 
-export const todoDelete = todoID => racerModel => {
-  racerModel.root.del(`todos.${todoID}`);
-};
+export const todoDelete = todoID => dispatch => dispatch.del(`todos.${todoID}`);

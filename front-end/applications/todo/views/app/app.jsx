@@ -8,7 +8,6 @@ import Todo from '../../blocks/todo/todo';
 import styles from './app.styl';
 
 import {
-  todoSubscribe,
   todoSelectList,
   todoCreate,
   todoMarkComplete,
@@ -63,14 +62,14 @@ export default connectRacer({
     ),
   mapSelectToProps: (select, props) => {
     return {
-      // todos: select(todoSelectList),
+      getTodo: id => select.getCopy(`todos.${id}`),
     };
   },
   mapDispatchToProps: (dispatch, props) => {
     return {
-      createTodo: form => dispatch(todoCreate(form)),
-      markComplete: (todoID, isComplete) => dispatch(todoMarkComplete(todoID, isComplete)),
-      deleteTodo: (todoID) => dispatch(todoDelete(todoID)),
+      createTodo: form => dispatch.add(todoCreate(form)),
+      markComplete: (todoID, isComplete) => dispatch.set(todoMarkComplete(todoID, isComplete)),
+      deleteTodo: todoID => dispatch.del(todoDelete(todoID)),
     };
   }
 })(App);
