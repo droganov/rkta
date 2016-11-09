@@ -1,0 +1,64 @@
+# http://anandmanisankar.com/posts/docker-container-nginx-node-redis-example/
+
+
+version: "2"
+services:
+  nginx:
+    container_name: ${APPLICATION_NAME}_nginx
+    restart: 'always'
+    build: ./nginx
+    links:
+      - node
+    ports:
+      - "80:80"
+    volumes:
+      - ../www_root:/public:ro
+
+  redis:
+    container_name: ${APPLICATION_NAME}_redis
+    restart: 'always'
+    image: redis:3-alpine
+    ports:
+        - "6379"
+
+  mongo:
+    container_name: ${APPLICATION_NAME}_mongo
+    restart: 'always'
+    build: ./mongo
+    ports:
+      - "27017:27017"
+
+  # elastic:
+  #   container_name: ${APPLICATION_NAME}_elastic
+  #   restart: 'always'
+  #   build: ./elasticsearch
+  #   ports:
+  #     - "9200"
+
+  # connector:
+  #   container_name: ${APPLICATION_NAME}_connector
+  #   restart: 'always'
+  #   build: ./connector
+  #   depends_on:
+  #     - mongo
+  #     - elastic
+  #   links:
+  #     - mongo
+  #     - elastic
+
+  node:
+    container_name: ${APPLICATION_NAME}_node
+    restart: 'always'
+    build: ../
+    links:
+      - mongo
+      - redis
+      # - elastic
+    ports:
+      - "3000"
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ../:/app/src:ro
+      - /app/src/node_modules
