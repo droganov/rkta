@@ -36,9 +36,13 @@ function start() {
 }
 
 function connectToDb(cb) {
+  debug("Trying connect to mongo ...");
   mongodb
     .connect(process.env.MONGO_URL)
-    .then(function(db){
+    .then(function(db) {
+      return db.collection('startups').insertOne({ ts: new Date().getTime() });
+    })
+    .then(function(insertResult) {
       cb();
     })
     .catch(cb);

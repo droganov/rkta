@@ -44,6 +44,8 @@
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-postmortem": "^1.0.5",
     "json-loader": "^0.5.4",
     "koa-webpack-dev-middleware": "^1.1.0",
     "koa-webpack-hot-middleware": "^1.0.3",
@@ -64,7 +66,8 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
     "webpack-hot-middleware": "^2.7.1",
-    "webpack-stats-plugin": "^0.1.1"
+    "webpack-stats-plugin": "^0.1.1",
+    "yargs": "^6.3.0"
   },
   "dependencies": {
     "app-module-path": "^1.1.0",

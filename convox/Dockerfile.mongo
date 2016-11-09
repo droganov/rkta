@@ -1,7 +1,0 @@
-FROM mongo:2.6
-
-ENV LINK_SCHEME mongodb
-ENV LINK_PATH /rkta
-
-# CMD ["mongod", "--quiet", "--replSet", "rs0"]
-CMD ["mongod", "--quiet"]
