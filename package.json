@@ -76,7 +76,7 @@
     "connect": "^3.4.1",
     "file-loader": "^0.8.5",
     "install": "^0.7.3",
-    "kerberos": "0.0.21",
+    "kerberos": "1.1.2",
     "koa": "^1.1.2",
     "koa-body": "^1.4.0",
     "koa-connect": "^1.0.0",
