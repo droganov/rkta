@@ -100,7 +100,7 @@
     "react-fluid-svg": "0.0.6",
     "react-form-to-props": "0.0.5",
     "react-helmet": "^3.0.0",
-    "react-intl": "^2.0.0-rc-1",
+    "react-intl": "^3.1.6",
     "react-redux": "^4.4.0",
     "react-responsive": "^1.1.1",
     "react-router": "^2.0.1",
