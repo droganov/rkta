@@ -75,7 +75,7 @@
     "classnames": "^2.2.0",
     "connect": "^3.4.1",
     "file-loader": "^0.8.5",
-    "install": "^0.7.3",
+    "install": "^0.13.0",
     "kerberos": "0.0.21",
     "koa": "^1.1.2",
     "koa-body": "^1.4.0",
